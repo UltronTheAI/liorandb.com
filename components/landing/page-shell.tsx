@@ -65,6 +65,16 @@ function Section({ id, children }: { id: string; children: React.ReactNode }) {
 }
 
 export function LandingPage() {
+  const architectureStages = [
+    "Client requests",
+    "Document API",
+    "Snapshot isolation",
+    "Primary pages",
+    "Durability layer",
+    "Hot reads",
+    "On-disk state",
+  ] as const;
+
   return (
     <div id="top" className="min-h-screen overflow-x-clip bg-[var(--color-bg)] text-[var(--color-text)]">
       <div className="page-grid pointer-events-none fixed inset-0 opacity-100" />
@@ -81,7 +91,7 @@ export function LandingPage() {
         <Section id="product">
           <div className="grid items-center gap-12 pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
             <Reveal className="space-y-8">
-              <div className="inline-flex items-center gap-3 rounded-full border border-[rgba(46,229,157,0.22)] bg-[rgba(46,229,157,0.08)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--color-primary)]">
+              <div className="inline-flex items-center gap-3 rounded-sm border border-[rgba(46,229,157,0.22)] bg-[rgba(46,229,157,0.08)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--color-primary)]">
                 <span className="status-dot" />
                 LioranDB V2 pre-alpha arrives {siteConfig.preAlphaDate}
               </div>
@@ -372,10 +382,22 @@ const manager = new LioranManager({
                   </p>
                   <div className="grid gap-3">
                     {architectureFlow.map((item, index) => (
-                      <div key={item} className="relative rounded-[16px] border border-white/8 bg-white/4 px-4 py-3">
-                        <span className="text-sm text-white">{item}</span>
+                      <div
+                        key={item}
+                        className="relative overflow-hidden rounded-[18px] border border-white/8 bg-[linear-gradient(90deg,rgba(255,255,255,0.03),rgba(46,229,157,0.02))] px-4 py-4"
+                      >
+                        <div className="grid items-center gap-3 md:grid-cols-[1fr_24px_140px]">
+                          <span className="text-sm font-medium text-white">{item}</span>
+                          <span
+                            aria-hidden
+                            className="hidden h-px bg-[linear-gradient(90deg,rgba(46,229,157,0.75),rgba(85,214,255,0.2))] md:block"
+                          />
+                          <span className="rounded-full border border-white/10 bg-black/25 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-zinc-400">
+                            {architectureStages[index]}
+                          </span>
+                        </div>
                         {index < architectureFlow.length - 1 ? (
-                          <span className="mx-auto mt-3 block h-6 w-px bg-[linear-gradient(180deg,rgba(46,229,157,0.8),rgba(85,214,255,0.15))]" />
+                          <span className="mx-auto mt-4 block h-5 w-px bg-[linear-gradient(180deg,rgba(46,229,157,0.8),rgba(85,214,255,0.15))]" />
                         ) : null}
                       </div>
                     ))}
@@ -617,8 +639,8 @@ const result = await users.find({
                     architecture and development of LioranDB.
                   </p>
                   <blockquote className="mt-6 max-w-3xl border-l border-[var(--color-primary)] pl-5 text-xl font-medium tracking-[-0.03em] text-white">
-                    “I don’t want India to only consume developer infrastructure. I
-                    want us to build it.”
+                    “I don&apos;t want India to only consume developer infrastructure.
+                    I want us to build it.”
                   </blockquote>
                   <div className="mt-6 flex flex-wrap gap-2">
                     {founderSkills.map((skill) => (
@@ -675,7 +697,7 @@ const result = await users.find({
             />
           </Reveal>
           <div className="mt-10 grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid auto-rows-fr gap-4 md:grid-cols-2">
               {[
                 ["Explore V1 source", siteConfig.v1GithubUrl],
                 ["Read the documentation", siteConfig.docsUrl],
@@ -687,12 +709,15 @@ const result = await users.find({
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-6 transition hover:border-[var(--color-border-strong)]"
+                    className="flex h-full min-h-[176px] flex-col rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-6 transition hover:border-[var(--color-border-strong)]"
                   >
                     <p className="text-lg font-semibold text-white">{label}</p>
                     <p className="mt-3 text-sm leading-7 text-zinc-400">
                       Public development. Source available. Feedback welcome.
                     </p>
+                    <span className="mt-auto pt-6 text-sm font-medium text-[var(--color-primary)]">
+                      Open link →
+                    </span>
                   </Link>
                 </Reveal>
               ))}

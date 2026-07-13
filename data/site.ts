@@ -399,6 +399,6 @@ export const footerColumns = [
   },
   {
     title: "Legal",
-    links: [["License", "#"], ["Privacy", "#"], ["Terms", "#"]],
+    links: [["License", "/license"], ["Privacy", "/privacy"], ["Terms", "/terms"]],
   },
 ] as const;

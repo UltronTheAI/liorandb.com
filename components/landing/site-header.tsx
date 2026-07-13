@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, MessageSquareText, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { GitHubMark } from "./github-mark";
@@ -91,7 +92,14 @@ export function SiteHeader({
           className="inline-flex items-center gap-3 rounded-full pr-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
         >
           <span className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--color-border-strong)] bg-[linear-gradient(135deg,rgba(46,229,157,0.18),rgba(85,214,255,0.14))]">
-            <span className="h-4 w-4 rounded-[6px] border border-[var(--color-primary)] bg-[radial-gradient(circle_at_30%_30%,rgba(60,255,176,0.95),rgba(46,229,157,0.25))]" />
+            <Image
+              src="/favicon.ico"
+              alt="LioranDB logo"
+              width={24}
+              height={24}
+              className="h-6 w-6 rounded-[6px]"
+              priority
+            />
           </span>
           <span>
             <span className="block text-sm font-semibold tracking-[0.18em] text-white uppercase">
