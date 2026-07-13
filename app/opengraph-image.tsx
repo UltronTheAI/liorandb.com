@@ -58,7 +58,7 @@ export default function OpenGraphImage() {
               maxWidth: "820px",
             }}
           >
-            A developer-first document database built in India.
+            A developer-first document database developed in India.
           </div>
           <div
             style={{

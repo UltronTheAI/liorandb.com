@@ -105,8 +105,8 @@ export function SiteHeader({
             <span className="block text-sm font-semibold tracking-[0.18em] text-white uppercase">
               LioranDB
             </span>
-            <span className="inline-flex rounded-full border border-[rgba(255,153,51,0.18)] bg-[rgba(255,153,51,0.07)] px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#ffbb6e]">
-              Made in India
+            <span className="inline-flex max-w-full rounded-full border border-[rgba(255,153,51,0.18)] bg-[rgba(255,153,51,0.07)] px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#ffbb6e]">
+              Developed in India
             </span>
           </span>
         </Link>

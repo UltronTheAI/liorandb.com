@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     >
       <h2>Overview</h2>
       <p>
-        LioranDB is built with a simple principle: collect as little personal data
+        LioranDB is developed with a simple principle: collect as little personal data
         as possible while still operating the website, documentation, community
         links and product communication channels.
       </p>

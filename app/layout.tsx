@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "MongoDB alternative",
     "developer infrastructure India",
     "self-hosted database",
-    "JSON database",
+    "document database India",
   ],
   alternates: {
     canonical: "/",
@@ -66,6 +66,7 @@ const softwareJsonLd = {
     "@type": "Organization",
     name: "Lioran Developer Solutions",
   },
+  foundingDate: "2025",
 };
 
 const organizationJsonLd = {
@@ -82,6 +83,7 @@ const organizationJsonLd = {
     name: "Swaraj Puppalwar",
     sameAs: siteConfig.founderGithubUrl,
   },
+  foundingDate: "2025",
 };
 
 export default function RootLayout({

@@ -89,7 +89,7 @@ export function LandingPage() {
 
       <main>
         <Section id="product">
-          <div className="grid items-center gap-12 pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
+          <div className="grid items-center gap-10 pt-8 sm:gap-12 sm:pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
             <Reveal className="space-y-8">
               <div className="inline-flex items-center gap-3 rounded-sm border border-[rgba(46,229,157,0.22)] bg-[rgba(46,229,157,0.08)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--color-primary)]">
                 <span className="status-dot" />
@@ -105,9 +105,10 @@ export function LandingPage() {
                   tomorrow.
                 </p>
                 <p className="max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg">
-                  LioranDB is a developer-first JSON document database built in
+                  LioranDB is a developer-first document database developed in
                   India for startups, SaaS platforms, APIs and data-intensive
-                  applications. V1 is live for Node.js. V2 is being rebuilt in Rust.
+                  applications. One year in, V1 is live for Node.js and V2 is being
+                  rebuilt in Rust.
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -140,11 +141,12 @@ export function LandingPage() {
               </Link>
               <div className="flex flex-wrap gap-3">
                 {[
-                  "100% Made in India",
+                  "Developed in India",
                   "Self-hostable",
                   "Developer-first",
                   "MongoDB-style API",
                   "Rust-powered V2",
+                  "1 year old",
                 ].map((item) => (
                   <span
                     key={item}
@@ -163,8 +165,8 @@ export function LandingPage() {
         </Section>
 
         <Section id="status-strip">
-          <Reveal className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.9),rgba(10,10,12,0.92))] p-6 md:p-8">
-            <div className="grid gap-6 xl:grid-cols-[0.85fr_1fr_1fr]">
+          <Reveal className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.9),rgba(10,10,12,0.92))] p-5 sm:p-6 md:p-8">
+            <div className="grid gap-5 xl:grid-cols-[0.85fr_1fr_1fr]">
               <div>
                 <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
                   Product status
@@ -242,7 +244,7 @@ export function LandingPage() {
             <SectionHeading
               eyebrow="Get Started"
               title="From zero to documents in minutes."
-              description="Install LioranDB Embedded, open a collection and start working with JSON documents using a familiar MongoDB-style API."
+              description="Install LioranDB Embedded, open a collection and start working with documents using a familiar MongoDB-style API."
             />
           </Reveal>
           <div className="mt-10">
@@ -273,7 +275,7 @@ export function LandingPage() {
             <SectionHeading
               eyebrow="V1 Live"
               title="V1 is live. Small footprint. Serious foundations."
-              description="LioranDB Embedded gives Node.js developers a file-based JSON database with the durability and developer ergonomics needed for local tools, internal applications and lightweight production workloads."
+              description="LioranDB Embedded gives Node.js developers a file-based document database with the durability and developer ergonomics needed for local tools, internal applications and lightweight production workloads."
             />
           </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -340,7 +342,7 @@ const manager = new LioranManager({
 
         <Section id="v2">
           <Reveal>
-            <div className="rounded-[30px] border border-[rgba(255,209,102,0.16)] bg-[linear-gradient(180deg,rgba(255,209,102,0.05),rgba(46,229,157,0.02),rgba(10,10,10,0.96))] p-6 md:p-8">
+            <div className="rounded-[30px] border border-[rgba(255,209,102,0.16)] bg-[linear-gradient(180deg,rgba(255,209,102,0.05),rgba(46,229,157,0.02),rgba(10,10,10,0.96))] p-5 sm:p-6 md:p-8">
               <span className="inline-flex rounded-full border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.08)] px-3 py-2 text-xs uppercase tracking-[0.2em] text-[#ffd166]">
                 Under active development
               </span>
@@ -376,7 +378,7 @@ const manager = new LioranManager({
                   </Link>
                 </div>
 
-                <div className="rounded-[24px] border border-white/10 bg-black/35 p-5">
+                <div className="min-w-0 rounded-[24px] border border-white/10 bg-black/35 p-4 sm:p-5">
                   <p className="mb-4 text-xs uppercase tracking-[0.22em] text-zinc-500">
                     Architecture direction
                   </p>
@@ -386,13 +388,13 @@ const manager = new LioranManager({
                         key={item}
                         className="relative overflow-hidden rounded-[18px] border border-white/8 bg-[linear-gradient(90deg,rgba(255,255,255,0.03),rgba(46,229,157,0.02))] px-4 py-4"
                       >
-                        <div className="grid items-center gap-3 md:grid-cols-[1fr_24px_140px]">
+                        <div className="grid items-start gap-3 md:grid-cols-[1fr_24px_140px]">
                           <span className="text-sm font-medium text-white">{item}</span>
                           <span
                             aria-hidden
                             className="hidden h-px bg-[linear-gradient(90deg,rgba(46,229,157,0.75),rgba(85,214,255,0.2))] md:block"
                           />
-                          <span className="rounded-full border border-white/10 bg-black/25 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-zinc-400">
+                          <span className="justify-self-start rounded-full border border-white/10 bg-black/25 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-zinc-400">
                             {architectureStages[index]}
                           </span>
                         </div>
@@ -454,13 +456,13 @@ const manager = new LioranManager({
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <Reveal>
               <SectionHeading
-                eyebrow="Built in India"
+                eyebrow="Developed in India"
                 title="Indian data deserves Indian infrastructure."
                 description="India’s software ecosystem should not depend entirely on infrastructure designed, owned and controlled elsewhere. LioranDB is one step toward a stronger domestic developer platform ecosystem."
               />
               <div className="india-mark mt-8 rounded-[28px] border border-white/10 bg-[var(--color-elevated)] p-6">
                 <p className="text-2xl font-semibold tracking-[-0.04em] text-white">
-                  Made in India. Built for the world.
+                  Developed in India. Built for the world.
                 </p>
                 <p className="mt-3 text-sm leading-7 text-zinc-400">
                   LioranDB is independently developed and is not presented as an
@@ -709,7 +711,7 @@ const result = await users.find({
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-full min-h-[176px] flex-col rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-6 transition hover:border-[var(--color-border-strong)]"
+                    className="flex h-full min-h-[176px] flex-col rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5 sm:p-6 transition hover:border-[var(--color-border-strong)]"
                   >
                     <p className="text-lg font-semibold text-white">{label}</p>
                     <p className="mt-3 text-sm leading-7 text-zinc-400">
@@ -723,7 +725,7 @@ const result = await users.find({
               ))}
             </div>
             <Reveal delay={0.08}>
-              <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.98))] p-6">
+              <div className="min-w-0 rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.98))] p-5 sm:p-6">
                 <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
                   GitHub activity panel
                 </p>
@@ -823,7 +825,7 @@ $ liorandb start
       </main>
 
       <footer className="mx-auto max-w-7xl px-4 pb-16 pt-8 md:px-6">
-        <div className="grid gap-8 rounded-[28px] border border-white/10 bg-[var(--color-elevated)] p-6 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid gap-8 rounded-[28px] border border-white/10 bg-[var(--color-elevated)] p-5 sm:p-6 md:grid-cols-2 xl:grid-cols-5">
           <div className="xl:col-span-1">
             <p className="text-xl font-semibold text-white">LioranDB</p>
             <p className="mt-3 text-sm leading-7 text-zinc-400">
@@ -851,7 +853,7 @@ $ liorandb start
           ))}
         </div>
         <div className="mt-6 flex flex-col gap-3 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Lioran Developer Solutions. LioranDB is built in India.</p>
+          <p>© 2026 Lioran Developer Solutions. LioranDB is developed in India.</p>
           <p>Aligned with the vision of keeping Indian data in India.</p>
         </div>
       </footer>

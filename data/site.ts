@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "LioranDB",
-  title: "LioranDB — A Developer-First Document Database Built in India",
+  title: "LioranDB — A Developer-First Document Database Developed in India",
   description:
-    "LioranDB is a developer-first JSON document database built in India. Explore the live Node.js embedded database and follow the Rust-powered V2 pre-alpha launching on 16 August 2026.",
+    "LioranDB is a developer-first document database developed in India. Explore the live Node.js embedded database and follow the Rust-powered V2 pre-alpha launching on 16 August 2026.",
   url: "https://liorandb.com",
   docsUrl: "https://db.lioransolutions.com",
   discordUrl: "https://discord.gg/WsWWThjPMp",
@@ -194,7 +194,7 @@ console.log(
 
 export const features = [
   ["Embedded database", "Run directly inside your Node.js process.", "node app.ts"],
-  ["JSON documents", "Store application data naturally without rigid tables.", '{ "plan": "pro" }'],
+  ["Documents", "Store application data naturally without rigid tables.", '{ "plan": "pro" }'],
   ["MongoDB-style API", "Use familiar collections, queries and update operators.", "db.collection('users')"],
   ["Write-ahead log", "Protect committed data with durable operation logging.", "wal/segment-0001.log"],
   ["Collections", "Keep application domains isolated and organized.", "users  sessions  orders"],
@@ -281,7 +281,7 @@ export const roadmap = [
     title: "V1 • Live",
     items: [
       "Embedded Node.js database",
-      "JSON documents",
+      "Documents",
       "WAL",
       "MongoDB-style queries",
       "Indexes, transactions and snapshots",
@@ -331,7 +331,7 @@ export const founderSkills = [
 export const faqs = [
   [
     "What is LioranDB?",
-    "LioranDB is a developer-first JSON document database built in India. V1 is available as an embedded Node.js database, while V2 is a new high-performance engine under development in Rust.",
+    "LioranDB is a developer-first document database developed in India. V1 is available as an embedded Node.js database, while V2 is a new high-performance engine under development in Rust.",
   ],
   [
     "Is LioranDB production-ready?",
