@@ -90,13 +90,13 @@ export function LandingPage() {
       <main>
         <Section id="product">
           <div className="grid items-center gap-10 pt-8 sm:gap-12 sm:pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
-            <Reveal className="space-y-8">
-              <div className="inline-flex items-center gap-3 rounded-sm border border-[rgba(46,229,157,0.22)] bg-[rgba(46,229,157,0.08)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--color-primary)]">
+            <Reveal className="min-w-0 space-y-8">
+              <div className="inline-flex max-w-full flex-wrap items-center gap-3 rounded-sm border border-[rgba(46,229,157,0.22)] bg-[rgba(46,229,157,0.08)] px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-[var(--color-primary)] sm:px-4 sm:text-xs sm:tracking-[0.2em]">
                 <span className="status-dot" />
                 LioranDB V2 pre-alpha arrives {siteConfig.preAlphaDate}
               </div>
               <div className="space-y-6">
-                <h1 className="max-w-4xl text-balance text-5xl font-semibold tracking-[-0.065em] text-white sm:text-6xl lg:text-7xl">
+                <h1 className="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.065em] text-white xs:text-[2.8rem] sm:text-6xl lg:text-7xl">
                   India&apos;s developer-first{" "}
                   <span className="text-gradient">document database.</span>
                 </h1>
@@ -139,7 +139,7 @@ export function LandingPage() {
                 View source on GitHub
                 <ExternalLink size={14} />
               </Link>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {[
                   "Developed in India",
                   "Self-hostable",
@@ -150,7 +150,7 @@ export function LandingPage() {
                 ].map((item) => (
                   <span
                     key={item}
-                    className="inline-flex rounded-full border border-white/10 bg-white/4 px-4 py-2 text-sm text-zinc-300"
+                    className="inline-flex rounded-full border border-white/10 bg-white/4 px-3 py-2 text-xs text-zinc-300 sm:px-4 sm:text-sm"
                   >
                     {item}
                   </span>
@@ -158,7 +158,7 @@ export function LandingPage() {
               </div>
             </Reveal>
 
-            <Reveal delay={0.1}>
+            <Reveal delay={0.1} className="min-w-0">
               <HeroConsole code={heroCode} output={heroOutput} />
             </Reveal>
           </div>

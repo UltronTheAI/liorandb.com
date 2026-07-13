@@ -14,30 +14,30 @@ export function HeroConsole({ code, output }: HeroConsoleProps) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.98),rgba(7,7,10,0.98))] shadow-[0_40px_120px_rgba(0,0,0,0.55)]">
-      <div className="flex items-center justify-between border-b border-white/8 px-4 py-3">
-        <div className="flex items-center gap-3">
+    <div className="relative min-w-0 w-full overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.98),rgba(7,7,10,0.98))] shadow-[0_40px_120px_rgba(0,0,0,0.55)]">
+      <div className="flex flex-col gap-3 border-b border-white/8 px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-4">
+        <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
           <div className="flex gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
           </div>
-          <span className="rounded-full border border-[var(--color-border-strong)] bg-[rgba(46,229,157,0.08)] px-2 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--color-primary)]">
+          <span className="rounded-full border border-[var(--color-border-strong)] bg-[rgba(46,229,157,0.08)] px-2 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--color-primary)] sm:text-[11px] sm:tracking-[0.18em]">
             Connected
           </span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="rounded-full border border-white/8 px-2 py-1 text-[11px] text-zinc-400">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-white/8 px-2 py-1 text-[10px] text-zinc-400 sm:text-[11px]">
             V1
           </span>
-          <span className="rounded-full border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.08)] px-2 py-1 text-[11px] text-[#ffd166]">
+          <span className="rounded-full border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.08)] px-2 py-1 text-[10px] text-[#ffd166] sm:text-[11px]">
             V2 in development
           </span>
           <CopyButton text={code} />
         </div>
       </div>
       <div className="grid gap-0 xl:grid-cols-[220px_1fr_280px]">
-        <aside className="border-b border-white/8 p-4 xl:border-r xl:border-b-0">
+        <aside className="min-w-0 border-b border-white/8 p-4 xl:border-r xl:border-b-0">
           <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-zinc-500">
             <DatabaseZap size={14} />
             Collections
@@ -75,8 +75,8 @@ export function HeroConsole({ code, output }: HeroConsoleProps) {
             </div>
           </div>
         </aside>
-        <div className="border-b border-white/8 p-4 xl:border-r xl:border-b-0">
-          <div className="mb-3 flex items-center justify-between">
+        <div className="min-w-0 border-b border-white/8 p-4 xl:border-r xl:border-b-0">
+          <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
               startup.ts
             </span>
@@ -91,8 +91,8 @@ export function HeroConsole({ code, output }: HeroConsoleProps) {
             className="bg-[linear-gradient(180deg,rgba(8,10,14,0.92),rgba(6,7,10,0.96))] text-zinc-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
           />
         </div>
-        <div className="p-4">
-          <div className="mb-3 flex items-center justify-between">
+        <div className="min-w-0 p-4">
+          <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
               Output
             </span>

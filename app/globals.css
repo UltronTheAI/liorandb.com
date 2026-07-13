@@ -25,6 +25,7 @@
   --color-foreground: var(--color-text);
   --font-sans: var(--font-ui);
   --font-mono: var(--font-code);
+  --breakpoint-xs: 30rem;
 }
 
 * {
