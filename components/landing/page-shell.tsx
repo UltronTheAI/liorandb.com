@@ -313,8 +313,8 @@ export function LandingPage() {
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.94))] p-6">
-                <div className="rounded-[20px] border border-white/8 bg-black/30 p-5 font-mono text-sm leading-8 text-zinc-300">
+              <div className="min-w-0 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.94))] p-4 sm:p-6">
+                <div className="min-w-0 overflow-hidden rounded-[20px] border border-white/8 bg-black/30 p-3 font-mono text-xs leading-7 text-zinc-300 sm:p-5 sm:text-sm sm:leading-8">
                   <CodeBlock
                     code={`.liorandb/
 ├── app/
