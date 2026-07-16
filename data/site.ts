@@ -24,34 +24,16 @@ export const navItems = [
   ["FAQ", "#faq"],
 ] as const;
 
-export const heroCode = `import { LioranManager } from "@liorandb/core";
+export const heroCode = `users.find({ age: 18 })`;
 
-const manager = new LioranManager({
-  rootPath: "./data",
-});
-
-const db = await manager.db("startup");
-const users = db.collection("users");
-
-await users.insertOne({
-  name: "Aarav",
-  plan: "pro",
-  region: "IN",
-});
-
-const user = await users.findOne({
-  plan: "pro",
-});
-
-console.log(user);`;
-
-export const heroOutput = `{
-  "_id": "b2c6b5d8-6f3f-4d4b-8d52-2a1c6f6f9b0e",
-  "name": "Aarav",
-  "plan": "pro",
-  "region": "IN",
-  "__v": 1
-}`;
+export const heroOutput = `$ users.find({ age: 18 })
+[
+  {
+    name: "Aarav",
+    age: 18,
+    plan: "pro"
+  }
+]`;
 
 export const installCommands = {
   npm: "npm install @liorandb/core",

@@ -91,9 +91,8 @@ export function LandingPage() {
         <Section id="product">
           <div className="grid items-center gap-10 pt-8 sm:gap-12 sm:pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
             <Reveal className="min-w-0 space-y-8">
-              <div className="inline-flex max-w-full flex-wrap items-center gap-3 rounded-sm border border-[rgba(46,229,157,0.22)] bg-[rgba(46,229,157,0.08)] px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-[var(--color-primary)] sm:px-4 sm:text-xs sm:tracking-[0.2em]">
-                <span className="status-dot" />
-                LioranDB V2 pre-alpha arrives {siteConfig.preAlphaDate}
+              <div className="inline-flex max-w-full flex-wrap items-center rounded-sm border border-white/12 bg-white/[0.03] px-3 py-2 text-[11px] font-medium uppercase tracking-[0.14em] text-zinc-300 sm:px-4 sm:text-xs sm:tracking-[0.18em]">
+                LioranDB V2 pre-alpha scheduled for {siteConfig.preAlphaDate}
               </div>
               <div className="space-y-6">
                 <h1 className="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.065em] text-white xs:text-[2.8rem] sm:text-6xl lg:text-7xl">
@@ -342,8 +341,8 @@ const manager = new LioranManager({
 
         <Section id="v2">
           <Reveal>
-            <div className="rounded-[30px] border border-[rgba(255,209,102,0.16)] bg-[linear-gradient(180deg,rgba(255,209,102,0.05),rgba(46,229,157,0.02),rgba(10,10,10,0.96))] p-5 sm:p-6 md:p-8">
-              <span className="inline-flex rounded-full border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.08)] px-3 py-2 text-xs uppercase tracking-[0.2em] text-[#ffd166]">
+            <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(22,22,24,0.94),rgba(10,10,12,0.98))] p-5 sm:p-6 md:p-8">
+              <span className="inline-flex rounded-full border border-[rgba(255,209,102,0.14)] bg-[rgba(255,209,102,0.05)] px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[#f2c66d]">
                 Under active development
               </span>
               <div className="mt-6 grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
@@ -378,7 +377,7 @@ const manager = new LioranManager({
                   </Link>
                 </div>
 
-                <div className="min-w-0 rounded-[24px] border border-white/10 bg-black/35 p-4 sm:p-5">
+                <div className="min-w-0 rounded-[24px] border border-white/10 bg-[rgba(8,10,12,0.72)] p-4 sm:p-5">
                   <p className="mb-4 text-xs uppercase tracking-[0.22em] text-zinc-500">
                     Architecture direction
                   </p>
@@ -386,28 +385,21 @@ const manager = new LioranManager({
                     {architectureFlow.map((item, index) => (
                       <div
                         key={item}
-                        className="relative overflow-hidden rounded-[18px] border border-white/8 bg-[linear-gradient(90deg,rgba(255,255,255,0.03),rgba(46,229,157,0.02))] px-4 py-4"
+                        className="rounded-[18px] border border-white/8 bg-[rgba(255,255,255,0.02)] px-4 py-4 transition-colors hover:border-white/12 hover:bg-[rgba(255,255,255,0.03)]"
                       >
-                        <div className="grid items-start gap-3 md:grid-cols-[1fr_24px_140px]">
+                        <div className="grid items-start gap-3 md:grid-cols-[1fr_140px] md:items-center">
                           <span className="text-sm font-medium text-white">{item}</span>
-                          <span
-                            aria-hidden
-                            className="hidden h-px bg-[linear-gradient(90deg,rgba(46,229,157,0.75),rgba(85,214,255,0.2))] md:block"
-                          />
-                          <span className="justify-self-start rounded-full border border-white/10 bg-black/25 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-zinc-400">
+                          <span className="justify-self-start rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs uppercase tracking-[0.16em] text-zinc-400">
                             {architectureStages[index]}
                           </span>
                         </div>
-                        {index < architectureFlow.length - 1 ? (
-                          <span className="mx-auto mt-4 block h-5 w-px bg-[linear-gradient(180deg,rgba(46,229,157,0.8),rgba(85,214,255,0.15))]" />
-                        ) : null}
                       </div>
                     ))}
                     <div className="mt-2 grid gap-3 sm:grid-cols-2">
                       {architectureSideSystems.map((item) => (
                         <div
                           key={item}
-                          className="rounded-[14px] border border-white/8 bg-black/25 px-4 py-3 text-sm text-zinc-300"
+                          className="rounded-[14px] border border-white/8 bg-black/20 px-4 py-3 text-sm text-zinc-300"
                         >
                           {item}
                         </div>
