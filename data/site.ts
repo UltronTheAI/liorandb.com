@@ -366,44 +366,44 @@ export const founderSkills = [
 
 export const faqs = [
   [
-    "What is LioranDB?",
-    "LioranDB is a developer-first document database developed in India. V2 is a high-performance Rust-powered engine launched as pre-alpha on 16 August 2026.",
+    "What is LioranDB V2?",
+    "LioranDB V2 is a developer-first document database developed in India. It is a Rust-powered engine launched as pre-alpha on 16 August 2026.",
   ],
   [
-    "Is LioranDB production-ready?",
-    "LioranDB V2 pre-alpha is launched and available for developers to evaluate. This is an early release. Teams should test it carefully against their own reliability, durability and workload requirements. Alpha launch is scheduled for 23 October 2026.",
+    "Is LioranDB V2 production-ready?",
+    "LioranDB V2 is live as a pre-alpha release for developers to evaluate. It is meant for early testing, workload feedback and architecture validation. Alpha launch is scheduled for 23 October 2026.",
   ],
   [
     "When will LioranDB V2 launch?",
-    "The V2 pre-alpha is now live as of 16 August 2026. Alpha launch is planned for 23 October 2026.",
+    "The V2 pre-alpha is now live as of 16 August 2026. The planned alpha launch is 23 October 2026.",
   ],
   [
-    "Is LioranDB open source?",
-    "The V1 source is publicly accessible on GitHub. Broader licensing claims should be verified against the repository’s current license.",
+    "Is LioranDB V2 open source?",
+    "No. LioranDB V2 is a closed-source product in its current pre-alpha stage, with benchmark logs and project updates shared publicly for transparency.",
   ],
   [
     "Does LioranDB use MongoDB internally?",
-    "No. LioranDB provides a familiar MongoDB-style document API, but it uses its own storage implementation.",
-  ],
-  [
-    "Where is data stored in V1?",
-    "LioranDB Embedded stores databases and collections in local directories. Developers may use the default path, an environment variable or a custom rootPath.",
+    "No. LioranDB V2 provides a familiar MongoDB-style document API, but it uses its own storage engine and execution model.",
   ],
   [
     "What language is V2 written in?",
-    "The V2 storage engine is being developed in Rust.",
+    "The V2 storage engine is built in Rust for performance, concurrency and low-level control.",
+  ],
+  [
+    "Where is data stored in LioranDB V2?",
+    "LioranDB V2 stores databases and collections in configurable local data directories, with deployment patterns designed for developer-controlled environments.",
   ],
   [
     "Is LioranDB officially supported by the Indian government?",
-    "No. LioranDB is an independent product. Its mission is aligned with the broader goal of strengthening India’s domestic developer infrastructure and giving teams more control over where their data is stored.",
+    "No. LioranDB is an independent product. Its mission is to strengthen India’s domestic developer infrastructure and give teams more control over where their application data is stored.",
   ],
   [
-    "Can I join the pre-alpha?",
-    "Yes. Join the Discord community to follow development and future pre-alpha announcements.",
+    "Can I join the V2 pre-alpha?",
+    "Yes. Join the Discord community to follow development progress, testing updates and future launch milestones.",
   ],
   [
-    "Who is building LioranDB?",
-    "LioranDB is led by Swaraj Puppalwar, Founder & CTO of Lioran Group, alongside contributors and the Lioran Developer Solutions ecosystem.",
+    "Who is building LioranDB V2?",
+    "LioranDB V2 is led by Swaraj Puppalwar, Founder & CTO of Lioran Group, alongside contributors and the broader Lioran Developer Solutions ecosystem.",
   ],
 ] as const;
 

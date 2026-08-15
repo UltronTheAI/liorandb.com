@@ -712,7 +712,7 @@ const result = await users.find({
           <div className="mt-10 grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
             <div className="grid auto-rows-fr gap-4 md:grid-cols-2">
               {[
-                ["Explore V1 source", siteConfig.v1GithubUrl],
+                ["Explore V2 source", siteConfig.v1GithubUrl],
                 ["Read the documentation", siteConfig.docsUrl],
                 ["Join Discord", siteConfig.discordUrl],
                 ["Follow V2 development", siteConfig.orgGithubUrl],
@@ -820,7 +820,7 @@ const result = await users.find({
                 </div>
                 <div className="rounded-[24px] border border-white/10 bg-black/45 p-5">
                   <CodeBlock
-                    code={`$ npm install @liorandb/core
+                    code={`$ npm install @liorandb/driver
 ✓ package installed
 
 $ liorandb start
