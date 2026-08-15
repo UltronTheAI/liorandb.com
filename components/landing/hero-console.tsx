@@ -25,7 +25,7 @@ export function HeroConsole({ code, output }: HeroConsoleProps) {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full border border-white/8 px-2 py-1 text-[10px] text-zinc-400 sm:text-[11px]">
-            V1
+            V2
           </span>
           <CopyButton text={code} />
         </div>
