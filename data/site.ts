@@ -2,22 +2,24 @@ export const siteConfig = {
   name: "LioranDB",
   title: "LioranDB — A Developer-First Document Database Developed in India",
   description:
-    "LioranDB is a developer-first document database developed in India. Explore the live Node.js embedded database and follow the Rust-powered V2 pre-alpha launching on 16 August 2026.",
+    "LioranDB V2 pre-alpha is launched on 16 August 2026. Build with the Rust-powered high-performance database developed in India. Alpha launch coming on 23 October 2026.",
   url: "https://liorandb.com",
-  docsUrl: "https://db.lioransolutions.com",
+  docsUrl: "https://docs.liorandb.com",
+  studioUrl: "https://studio.liorandb.com",
   discordUrl: "https://discord.gg/WsWWThjPMp",
-  v1GithubUrl: "https://github.com/LioranGroupOfficial/Liorandb/tree/core",
+  v1GithubUrl: "https://github.com/LioranGroupOfficial",
   orgGithubUrl: "https://github.com/LioranGroupOfficial",
   founderGithubUrl: "https://github.com/UltronTheAI",
   founderImage: "https://avatars.githubusercontent.com/u/79976106?v=4",
   companyUrl: "https://lioransolutions.com",
   preAlphaDate: "16 August 2026",
+  alphaLaunchDate: "23 October 2026",
 } as const;
 
 export const navItems = [
   ["Product", "#product"],
-  ["V1", "#v1"],
   ["V2", "#v2"],
+  ["Studio", "external:studio"],
   ["Benchmarks", "#benchmarks"],
   ["Why India", "#why-india"],
   ["Founder", "#founder"],
@@ -36,141 +38,137 @@ export const heroOutput = `$ users.find({ age: 18 })
 ]`;
 
 export const installCommands = {
-  npm: "npm install @liorandb/core",
-  pnpm: "pnpm add @liorandb/core",
-  yarn: "yarn add @liorandb/core",
+  docker: "docker run -d --name liorandb -p 27018:27018 -p 27019:27019 -p 27201:27201 -v ldb-data:/var/lib/liorandb/data liorandb/liorandb:pre-alpha",
+  cli: "npm i -g @liorandb/cli@1.0.4",
+  driver: "npm i @liorandb/driver@2.0.4",
 } as const;
 
 export const getStartedSteps = [
-  "Create manager",
-  "Open database",
-  "Create collection",
-  "Insert document",
-  "Query document",
-  "Close cleanly",
+  "Start Docker container",
+  "Install CLI",
+  "Login as admin",
+  "Install driver",
+  "Write your first query",
+  "Deploy to production",
 ] as const;
 
-export const getStartedCode = `import { LioranManager } from "@liorandb/core";
+export const getStartedCode = `import { LioranDBClient } from "@liorandb/driver";
 
-const manager = new LioranManager({
-  rootPath: "./.liorandb",
-});
-
-const db = await manager.db("app");
-
-const users = db.collection<{
+type User = {
   _id?: string;
   email: string;
-  plan: "free" | "pro";
-}>("users");
+  active: boolean;
+  age: number;
+};
 
-await users.insertOne({
-  email: "founder@startup.in",
-  plan: "free",
-});
+const password = encodeURIComponent("Q7m!Z2x@L9p#R4vK");
+const uri = \`liorandb://admin:\${password}@127.0.0.1:27018/default\`;
+const client = await LioranDBClient.connect(uri);
 
-const found = await users.findOne({
-  email: "founder@startup.in",
-});
-
-console.log(found);
-
-await manager.close();`;
+try {
+  const db = client.db("default");
+  const users = db.collection<User>("users");
+  
+  const insertResult = await users.insertOne({
+    email: "ada@example.com",
+    active: true,
+    age: 31,
+  });
+  
+  const user = await users.findOne({email: "ada@example.com"});
+  const activeUsers = await users.find({active: true}).limit(10).toArray();
+  
+  console.log({
+    insertedId: insertResult.insertedId,
+    user,
+    activeCount: activeUsers.length,
+  });
+} finally {
+  await client.close();
+}`;
 
 export const getStartedOutput = `{
-  "_id": "b2c6b5d8-6f3f-4d4b-8d52-2a1c6f6f9b0e",
-  "email": "founder@startup.in",
-  "plan": "free",
-  "__v": 1
+  "insertedId": "01K2EXAMPLE",
+  "user": {
+    "_id": "01K2EXAMPLE",
+    "email": "ada@example.com",
+    "active": true,
+    "age": 31
+  },
+  "activeCount": 1
 }`;
 
 export const apiExplorerTabs = [
   {
+    id: "connect",
+    label: "Connect",
+    code: `import { LioranDBClient } from "@liorandb/driver";
+
+const client = await LioranDBClient.connect(
+  "liorandb://admin:password@127.0.0.1:27018/default"
+);`,
+    output: `// Connected successfully
+Client ready to use`,
+  },
+  {
     id: "insert",
     label: "Insert",
-    code: `await items.insertMany([
-  { sku: "A", qty: 10 },
-  { sku: "B", qty: 2 },
-  { sku: "C", qty: 25 },
-]);`,
+    code: `const users = db.collection("users");
+
+await users.insertOne({
+  email: "user@example.com",
+  active: true,
+  age: 25,
+});`,
     output: `{
   "acknowledged": true,
-  "insertedCount": 3
+  "insertedId": "01K2ABC123"
 }`,
   },
   {
     id: "query",
     label: "Query",
-    code: `const item = await items.findOne({
-  sku: "A",
+    code: `const user = await users.findOne({
+  email: "user@example.com"
 });
 
-console.log(item);`,
+console.log(user);`,
     output: `{
-  "sku": "A",
-  "qty": 10
+  "_id": "01K2ABC123",
+  "email": "user@example.com",
+  "active": true,
+  "age": 25
 }`,
   },
   {
-    id: "update",
-    label: "Update",
-    code: `await items.updateOne(
-  { sku: "B" },
-  { $inc: { qty: 5 } }
-);`,
-    output: `{
-  "matchedCount": 1,
-  "modifiedCount": 1
-}`,
-  },
-  {
-    id: "pagination",
-    label: "Pagination",
-    code: `const page = await items.find(
-  { qty: { $gte: 5 } },
-  { limit: 2, offset: 0 }
-);
+    id: "index",
+    label: "Index",
+    code: `await users.createIndex("email");
+await users.createTextIndex("email");
 
-console.log(
-  page.map(item => ({
-    sku: item.sku,
-    qty: item.qty,
-  }))
-);`,
-    output: `[
-  { "sku": "A", "qty": 10 },
-  { "sku": "B", "qty": 7 }
-]`,
-  },
-  {
-    id: "indexes",
-    label: "Indexes",
-    code: `await users.createIndex({
-  email: 1,
-  plan: 1,
-});`,
+const textResults = await users.find({
+  $text: { $search: "user" }
+}).toArray();`,
     output: `{
   "ok": true,
-  "index": "email_1_plan_1"
+  "index": "email_1"
 }`,
   },
   {
-    id: "transactions",
-    label: "Transactions",
-    code: `await manager.transaction(async (tx) => {
-  const orders = tx.collection("orders");
-  const inventory = tx.collection("inventory");
+    id: "aggregate",
+    label: "Aggregate",
+    code: `const pipeline = [
+  { $match: { active: true } },
+  { $group: { _id: null, count: { $sum: 1 } } }
+];
 
-  await orders.insertOne({ sku: "A", qty: 1 });
-  await inventory.updateOne(
-    { sku: "A" },
-    { $inc: { qty: -1 } }
-  );
-});`,
-    output: `{
-  "committed": true,
-  "operations": 2
-}`,
+const result = await users.aggregate(pipeline).toArray();`,
+    output: `[
+  {
+    "_id": null,
+    "count": 42
+  }
+]`,
   },
 ] as const;
 
@@ -225,12 +223,75 @@ export const v2Cards = [
 
 export const benchmarkMetrics = [
   { label: "Writes/sec", value: 25140, suffix: "" },
-  { label: "Reads/sec", value: 19870, suffix: "" },
+  { label: "Reads/sec", value: 34987, suffix: "" },
   { label: "p50 latency", value: 4.3, suffix: "ms" },
   { label: "p99 latency", value: 31.7, suffix: "ms" },
   { label: "Dataset size", value: 100, suffix: "M docs" },
   { label: "Index health", value: 98.4, suffix: "%" },
 ] as const;
+
+export const benchmarkDetails = {
+  hardware: {
+    device: "HP OMEN Gaming Laptop",
+    processor: "Intel Core Ultra 7 (14th Generation)",
+    cores: "16 Physical Cores",
+    memory: "24 GB DDR5 @ 5600 MT/s",
+    storage: "NVMe PCIe SSD",
+    os: "Windows",
+  },
+  configuration: {
+    language: "Rust",
+    nodes: 4,
+    partitions: 8,
+    workerThreads: 32,
+    batchSize: 256,
+  },
+  features: [
+    "Secondary Indexes",
+    "Full-Text Search",
+    "Write-Ahead Log (WAL)",
+    "MVCC",
+    "Parallel Read & Write Execution",
+  ],
+  results: {
+    writePerformance: {
+      title: "Write Performance",
+      throughput: "23K to 25K writes/sec",
+      description: "Sustained write throughput across millions of documents with stable WAL group commit behavior.",
+      logs: [
+        "https://www.liorandb.com/benchmark_ldb/write/writes_log_1m.txt",
+        "https://www.liorandb.com/benchmark_ldb/write/writes_log_10m.txt",
+        "https://www.liorandb.com/benchmark_ldb/write/writes_other_log_1m.txt",
+        "https://www.liorandb.com/benchmark_ldb/write/writes_other_log_10m.txt",
+      ],
+    },
+    readPerformance: {
+      title: "Read Performance",
+      highlights: ["Primary Key Lookups", "Secondary Index Queries", "Range Queries", "Pagination", "Full Text Search"],
+      description: "Low millisecond latency, high parallel throughput, and stable performance under concurrency.",
+      logs: [
+        "https://www.liorandb.com/benchmark_ldb/read/reads_log_1m.txt",
+        "https://www.liorandb.com/benchmark_ldb/read/reads_log_10m.txt",
+        "https://www.liorandb.com/benchmark_ldb/read/reads_other_log_1m.txt",
+        "https://www.liorandb.com/benchmark_ldb/read/reads_other_log_10m.txt",
+      ],
+    },
+    mixedWorkload: {
+      title: "Mixed Workload (Soak Test)",
+      target: "~35K Total Operations/sec",
+      writeOps: "~10K writes/sec",
+      readOps: "~25K reads/sec",
+      description: "Continuous mixed workload testing for long-running stability rather than peak numbers.",
+      log: "https://www.liorandb.com/benchmark_ldb/soak/soak_10m.txt",
+    },
+    crashRecovery: {
+      title: "Crash Recovery Test",
+      description: "Repeated forced crashes during active writes to verify WAL recovery, metadata consistency, duplicate prevention, and missing document detection.",
+      log: "https://www.liorandb.com/benchmark_ldb/crash/crash_test_1m_9c.txt",
+    },
+  },
+  logsUrl: "https://www.liorandb.com/benchmark_ldb/",
+} as const;
 
 export const indiaPillars = [
   [
@@ -260,43 +321,36 @@ export const useCases = [
 
 export const roadmap = [
   {
-    title: "V1 • Live",
-    items: [
-      "Embedded Node.js database",
-      "Documents",
-      "WAL",
-      "MongoDB-style queries",
-      "Indexes, transactions and snapshots",
-    ],
-  },
-  {
-    title: "V2 development • Current",
+    title: "V2 pre-alpha • Launched",
     items: [
       "Rust storage engine",
       "B+ tree and MVCC",
       "LSM secondary indexes",
       "Text inverted index",
       "Crash recovery",
-      "Performance stabilization",
+      "Docker deployment",
     ],
   },
   {
-    title: "16 August 2026 • Pre-alpha",
-    items: [
-      "Early developer access",
-      "Community testing",
-      "Benchmark feedback",
-      "API validation",
-    ],
-  },
-  {
-    title: "After pre-alpha",
+    title: "V2 Alpha • 23 October 2026",
     items: [
       "Larger dataset testing",
       "Driver ecosystem",
-      "Managed deployment experiments",
-      "Replication and clustering research",
+      "gRPC and REST APIs",
+      "Managed deployment templates",
       "Production hardening",
+      "Performance optimization",
+    ],
+  },
+  {
+    title: "V2 Future",
+    items: [
+      "Replication and clustering",
+      "Sharding and partitioning",
+      "Advanced monitoring",
+      "Backup and restore",
+      "Enterprise features",
+      "Community contributions",
     ],
   },
 ] as const;
@@ -313,15 +367,15 @@ export const founderSkills = [
 export const faqs = [
   [
     "What is LioranDB?",
-    "LioranDB is a developer-first document database developed in India. V1 is available as an embedded Node.js database, while V2 is a new high-performance engine under development in Rust.",
+    "LioranDB is a developer-first document database developed in India. V2 is a high-performance Rust-powered engine launched as pre-alpha on 16 August 2026.",
   ],
   [
     "Is LioranDB production-ready?",
-    "LioranDB V1 is live and available for developers to evaluate. Teams should test it carefully against their own reliability, durability and workload requirements. V2 is under development and its August 2026 release will be a pre-alpha, not a production release.",
+    "LioranDB V2 pre-alpha is launched and available for developers to evaluate. This is an early release. Teams should test it carefully against their own reliability, durability and workload requirements. Alpha launch is scheduled for 23 October 2026.",
   ],
   [
     "When will LioranDB V2 launch?",
-    "The V2 pre-alpha is planned for 16 August 2026.",
+    "The V2 pre-alpha is now live as of 16 August 2026. Alpha launch is planned for 23 October 2026.",
   ],
   [
     "Is LioranDB open source?",
@@ -357,16 +411,16 @@ export const footerColumns = [
   {
     title: "Product",
     links: [
-      ["V1 Docs", siteConfig.docsUrl],
-      ["V1 GitHub", siteConfig.v1GithubUrl],
-      ["V2 Development", "#v2"],
+      ["Docs", siteConfig.docsUrl],
+      ["V2 GitHub", siteConfig.v1GithubUrl],
+      ["Discord", siteConfig.discordUrl],
       ["Roadmap", "#roadmap"],
     ],
   },
   {
     title: "Community",
     links: [
-      ["Discord", siteConfig.discordUrl],
+      ["Join Discord", siteConfig.discordUrl],
       ["GitHub Organization", siteConfig.orgGithubUrl],
       ["Report an Issue", siteConfig.v1GithubUrl],
     ],

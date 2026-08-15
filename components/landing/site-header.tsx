@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Menu, MessageSquareText, X } from "lucide-react";
+import { BookOpen, Menu, MessageSquareText, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -12,6 +12,7 @@ type NavItem = readonly [string, string];
 type SiteHeaderProps = {
   navItems: readonly NavItem[];
   docsUrl: string;
+  studioUrl: string;
   discordUrl: string;
   githubUrl: string;
 };
@@ -19,6 +20,7 @@ type SiteHeaderProps = {
 export function SiteHeader({
   navItems,
   docsUrl,
+  studioUrl,
   discordUrl,
   githubUrl,
 }: SiteHeaderProps) {
@@ -28,7 +30,10 @@ export function SiteHeader({
   const reduceMotion = useReducedMotion();
 
   const ids = useMemo(
-    () => navItems.map(([, href]) => href.replace("#", "")),
+    () => navItems
+      .map(([, href]) => href)
+      .filter(href => !href.startsWith("external:"))
+      .map(href => href.replace("#", "")),
     [navItems],
   );
 
@@ -112,15 +117,22 @@ export function SiteHeader({
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
-          {navItems.map(([label, href]) => (
-            <Link
-              key={href}
-              href={href}
-              className={`${linkClass} ${active === href ? "text-white" : ""}`}
-            >
-              {label}
-            </Link>
-          ))}
+          {navItems.map(([label, href]) => {
+            const isExternal = href.startsWith("external:");
+            const actualHref = isExternal ? (href === "external:studio" ? studioUrl : href) : href;
+            
+            return (
+              <Link
+                key={href}
+                href={actualHref}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noreferrer" : undefined}
+                className={`${linkClass} ${!isExternal && active === href ? "text-white" : ""}`}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
@@ -146,9 +158,10 @@ export function SiteHeader({
             href={docsUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center rounded-[10px] bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-black transition hover:bg-[var(--color-primary-bright)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className="inline-flex items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
           >
-            Read V1 Docs
+            <BookOpen size={16} />
+            Docs
           </Link>
         </div>
 
@@ -173,25 +186,33 @@ export function SiteHeader({
             className="mx-auto mt-3 max-w-7xl rounded-[18px] border border-white/10 bg-[rgba(10,10,10,0.96)] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] lg:hidden"
           >
             <nav className="flex flex-col gap-2">
-              {navItems.map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="rounded-xl px-4 py-3 text-sm font-medium text-zinc-200 transition hover:bg-white/6"
-                  onClick={() => setOpen(false)}
-                >
-                  {label}
-                </Link>
-              ))}
+              {navItems.map(([label, href]) => {
+                const isExternal = href.startsWith("external:");
+                const actualHref = isExternal ? (href === "external:studio" ? studioUrl : href) : href;
+                
+                return (
+                  <Link
+                    key={href}
+                    href={actualHref}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noreferrer" : undefined}
+                    className="rounded-xl px-4 py-3 text-sm font-medium text-zinc-200 transition hover:bg-white/6"
+                    onClick={() => setOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
             </nav>
             <div className="mt-4 grid gap-2">
               <Link
                 href={docsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-[10px] bg-[var(--color-primary)] px-4 py-3 text-center text-sm font-semibold text-black"
+                className="inline-flex items-center justify-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-4 py-3 text-sm font-medium text-white"
               >
-                Read V1 Docs
+                <BookOpen size={16} />
+                Docs
               </Link>
               <Link
                 href={discordUrl}

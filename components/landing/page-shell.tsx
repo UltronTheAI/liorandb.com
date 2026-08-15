@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ExternalLink, ShieldCheck } from "lucide-react";
+import { ArrowRight, ExternalLink, ShieldCheck } from "lucide-react";
 import {
   apiExplorerTabs,
   architectureFlow,
   architectureSideSystems,
+  benchmarkDetails,
   benchmarkMetrics,
   faqs,
-  features,
   footerColumns,
   founderSkills,
   getStartedCode,
@@ -20,7 +20,6 @@ import {
   navItems,
   roadmap,
   siteConfig,
-  storageRules,
   useCases,
   v2Cards,
 } from "@/data/site";
@@ -83,6 +82,7 @@ export function LandingPage() {
       <SiteHeader
         navItems={navItems}
         docsUrl={siteConfig.docsUrl}
+        studioUrl={siteConfig.studioUrl}
         discordUrl={siteConfig.discordUrl}
         githubUrl={siteConfig.v1GithubUrl}
       />
@@ -92,7 +92,7 @@ export function LandingPage() {
           <div className="grid items-center gap-10 pt-8 sm:gap-12 sm:pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
             <Reveal className="min-w-0 space-y-8">
               <div className="inline-flex max-w-full flex-wrap items-center rounded-sm border border-white/12 bg-white/[0.03] px-3 py-2 text-[11px] font-medium uppercase tracking-[0.14em] text-zinc-300 sm:px-4 sm:text-xs sm:tracking-[0.18em]">
-                LioranDB V2 pre-alpha scheduled for {siteConfig.preAlphaDate}
+                LioranDB V2 pre-alpha launched on {siteConfig.preAlphaDate}. Alpha coming {siteConfig.alphaLaunchDate}
               </div>
               <div className="space-y-6">
                 <h1 className="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.065em] text-white xs:text-[2.8rem] sm:text-6xl lg:text-7xl">
@@ -100,14 +100,10 @@ export function LandingPage() {
                   <span className="text-gradient">document database.</span>
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">
-                  MongoDB-style simplicity today. A high-performance Rust engine
-                  tomorrow.
+                  High-performance document database developed in Rust.
                 </p>
                 <p className="max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg">
-                  LioranDB is a developer-first document database developed in
-                  India for startups, SaaS platforms, APIs and data-intensive
-                  applications. One year in, V1 is live for Node.js and V2 is being
-                  rebuilt in Rust.
+                  LioranDB V2 is a developer-first document database with Rust performance, Docker deployment, and APIs designed for startups, SaaS platforms, APIs and data-intensive applications. Pre-alpha is live now.
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -117,7 +113,7 @@ export function LandingPage() {
                   rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-5 py-4 text-sm font-semibold text-black transition hover:bg-[var(--color-primary-bright)]"
                 >
-                  Explore V1
+                  Read Docs
                   <ArrowRight size={16} />
                 </Link>
                 <Link
@@ -126,7 +122,7 @@ export function LandingPage() {
                   rel="noreferrer"
                   className="inline-flex items-center justify-center rounded-[10px] border border-white/12 bg-white/5 px-5 py-4 text-sm font-medium text-white transition hover:bg-white/10"
                 >
-                  Join the V2 journey
+                  Join Community
                 </Link>
               </div>
               <Link
@@ -165,75 +161,46 @@ export function LandingPage() {
 
         <Section id="status-strip">
           <Reveal className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.9),rgba(10,10,12,0.92))] p-5 sm:p-6 md:p-8">
-            <div className="grid gap-5 xl:grid-cols-[0.85fr_1fr_1fr]">
+            <div className="grid gap-5 xl:grid-cols-[0.85fr_1fr]">
               <div>
                 <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
                   Product status
                 </p>
                 <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white">
-                  Two generations. One mission.
+                  V2 is live and ready.
                 </h2>
               </div>
-              {[
-                {
-                  title: "V1",
-                  status: "Live",
-                  engine: "Node.js / TypeScript",
-                  extra: "@liorandb/core",
-                  type: "Embedded document database",
-                  href: siteConfig.docsUrl,
-                  cta: "Open docs",
-                },
-                {
-                  title: "V2",
-                  status: "In development",
-                  engine: "Rust",
-                  extra: `Pre-alpha • ${siteConfig.preAlphaDate}`,
-                  type: "High-performance database engine",
-                  href: siteConfig.discordUrl,
-                  cta: "Follow development",
-                },
-              ].map((card, index) => (
-                <div
-                  key={card.title}
-                  className="relative rounded-[24px] border border-white/10 bg-black/30 p-5"
-                >
-                  {index === 0 ? (
-                    <div className="hidden xl:block">
-                      <span className="absolute -right-16 top-1/2 h-px w-16 bg-[linear-gradient(90deg,rgba(46,229,157,0.65),rgba(85,214,255,0.3),transparent)]" />
-                    </div>
-                  ) : null}
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-semibold text-white">{card.title}</span>
-                    <span className="rounded-full border border-white/10 px-3 py-1 text-xs uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                      {card.status}
-                    </span>
-                  </div>
-                  <dl className="mt-4 space-y-3 text-sm text-zinc-400">
-                    <div className="flex justify-between gap-4">
-                      <dt>Engine</dt>
-                      <dd>{card.engine}</dd>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <dt>{card.title === "V1" ? "Package" : "Release"}</dt>
-                      <dd>{card.extra}</dd>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <dt>Type</dt>
-                      <dd className="text-right">{card.type}</dd>
-                    </div>
-                  </dl>
-                  <Link
-                    href={card.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white"
-                  >
-                    {card.cta}
-                    <ArrowRight size={16} />
-                  </Link>
+              <div className="rounded-[24px] border border-white/10 bg-black/30 p-5">
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-semibold text-white">V2 Pre-alpha</span>
+                  <span className="rounded-full border border-white/10 px-3 py-1 text-xs uppercase tracking-[0.18em] text-[var(--color-primary)]">
+                    Launched
+                  </span>
                 </div>
-              ))}
+                <dl className="mt-4 space-y-3 text-sm text-zinc-400">
+                  <div className="flex justify-between gap-4">
+                    <dt>Engine</dt>
+                    <dd>Rust</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt>Released</dt>
+                    <dd>{siteConfig.preAlphaDate}</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt>Alpha Launch</dt>
+                    <dd className="text-right">{siteConfig.alphaLaunchDate}</dd>
+                  </div>
+                </dl>
+                <Link
+                  href={siteConfig.docsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white"
+                >
+                  Read the docs
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
             </div>
           </Reveal>
         </Section>
@@ -242,8 +209,8 @@ export function LandingPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Get Started"
-              title="From zero to documents in minutes."
-              description="Install LioranDB Embedded, open a collection and start working with documents using a familiar MongoDB-style API."
+              title="Solo Docker Quickstart"
+              description="Spin up a single local LioranDB instance running directly from Docker. Everything you need to start building."
             />
           </Reveal>
           <div className="mt-10">
@@ -260,8 +227,8 @@ export function LandingPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Developer API"
-              title="A document API that already feels familiar."
-              description="Collections, queries, operators and transactions are laid out like a developer tool, not a marketing diagram."
+              title="Build with the TypeScript driver."
+              description="Connect, query, index, and aggregate with familiar MongoDB-style operations. gRPC and REST APIs are also available."
             />
           </Reveal>
           <div className="mt-10">
@@ -269,91 +236,21 @@ export function LandingPage() {
           </div>
         </Section>
 
-        <Section id="v1">
-          <Reveal>
-            <SectionHeading
-              eyebrow="V1 Live"
-              title="V1 is live. Small footprint. Serious foundations."
-              description="LioranDB Embedded gives Node.js developers a file-based document database with the durability and developer ergonomics needed for local tools, internal applications and lightweight production workloads."
-            />
-          </Reveal>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {features.map(([title, description, snippet], index) => (
-              <Reveal key={title} delay={index * 0.03}>
-                <div className="feature-card h-full rounded-[22px] border border-white/10 bg-[var(--color-card)] p-5">
-                  <div className="mb-4 rounded-[14px] border border-white/8 bg-black/35 px-3 py-3 font-mono text-xs text-[var(--color-primary)]">
-                    {snippet}
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">{title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-zinc-400">{description}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Section>
-
-        <Section id="storage">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <Reveal>
-              <SectionHeading
-                eyebrow="Storage Model"
-                title="Your database. Your files. Your control."
-                description="LioranDB Embedded stores each database and collection in its own directory. Choose the default location or place the data inside your project."
-              />
-              <div className="mt-6 space-y-3">
-                {storageRules.map((rule) => (
-                  <div
-                    key={rule}
-                    className="inline-flex w-full items-center gap-3 rounded-[18px] border border-white/10 bg-[var(--color-elevated)] px-4 py-3 text-sm text-zinc-300"
-                  >
-                    <CheckCircle2 size={16} className="text-[var(--color-primary)]" />
-                    {rule}
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <div className="min-w-0 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.94))] p-4 sm:p-6">
-                <div className="min-w-0 overflow-hidden rounded-[20px] border border-white/8 bg-black/30 p-3 font-mono text-xs leading-7 text-zinc-300 sm:p-5 sm:text-sm sm:leading-8">
-                  <CodeBlock
-                    code={`.liorandb/
-├── app/
-│   ├── users/
-│   ├── sessions/
-│   └── settings/
-├── shop/
-│   ├── items/
-│   ├── orders/
-│   └── customers/
-└── snapshots/
-
-const manager = new LioranManager({
-  rootPath: "./.liorandb",
-});`}
-                    variant="terminal"
-                    className="border-0 bg-transparent p-0 text-zinc-300"
-                  />
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </Section>
-
         <Section id="v2">
           <Reveal>
             <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(22,22,24,0.94),rgba(10,10,12,0.98))] p-5 sm:p-6 md:p-8">
-              <span className="inline-flex rounded-full border border-[rgba(255,209,102,0.14)] bg-[rgba(255,209,102,0.05)] px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[#f2c66d]">
-                Under active development
+              <span className="inline-flex rounded-full border border-[rgba(46,229,157,0.14)] bg-[rgba(46,229,157,0.05)] px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[#2ee59d]">
+                Pre-alpha Launched
               </span>
               <div className="mt-6 grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
                 <div>
                   <h2 className="max-w-3xl text-balance text-4xl font-semibold tracking-[-0.05em] text-white md:text-5xl">
-                    The next generation of LioranDB is being forged in Rust.
+                    LioranDB V2 is built in Rust. Now you can code it.
                   </h2>
                   <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-300">
-                    V2 is a new high-performance storage engine designed for larger
+                    V2 is a high-performance storage engine designed for larger
                     datasets, predictable latency, transactional workloads and
-                    production-focused observability.
+                    production-focused observability. Docker deployment is ready. Alpha launch coming on {siteConfig.alphaLaunchDate}.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
@@ -429,18 +326,70 @@ const manager = new LioranManager({
             <SectionHeading
               eyebrow="Internal Benchmarking"
               title="Built under pressure, not inside a toy demo."
-              description="Development testing has reached datasets approaching 100 million documents, around 45K combined operations per second, and write-heavy runs around 25K writes per second."
+              description="Development testing has reached datasets approaching 100 million documents, with sustained write throughput of 23-25K writes per second and 35K combined operations per second in mixed workloads."
             />
           </Reveal>
           <div className="mt-10">
             <BenchmarkDashboard metrics={benchmarkMetrics} />
           </div>
+          
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Hardware</h3>
+              <ul className="mt-4 space-y-2 text-sm text-zinc-400">
+                <li>{benchmarkDetails.hardware.processor}</li>
+                <li>{benchmarkDetails.hardware.cores}</li>
+                <li>{benchmarkDetails.hardware.memory}</li>
+                <li>{benchmarkDetails.hardware.storage}</li>
+              </ul>
+            </Reveal>
+            
+            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5" delay={0.04}>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Configuration</h3>
+              <ul className="mt-4 space-y-2 text-sm text-zinc-400">
+                <li>Nodes: {benchmarkDetails.configuration.nodes}</li>
+                <li>Partitions: {benchmarkDetails.configuration.partitions}</li>
+                <li>Threads: {benchmarkDetails.configuration.workerThreads}</li>
+                <li>Batch: {benchmarkDetails.configuration.batchSize}</li>
+              </ul>
+            </Reveal>
+            
+            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5" delay={0.08}>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Write Performance</h3>
+              <p className="mt-4 text-sm text-zinc-300">{benchmarkDetails.results.writePerformance.throughput}</p>
+              <p className="mt-2 text-xs text-zinc-400">{benchmarkDetails.results.writePerformance.description}</p>
+            </Reveal>
+            
+            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5" delay={0.12}>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Recovery & Durability</h3>
+              <p className="mt-4 text-sm text-zinc-300">Crash Recovery</p>
+              <p className="mt-2 text-xs text-zinc-400">WAL replay, metadata consistency, and duplicate prevention validated through repeated crash cycles.</p>
+            </Reveal>
+          </div>
+          
+          <Reveal className="mt-10 rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6">
+            <h3 className="text-lg font-semibold text-white">Features Tested</h3>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {benchmarkDetails.features.map((feature) => (
+                <div key={feature} className="flex items-center gap-2 text-sm text-zinc-300">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-primary)]" />
+                  {feature}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          
           <Reveal className="mt-6 rounded-[20px] border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.06)] p-5 text-sm leading-7 text-zinc-300">
-            Internal development benchmarks. Results vary based on hardware,
-            workload, index configuration, document size, durability settings and
-            dataset shape. V2 is under development and these figures are not
-            service-level guarantees. We care less about one heroic peak and more
-            about stable throughput, bounded tail latency and predictable recovery.
+            <p>All raw benchmark logs are publicly available for inspection and validation. These results demonstrate current pre-alpha capabilities rather than production guarantees. Dedicated server hardware is expected to deliver significantly higher throughput than consumer laptop testing.</p>
+            <Link
+              href={benchmarkDetails.logsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-bright)]"
+            >
+              View benchmark logs
+              <ExternalLink size={14} />
+            </Link>
           </Reveal>
         </Section>
 
@@ -763,11 +712,11 @@ const result = await users.find({
               <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
                 <div>
                   <h2 className="text-balance text-4xl font-semibold tracking-[-0.05em] text-white md:text-5xl">
-                    Build with V1. Help shape V2.
+                    Now you can code it. Pre-alpha is live.
                   </h2>
                   <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-300">
-                    Start with the embedded Node.js database today, or join the
-                    community building the next generation Rust engine.
+                    Get started with the Docker Quickstart. Read the docs. Join the
+                    community helping shape the production release.
                   </p>
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <Link
@@ -776,7 +725,7 @@ const result = await users.find({
                       rel="noreferrer"
                       className="inline-flex items-center justify-center rounded-[10px] bg-[var(--color-primary)] px-5 py-4 text-sm font-semibold text-black"
                     >
-                      Read V1 documentation
+                      Read documentation
                     </Link>
                     <Link
                       href={siteConfig.discordUrl}

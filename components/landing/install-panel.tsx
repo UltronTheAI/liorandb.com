@@ -6,7 +6,7 @@ import { CodeBlock } from "./code-block";
 import { CopyButton } from "./copy-button";
 
 type InstallPanelProps = {
-  commands: Record<"npm" | "pnpm" | "yarn", string>;
+  commands: Record<string, string>;
   steps: readonly string[];
   code: string;
   output: string;
@@ -18,7 +18,7 @@ export function InstallPanel({
   code,
   output,
 }: InstallPanelProps) {
-  const [activePkg, setActivePkg] = useState<keyof typeof commands>("npm");
+  const [activePkg, setActivePkg] = useState<string>(Object.keys(commands)[0]);
   const reduceMotion = useReducedMotion();
   const highlightedStep = useMemo(() => 3, []);
 
@@ -27,7 +27,7 @@ export function InstallPanel({
       <div className="rounded-[24px] border border-white/10 bg-[var(--color-elevated)] p-4 md:p-6">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
           <div className="inline-flex rounded-[14px] border border-white/10 bg-black/30 p-1">
-            {(Object.keys(commands) as Array<keyof typeof commands>).map((pkg) => (
+            {Object.keys(commands).map((pkg) => (
               <button
                 key={pkg}
                 type="button"
