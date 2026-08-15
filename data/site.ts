@@ -290,7 +290,7 @@ export const benchmarkDetails = {
       log: "https://www.liorandb.com/benchmark_ldb/crash/crash_test_1m_9c.txt",
     },
   },
-  logsUrl: "https://www.liorandb.com/benchmark_ldb/",
+  logsUrl: "https://dev.to/ultrontheai/liorandb-v2-pre-alpha-benchmark-summary-4nfb",
 } as const;
 
 export const indiaPillars = [
