@@ -378,6 +378,76 @@ export function LandingPage() {
               ))}
             </div>
           </Reveal>
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
+            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6">
+              <h3 className="text-base font-semibold text-white">📊 Write Performance Logs</h3>
+              <p className="mt-2 text-xs text-zinc-400">23K-25K writes/sec with stable WAL group commit</p>
+              <div className="mt-4 space-y-2">
+                {benchmarkDetails.results.writePerformance.logs.map((log) => (
+                  <Link
+                    key={log}
+                    href={log}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+                  >
+                    <ExternalLink size={12} />
+                    {log.split("/").pop()}
+                  </Link>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6" delay={0.04}>
+              <h3 className="text-base font-semibold text-white">📖 Read Performance Logs</h3>
+              <p className="mt-2 text-xs text-zinc-400">Low millisecond latency with high parallel throughput</p>
+              <div className="mt-4 space-y-2">
+                {benchmarkDetails.results.readPerformance.logs.map((log) => (
+                  <Link
+                    key={log}
+                    href={log}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+                  >
+                    <ExternalLink size={12} />
+                    {log.split("/").pop()}
+                  </Link>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="mt-4 grid gap-4 lg:grid-cols-2">
+            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6">
+              <h3 className="text-base font-semibold text-white">🔄 Mixed Workload (Soak Test)</h3>
+              <p className="mt-2 text-xs text-zinc-400">~10K writes/sec + ~25K reads/sec = ~35K ops/sec</p>
+              <Link
+                href={benchmarkDetails.results.mixedWorkload.log}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+              >
+                <ExternalLink size={12} />
+                {benchmarkDetails.results.mixedWorkload.log.split("/").pop()}
+              </Link>
+            </Reveal>
+
+            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6" delay={0.04}>
+              <h3 className="text-base font-semibold text-white">🛡️ Crash Recovery Test</h3>
+              <p className="mt-2 text-xs text-zinc-400">WAL replay & durability validation</p>
+              <Link
+                href={benchmarkDetails.results.crashRecovery.log}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+              >
+                <ExternalLink size={12} />
+                {benchmarkDetails.results.crashRecovery.log.split("/").pop()}
+              </Link>
+            </Reveal>
+          </div>
           
           <Reveal className="mt-6 rounded-[20px] border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.06)] p-5 text-sm leading-7 text-zinc-300">
             <p>All raw benchmark logs are publicly available for inspection and validation. These results demonstrate current pre-alpha capabilities rather than production guarantees. Dedicated server hardware is expected to deliver significantly higher throughput than consumer laptop testing.</p>
@@ -387,7 +457,7 @@ export function LandingPage() {
               rel="noreferrer"
               className="mt-3 inline-flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-bright)]"
             >
-              View benchmark logs
+              View all benchmark logs
               <ExternalLink size={14} />
             </Link>
           </Reveal>
