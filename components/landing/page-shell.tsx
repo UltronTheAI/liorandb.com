@@ -321,8 +321,7 @@ export function LandingPage() {
                   </h2>
                   <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-300">
                     V2 is a high-performance storage engine designed for larger
-                    datasets, predictable latency, transactional workloads and
-                    production-focused observability. Docker deployment is ready. Alpha launch coming on {siteConfig.alphaLaunchDate}.
+                    datasets, predictable latency, and transactional workloads. Local Docker pre-alpha is available for developer evaluation and benchmarking, while production workloads are reviewed and managed via our Founder Program. Alpha launch coming on {siteConfig.alphaLaunchDate}.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
@@ -331,8 +330,8 @@ export function LandingPage() {
                     <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
                       Pre-alpha • {siteConfig.preAlphaDate}
                     </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
-                      Not production-ready
+                    <span className="rounded-full border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.08)] px-4 py-2 text-sm text-[#2ee59d]">
+                      Managed Hosting Available
                     </span>
                   </div>
                   <Link

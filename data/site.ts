@@ -399,43 +399,39 @@ export const founderSkills = [
 export const faqs = [
   [
     "What is LioranDB V2?",
-    "LioranDB V2 is a developer-first document database developed in India. It is a Rust-powered engine launched as pre-alpha on 16 August 2026.",
+    "LioranDB V2 is a developer-first document database developed in India. It features a high-performance Rust storage engine launched as pre-alpha on 16 August 2026, with the Alpha release coming on 23 October 2026.",
   ],
   [
-    "Is LioranDB V2 production-ready?",
-    "LioranDB V2 is live as a pre-alpha release for developers to evaluate. It is meant for early testing, workload feedback and architecture validation. Alpha launch is scheduled for 23 October 2026.",
+    "How does the Managed Developer Hosting / Founder Program differ from the Pre-alpha self-hosted release?",
+    "The standalone Docker release is an experimental pre-alpha meant for local benchmarking, testing, and community feedback. The Managed Developer Hosting / Founder Program (₹5,000/mo) is a dedicated cloud service where our core engineering team directly provisions, isolates, configures automated daily backups, monitors, and supports your database instance with guaranteed throughput limits and direct founder support.",
   ],
   [
-    "When will LioranDB V2 launch?",
-    "The V2 pre-alpha is now live as of 16 August 2026. The planned alpha launch is 23 October 2026.",
+    "What is the service provisioning & digital delivery timeline?",
+    "LioranDB is 100% digital cloud infrastructure. After you submit your database request on app.liorandb.com and complete payment verification, dedicated database instances and connection credentials are electronically provisioned within 1 to 24 hours.",
+  ],
+  [
+    "What is your cancellation and refund policy?",
+    "Because dedicated cloud computing, NVMe storage, and engineering setup time are allocated immediately upon provisioning, all subscriptions are subject to a strict No-Refund Policy. However, you can cancel your subscription renewal at any time directly from the dashboard before the next billing date.",
+  ],
+  [
+    "What are the official support hours?",
+    "Direct founder and core engineering support is available Monday through Friday from 6:00 PM to 10:00 PM IST (4 hours daily). We are closed on Saturdays and Sundays. Support is handled via the dashboard, official email (support@liorandb.com), and our Discord developer community.",
   ],
   [
     "Is LioranDB V2 open source?",
-    "No. LioranDB V2 is a closed-source product in its current pre-alpha stage, with benchmark logs and project updates shared publicly for transparency.",
+    "No. LioranDB V2 is currently a proprietary product in its pre-alpha stage, with benchmark logs, architectural specifications, and drivers shared publicly for transparency.",
   ],
   [
     "Does LioranDB use MongoDB internally?",
-    "No. LioranDB V2 provides a familiar MongoDB-style document API, but it uses its own storage engine and execution model.",
+    "No. LioranDB V2 provides a familiar MongoDB-style document API for developer convenience, but it uses its own custom Rust B+ tree and MVCC storage engine.",
   ],
   [
-    "What language is V2 written in?",
-    "The V2 storage engine is built in Rust for performance, concurrency and low-level control.",
+    "Where is data stored in LioranDB?",
+    "LioranDB managed instances are hosted in secure developer-controlled datacenter regions in India, supporting data sovereignty so Indian applications can keep their data domestically.",
   ],
   [
-    "Where is data stored in LioranDB V2?",
-    "LioranDB V2 stores databases and collections in configurable local data directories, with deployment patterns designed for developer-controlled environments.",
-  ],
-  [
-    "Is LioranDB officially supported by the Indian government?",
-    "No. LioranDB is an independent product. Its mission is to strengthen India’s domestic developer infrastructure and give teams more control over where their application data is stored.",
-  ],
-  [
-    "Can I join the V2 pre-alpha?",
-    "Yes. Join the Discord community to follow development progress, testing updates and future launch milestones.",
-  ],
-  [
-    "Who is building LioranDB V2?",
-    "LioranDB V2 is led by Swaraj Puppalwar, Founder & CTO of Lioran Group, alongside contributors and the broader Lioran Developer Solutions ecosystem.",
+    "Who is building LioranDB?",
+    "LioranDB is built by Swaraj Puppalwar, Founder & CTO of Lioran Developer Solutions / Lioran Group, alongside contributors from the Indian developer ecosystem.",
   ],
 ] as const;
 
