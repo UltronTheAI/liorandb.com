@@ -2,8 +2,9 @@ export const siteConfig = {
   name: "LioranDB",
   title: "LioranDB — A Developer-First Document Database Developed in India",
   description:
-    "LioranDB V2 pre-alpha is launched on 16 August 2026. Build with the Rust-powered high-performance database developed in India. Alpha launch coming on 23 October 2026.",
+    "LioranDB V2 pre-alpha is launched on 16 August 2026, tested by 10+ developers with 3 real feedbacks. Build with the Rust-powered high-performance database developed in India. Alpha launch coming on 23 October 2026.",
   url: "https://liorandb.com",
+  appUrl: "https://app.liorandb.com",
   docsUrl: "https://docs.liorandb.com",
   studioUrl: "https://studio.liorandb.com",
   discordUrl: "https://discord.gg/WsWWThjPMp",
@@ -12,15 +13,46 @@ export const siteConfig = {
   founderGithubUrl: "https://github.com/UltronTheAI",
   founderImage: "https://avatars.githubusercontent.com/u/79976106?v=4",
   companyUrl: "https://lioransolutions.com",
+  supportEmail: "support@liorandb.com",
+  contactEmail: "contact@lioransolutions.com",
+  legalEntity: "Lioran Developer Solutions",
+  supportHours: "6:00 PM – 10:00 PM IST (Mon to Fri, Sat & Sun off)",
   preAlphaDate: "16 August 2026",
   alphaLaunchDate: "23 October 2026",
 } as const;
 
+export const trustedPartners = [
+  {
+    name: "Lioran Social",
+    role: "Currently used by",
+    badge: "Production User",
+    logo: "/ls.png",
+    description: "Powering real-world social data & user feeds",
+    darkLogo: false,
+  },
+  {
+    name: "Lioran Group",
+    role: "Currently used by",
+    badge: "Ecosystem Core",
+    logo: "/lg.png",
+    description: "Core developer platform & infrastructure",
+    darkLogo: true,
+  },
+  {
+    name: "The Masala Media",
+    role: "Social media managed by",
+    badge: "Official Agency",
+    logo: "/tmm.png",
+    description: "Brand & social media management operations",
+    darkLogo: false,
+  },
+] as const;
+
 export const navItems = [
   ["Product", "#product"],
   ["V2", "#v2"],
-  ["Studio", "external:studio"],
   ["Benchmarks", "#benchmarks"],
+  ["Pricing", "#pricing"],
   ["Why India", "#why-india"],
   ["Founder", "#founder"],
   ["FAQ", "#faq"],
@@ -407,11 +439,62 @@ export const faqs = [
   ],
 ] as const;
 
+export const pricingPlans = [
+  {
+    id: "developer-starter",
+    name: "Developer Starter",
+    badge: "Most Popular",
+    price: "₹5,000",
+    period: "/ month",
+    description:
+      "Fully managed, high-performance LioranDB instance for modern SaaS, APIs, and production startup workloads.",
+    highlight: true,
+    ctaText: "Request Database",
+    ctaHref: "https://app.liorandb.com",
+    features: [
+      "45,000 Ops/sec throughput (10k write ops/sec + 35k read ops/sec)",
+      "Under 1 Million documents capacity (< 1M docs)",
+      "Automated daily snapshot backups",
+      "Direct Founder & Core Engineering support",
+      "Basic feature & optimization requests",
+      "Dedicated single-node cloud provisioning",
+      "MongoDB-compatible driver & gRPC/REST APIs",
+      "Support window: 6:00 PM – 10:00 PM IST (Mon–Fri)",
+    ],
+    supportNote: "Support hours: 6:00 PM to 10:00 PM IST (Mon to Fri, Sat & Sun off).",
+  },
+  {
+    id: "custom-scale",
+    name: "Growth & Custom Scale",
+    badge: "High Scale",
+    price: "Custom",
+    period: "tailored architecture",
+    description:
+      "Custom multi-node cluster, high-throughput tuning, and enterprise SLAs for data-intensive systems.",
+    highlight: false,
+    ctaText: "Contact Founder",
+    ctaHref: "https://app.liorandb.com",
+    features: [
+      "High-throughput scaling (> 45k ops/sec custom limits)",
+      "Multi-million document storage (> 1M docs)",
+      "Custom backup intervals & Point-in-time recovery (PITR)",
+      "Priority founder SLA & dedicated engineering assistance",
+      "Custom query operators, driver tweaks & schema consulting",
+      "Multi-node clustering, replication & failover setup",
+      "Dedicated VPC / private peering deployment",
+      "Extended priority incident coverage",
+    ],
+    supportNote: "Dedicated engineering channel & priority escalation.",
+  },
+] as const;
+
 export const footerColumns = [
   {
     title: "Product",
     links: [
+      ["Dashboard", siteConfig.appUrl],
       ["Docs", siteConfig.docsUrl],
+      ["Pricing", "#pricing"],
       ["V2 GitHub", siteConfig.v1GithubUrl],
       ["Discord", siteConfig.discordUrl],
       ["Roadmap", "#roadmap"],
@@ -431,10 +514,18 @@ export const footerColumns = [
       ["Lioran Developer Solutions", siteConfig.companyUrl],
       ["Lioran Group", siteConfig.companyUrl],
       ["Founder", "#founder"],
+      ["Contact Us", "/contact"],
     ],
   },
   {
-    title: "Legal",
-    links: [["License", "/license"], ["Privacy", "/privacy"], ["Terms", "/terms"]],
+    title: "Legal & Policies",
+    links: [
+      ["Terms & Conditions", "/terms"],
+      ["Privacy Policy", "/privacy"],
+      ["Cancellation & Refund", "/refund"],
+      ["Shipping & Delivery", "/shipping"],
+      ["Contact Us", "/contact"],
+      ["License", "/license"],
+    ],
   },
 ] as const;

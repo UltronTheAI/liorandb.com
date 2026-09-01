@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { BookOpen, Menu, MessageSquareText, X } from "lucide-react";
+import { BookOpen, LayoutDashboard, Menu, MessageSquareText, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -11,6 +11,7 @@ type NavItem = readonly [string, string];
 
 type SiteHeaderProps = {
   navItems: readonly NavItem[];
+  appUrl: string;
   docsUrl: string;
   studioUrl: string;
   discordUrl: string;
@@ -19,6 +20,7 @@ type SiteHeaderProps = {
 
 export function SiteHeader({
   navItems,
+  appUrl,
   docsUrl,
   studioUrl,
   discordUrl,
@@ -81,7 +83,7 @@ export function SiteHeader({
   }, [open]);
 
   const linkClass =
-    "rounded-full px-3 py-2 text-sm text-zinc-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]";
+    "rounded-full px-2.5 py-2 text-xs font-medium text-zinc-400 transition hover:text-white xl:px-3 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]";
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 md:px-6">
@@ -93,7 +95,7 @@ export function SiteHeader({
         }`}
       >
         <Link
-          href="#top"
+          href="/#top"
           className="inline-flex items-center gap-3 rounded-full pr-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
         >
           <span className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--color-border-strong)] bg-[linear-gradient(135deg,rgba(46,229,157,0.18),rgba(85,214,255,0.14))]">
@@ -116,18 +118,25 @@ export function SiteHeader({
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        {/* Always visible Desktop Menu Bar */}
+        <nav className="hidden items-center gap-0.5 lg:flex xl:gap-1">
           {navItems.map(([label, href]) => {
             const isExternal = href.startsWith("external:");
-            const actualHref = isExternal ? (href === "external:studio" ? studioUrl : href) : href;
-            
+            const actualHref = isExternal
+              ? href === "external:studio"
+                ? studioUrl
+                : href
+              : href.startsWith("#")
+              ? `/${href}`
+              : href;
+
             return (
               <Link
                 key={href}
                 href={actualHref}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noreferrer" : undefined}
-                className={`${linkClass} ${!isExternal && active === href ? "text-white" : ""}`}
+                className={`${linkClass} ${!isExternal && active === href ? "text-white font-semibold" : ""}`}
               >
                 {label}
               </Link>
@@ -149,7 +158,7 @@ export function SiteHeader({
             href={discordUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className="inline-flex items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-3.5 py-3 text-xs font-medium text-white transition hover:bg-white/10 xl:px-4 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
           >
             <MessageSquareText size={16} />
             Join Discord
@@ -158,10 +167,19 @@ export function SiteHeader({
             href={docsUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className="inline-flex items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-3.5 py-3 text-xs font-medium text-white transition hover:bg-white/10 xl:px-4 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
           >
             <BookOpen size={16} />
             Docs
+          </Link>
+          <Link
+            href={appUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-3.5 py-3 text-xs font-semibold text-black transition hover:bg-[var(--color-primary-bright)] xl:px-4 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+          >
+            <LayoutDashboard size={16} />
+            Dashboard
           </Link>
         </div>
 
@@ -188,8 +206,14 @@ export function SiteHeader({
             <nav className="flex flex-col gap-2">
               {navItems.map(([label, href]) => {
                 const isExternal = href.startsWith("external:");
-                const actualHref = isExternal ? (href === "external:studio" ? studioUrl : href) : href;
-                
+                const actualHref = isExternal
+                  ? href === "external:studio"
+                    ? studioUrl
+                    : href
+                  : href.startsWith("#")
+                  ? `/${href}`
+                  : href;
+
                 return (
                   <Link
                     key={href}
@@ -205,6 +229,16 @@ export function SiteHeader({
               })}
             </nav>
             <div className="mt-4 grid gap-2">
+              <Link
+                href={appUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-black"
+                onClick={() => setOpen(false)}
+              >
+                <LayoutDashboard size={16} />
+                Open Dashboard (app.liorandb.com)
+              </Link>
               <Link
                 href={docsUrl}
                 target="_blank"

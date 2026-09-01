@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, ExternalLink, Server, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import {
   apiExplorerTabs,
   architectureFlow,
@@ -18,8 +18,10 @@ import {
   indiaPillars,
   installCommands,
   navItems,
+  pricingPlans,
   roadmap,
   siteConfig,
+  trustedPartners,
   useCases,
   v2Cards,
 } from "@/data/site";
@@ -32,6 +34,7 @@ import { HeroConsole } from "./hero-console";
 import { InstallPanel } from "./install-panel";
 import { Reveal } from "./reveal";
 import { SiteHeader } from "./site-header";
+import { SiteFooter } from "./site-footer";
 
 function SectionHeading({
   eyebrow,
@@ -81,6 +84,7 @@ export function LandingPage() {
       <div className="page-glow page-glow-mid" />
       <SiteHeader
         navItems={navItems}
+        appUrl={siteConfig.appUrl}
         docsUrl={siteConfig.docsUrl}
         studioUrl={siteConfig.studioUrl}
         discordUrl={siteConfig.discordUrl}
@@ -91,8 +95,11 @@ export function LandingPage() {
         <Section id="product">
           <div className="grid items-center gap-10 pt-8 sm:gap-12 sm:pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
             <Reveal className="min-w-0 space-y-8">
-              <div className="inline-flex max-w-full flex-wrap items-center rounded-sm border border-white/12 bg-white/[0.03] px-3 py-2 text-[11px] font-medium uppercase tracking-[0.14em] text-zinc-300 sm:px-4 sm:text-xs sm:tracking-[0.18em]">
-                LioranDB V2 pre-alpha launched on {siteConfig.preAlphaDate}. Alpha coming {siteConfig.alphaLaunchDate}
+              <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-[rgba(46,229,157,0.25)] bg-[rgba(46,229,157,0.06)] px-3.5 py-2 text-[11px] font-medium tracking-[0.08em] text-zinc-200 sm:px-4 sm:text-xs">
+                <span className="h-2 w-2 rounded-full bg-[var(--color-primary)] animate-pulse" />
+                <span>
+                  LioranDB V2 pre-alpha is live • <strong className="text-white">Tested by 10+ developers &amp; received 3 real feedbacks</strong>
+                </span>
               </div>
               <div className="space-y-6">
                 <h1 className="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.065em] text-white xs:text-[2.8rem] sm:text-6xl lg:text-7xl">
@@ -124,6 +131,14 @@ export function LandingPage() {
                 >
                   Join Community
                 </Link>
+                <Link
+                  href={siteConfig.appUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-[10px] border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.1)] px-5 py-4 text-sm font-semibold text-[var(--color-primary)] transition hover:bg-[rgba(46,229,157,0.18)]"
+                >
+                  Launch Dashboard
+                </Link>
               </div>
               <Link
                 href={siteConfig.v1GithubUrl}
@@ -136,16 +151,20 @@ export function LandingPage() {
               </Link>
               <div className="flex flex-wrap gap-2 sm:gap-3">
                 {[
+                  "Tested by 10+ Devs (3 Real Feedbacks)",
                   "Developed in India",
                   "Self-hostable",
                   "Developer-first",
                   "MongoDB-style API",
                   "Rust-powered V2",
-                  "1 year old",
                 ].map((item) => (
                   <span
                     key={item}
-                    className="inline-flex rounded-full border border-white/10 bg-white/4 px-3 py-2 text-xs text-zinc-300 sm:px-4 sm:text-sm"
+                    className={`inline-flex rounded-full px-3 py-2 text-xs sm:px-4 sm:text-sm ${
+                      item.includes("10+")
+                        ? "border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.1)] text-[#2ee59d] font-semibold"
+                        : "border border-white/10 bg-white/4 text-zinc-300"
+                    }`}
                   >
                     {item}
                   </span>
@@ -157,6 +176,52 @@ export function LandingPage() {
               <HeroConsole code={heroCode} output={heroOutput} />
             </Reveal>
           </div>
+
+          {/* Full-width Real World Adoption & Management Bar */}
+          <Reveal delay={0.15} className="mt-10 w-full sm:mt-12">
+            <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(18,18,22,0.9),rgba(10,10,12,0.95))] p-5 sm:p-7 md:p-8">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-white/8 pb-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-primary)]">
+                  Currently Used &amp; Managed By
+                </p>
+                <p className="text-xs text-zinc-400">
+                  Live production adoption &amp; brand management
+                </p>
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                {trustedPartners.map((partner) => (
+                  <div
+                    key={partner.name}
+                    className="flex items-center gap-4 rounded-[22px] border border-white/8 bg-white/[0.03] p-4 sm:p-5 transition hover:border-white/16 hover:bg-white/[0.06]"
+                  >
+                    <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white p-2 sm:p-2.5 shadow-[0_4px_16px_rgba(255,255,255,0.08)]">
+                      <Image
+                        src={partner.logo}
+                        alt={`${partner.name} logo`}
+                        width={64}
+                        height={64}
+                        className={`h-full w-full object-contain transition-transform ${
+                          partner.darkLogo ? "brightness-0 opacity-95 scale-[1.38]" : ""
+                        }`}
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-base font-semibold text-white">
+                        {partner.name}
+                      </p>
+                      <p className="mt-0.5 text-xs font-medium text-[var(--color-primary)]">
+                        {partner.role}
+                      </p>
+                      <p className="mt-1 line-clamp-1 text-xs text-zinc-400">
+                        {partner.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </Section>
 
         <Section id="status-strip">
@@ -169,6 +234,9 @@ export function LandingPage() {
                 <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white">
                   V2 is live and ready.
                 </h2>
+                <p className="mt-2 text-sm text-zinc-400">
+                  Pre-alpha tested with real workloads by 10+ developers with 3 detailed feedbacks incorporated.
+                </p>
               </div>
               <div className="rounded-[24px] border border-white/10 bg-black/30 p-5">
                 <div className="flex items-center justify-between">
@@ -181,6 +249,10 @@ export function LandingPage() {
                   <div className="flex justify-between gap-4">
                     <dt>Engine</dt>
                     <dd>Rust</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt>Validation</dt>
+                    <dd className="text-right text-[var(--color-primary)] font-medium">10+ Devs (3 Real Feedbacks)</dd>
                   </div>
                   <div className="flex justify-between gap-4">
                     <dt>Released</dt>
@@ -460,6 +532,175 @@ export function LandingPage() {
               View all benchmark logs
               <ExternalLink size={14} />
             </Link>
+          </Reveal>
+        </Section>
+
+        <Section id="pricing">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Managed Database Hosting"
+              title="Transparent pricing for developer infrastructure."
+              description="Deploy high-performance LioranDB document database infrastructure with guaranteed throughput, automated daily backups, and direct founder engineering support."
+            />
+          </Reveal>
+
+          {/* Workflow Explanation for Reviewers & Customers */}
+          <Reveal className="mt-8 rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.96))] p-5 sm:p-6 md:p-8">
+            <div className="flex items-center gap-3">
+              <span className="grid h-8 w-8 place-items-center rounded-lg border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.1)] text-[var(--color-primary)]">
+                <Zap size={16} />
+              </span>
+              <h3 className="text-base font-semibold uppercase tracking-[0.16em] text-white">
+                How Managed Provisioning Works
+              </h3>
+            </div>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  step: "01",
+                  title: "Request on Dashboard",
+                  desc: "Submit your database request with target workloads on app.liorandb.com.",
+                },
+                {
+                  step: "02",
+                  title: "Workload Review",
+                  desc: "Our developer team reviews sizing, query patterns, and capacity requirements.",
+                },
+                {
+                  step: "03",
+                  title: "Server Provisioning",
+                  desc: "Dedicated instance is allocated and activated via secure monthly subscription checkout.",
+                },
+                {
+                  step: "04",
+                  title: "Connect & Scale",
+                  desc: "Connect via @liorandb/driver or gRPC/REST endpoints with automated daily backups.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.step}
+                  className="rounded-[18px] border border-white/8 bg-black/30 p-4 transition hover:border-white/14"
+                >
+                  <span className="text-xs font-mono font-bold text-[var(--color-primary)]">
+                    STEP {item.step}
+                  </span>
+                  <h4 className="mt-2 text-sm font-semibold text-white">{item.title}</h4>
+                  <p className="mt-2 text-xs leading-5 text-zinc-400">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Pricing Plans Grid */}
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {pricingPlans.map((plan, index) => (
+              <Reveal key={plan.id} delay={index * 0.05} className="flex">
+                <div
+                  className={`flex w-full flex-col justify-between rounded-[28px] border p-6 sm:p-8 transition ${
+                    plan.highlight
+                      ? "border-[rgba(46,229,157,0.35)] bg-[linear-gradient(180deg,rgba(46,229,157,0.06),rgba(10,12,12,0.96))] shadow-[0_20px_60px_rgba(46,229,157,0.08)]"
+                      : "border-white/10 bg-[var(--color-elevated)]"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-200">
+                        {plan.name}
+                      </span>
+                      <span
+                        className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${
+                          plan.highlight
+                            ? "border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.12)] text-[#2ee59d]"
+                            : "border border-white/10 bg-white/5 text-zinc-400"
+                        }`}
+                      >
+                        {plan.badge}
+                      </span>
+                    </div>
+
+                    <div className="mt-6 flex items-baseline gap-2">
+                      <span className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                        {plan.price}
+                      </span>
+                      <span className="text-sm font-medium text-zinc-400">{plan.period}</span>
+                    </div>
+
+                    <p className="mt-4 text-sm leading-6 text-zinc-300">{plan.description}</p>
+
+                    <div className="my-6 h-px w-full bg-white/10" />
+
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                      Included with plan:
+                    </p>
+                    <ul className="mt-4 space-y-3">
+                      {plan.features.map((feat) => (
+                        <li key={feat} className="flex items-start gap-3 text-sm text-zinc-300">
+                          <CheckCircle2
+                            size={16}
+                            className="mt-0.5 shrink-0 text-[var(--color-primary)]"
+                          />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-8 space-y-4">
+                    <div className="flex items-center gap-2 rounded-[14px] border border-white/8 bg-black/35 px-3.5 py-2.5 text-xs text-zinc-300">
+                      <Clock size={14} className="shrink-0 text-[#ffd166]" />
+                      <span>{plan.supportNote}</span>
+                    </div>
+
+                    <Link
+                      href={plan.ctaHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`inline-flex w-full items-center justify-center gap-2 rounded-[12px] px-5 py-4 text-sm font-semibold transition ${
+                        plan.highlight
+                          ? "bg-[var(--color-primary)] text-black hover:bg-[var(--color-primary-bright)] shadow-[0_4px_20px_rgba(46,229,157,0.25)]"
+                          : "border border-white/14 bg-white/6 text-white hover:bg-white/12"
+                      }`}
+                    >
+                      {plan.ctaText}
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Support & Policy Notice Box */}
+          <Reveal className="mt-8 rounded-[24px] border border-white/10 bg-[var(--color-card)] p-6 sm:p-7">
+            <div className="grid gap-6 md:grid-cols-3">
+              <div>
+                <h4 className="flex items-center gap-2 text-sm font-semibold text-white">
+                  <Clock size={16} className="text-[var(--color-primary)]" />
+                  Support Schedule
+                </h4>
+                <p className="mt-2 text-xs leading-6 text-zinc-400">
+                  Direct Founder & engineering support is available daily from <strong className="text-zinc-200">6:00 PM to 10:00 PM IST (4 hours nightly)</strong>, Monday to Friday. Closed on Saturdays and Sundays.
+                </p>
+              </div>
+              <div>
+                <h4 className="flex items-center gap-2 text-sm font-semibold text-white">
+                  <Server size={16} className="text-[var(--color-cyan)]" />
+                  Digital Provisioning
+                </h4>
+                <p className="mt-2 text-xs leading-6 text-zinc-400">
+                  LioranDB provides digital cloud software and database infrastructure. Server instances and connection credentials are provisioned within 1 to 24 hours of approval. No physical shipment.
+                </p>
+              </div>
+              <div>
+                <h4 className="flex items-center gap-2 text-sm font-semibold text-white">
+                  <ShieldCheck size={16} className="text-[#ffd166]" />
+                  Subscription & Refund Terms
+                </h4>
+                <p className="mt-2 text-xs leading-6 text-zinc-400">
+                  Subscriptions are billed monthly. Due to immediate allocation of dedicated server compute and storage resources upon provisioning, all payments are covered under our <Link href="/refund" className="underline text-zinc-200 hover:text-white">Strict No-Refund Policy</Link>. Cancel anytime before the next billing cycle.
+                </p>
+              </div>
+            </div>
           </Reveal>
         </Section>
 
@@ -835,39 +1076,7 @@ $ liorandb start
         </Section>
       </main>
 
-      <footer className="mx-auto max-w-7xl px-4 pb-16 pt-8 md:px-6">
-        <div className="grid gap-8 rounded-[28px] border border-white/10 bg-[var(--color-elevated)] p-5 sm:p-6 md:grid-cols-2 xl:grid-cols-5">
-          <div className="xl:col-span-1">
-            <p className="text-xl font-semibold text-white">LioranDB</p>
-            <p className="mt-3 text-sm leading-7 text-zinc-400">
-              Built with care, Rust, TypeScript and an unreasonable number of
-              database benchmarks.
-            </p>
-          </div>
-          {footerColumns.map((column) => (
-            <div key={column.title}>
-              <p className="text-sm font-semibold text-white">{column.title}</p>
-              <div className="mt-4 space-y-3">
-                {column.links.map(([label, href]) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noreferrer" : undefined}
-                    className="block text-sm text-zinc-400 transition hover:text-white"
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 flex flex-col gap-3 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Lioran Developer Solutions. LioranDB is developed in India.</p>
-          <p>Aligned with the vision of keeping Indian data in India.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
