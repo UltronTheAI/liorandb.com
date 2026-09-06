@@ -142,10 +142,10 @@ export function DrawHeading({
         <span
           key={`${index}-${char}`}
           data-draw-char
-          className="inline-block"
+          className={char === " " ? "inline" : "inline-block"}
           aria-hidden="true"
         >
-          {char === " " ? "\u00A0" : char}
+          {char === " " ? " " : char}
         </span>
       ))}
     </span>

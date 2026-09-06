@@ -139,6 +139,7 @@ html.dark {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -146,6 +147,7 @@ body {
   color: var(--color-ink);
   font-family: var(--font-ui);
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 a,
@@ -228,28 +230,44 @@ html.dark .btn-secondary-on-dark {
   background: var(--color-canvas);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 16px;
 }
 
 .card-feature {
   background: var(--color-canvas);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 16px;
+  min-width: 0;
 }
 
 .pricing-card {
   background: var(--color-canvas);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 16px;
 }
 
 .pricing-card-featured {
   background: var(--color-surface-feature);
   border: 2px solid var(--color-brand-green);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 16px;
+}
+
+@media (min-width: 640px) {
+  .card-base,
+  .card-feature,
+  .pricing-card,
+  .pricing-card-featured {
+    padding: 24px;
+  }
+
+  .card-feature,
+  .pricing-card,
+  .pricing-card-featured {
+    padding: 32px;
+  }
 }
 
 .hero-band-dark {
@@ -522,6 +540,26 @@ html.dark .code-text { color: #d4d4d8; }
   margin-bottom: 1.25rem;
   border-collapse: collapse;
   font-size: 0.9rem;
+}
+
+.prose-legal .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-legal .table-wrap table {
+  margin-top: 0;
+  margin-bottom: 0;
+  min-width: 28rem;
+}
+
+.prose-legal th,
+.prose-legal td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .prose-legal th {

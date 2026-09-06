@@ -3,7 +3,8 @@
   width: 100%;
   min-height: 100%;
   height: auto;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .glow-cursor__canvas {

@@ -22,6 +22,7 @@ export default function ContactPage() {
       </div>
 
       <h2>Official Contact Information</h2>
+      <div className="table-wrap">
       <table>
         <tbody>
           <tr>
@@ -62,6 +63,7 @@ export default function ContactPage() {
           </tr>
         </tbody>
       </table>
+      </div>
 
       <h2>Support Schedule &amp; Working Hours</h2>
       <ul>

@@ -2,7 +2,7 @@
   --electric-light-color: var(--electric-border-color);
   position: relative;
   border-radius: inherit;
-  overflow: visible;
+  overflow: clip;
   isolation: isolate;
 }
 

@@ -5,7 +5,7 @@ import { footerColumns } from "@/data/site";
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="mx-auto max-w-[1280px] px-4 py-16 md:px-8 md:py-20">
+      <div className="mx-auto max-w-[1280px] px-4 py-12 md:px-8 md:py-16 lg:py-20">
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-5">
           <div className="xl:col-span-1">
             <Link

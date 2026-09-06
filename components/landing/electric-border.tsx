@@ -245,7 +245,9 @@ export default function ElectricBorder({
     const frequency = 10;
     const baseFlatness = 0;
     const displacement = 60;
-    const borderOffset = 60;
+    const borderOffset = window.matchMedia("(max-width: 640px)").matches
+      ? 28
+      : 60;
 
     const updateSize = () => {
       const rect = container.getBoundingClientRect();

@@ -197,7 +197,27 @@ export default function GlowCursor({
     enabled,
   });
 
-  propsRef.current = {
+  useEffect(() => {
+    propsRef.current = {
+      color,
+      secondaryColor,
+      trailLength,
+      trailWidth,
+      trailTaper,
+      followSpeed,
+      glowIntensity,
+      glowSpread,
+      hotspot,
+      brightness,
+      opacity,
+      pulseSpeed,
+      idleFade,
+      idleTimeout,
+      fadeDuration,
+      blendMode,
+      enabled,
+    };
+  }, [
     color,
     secondaryColor,
     trailLength,
@@ -215,7 +235,7 @@ export default function GlowCursor({
     fadeDuration,
     blendMode,
     enabled,
-  };
+  ]);
 
   useEffect(() => {
     const container = containerRef.current;

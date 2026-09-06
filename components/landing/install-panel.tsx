@@ -26,7 +26,7 @@ export function InstallPanel({
     <div className="space-y-6">
       <div className="card-feature">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="inline-flex rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] p-1">
+          <div className="inline-flex max-w-full flex-wrap rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] p-1">
             {Object.keys(commands).map((pkg) => (
               <button
                 key={pkg}
@@ -44,11 +44,11 @@ export function InstallPanel({
           </div>
           <CopyButton text={commands[activePkg]} label="Copy installation command" />
         </div>
-        <CodeBlock code={commands[activePkg]} variant="terminal" />
+        <CodeBlock code={commands[activePkg]} variant="terminal" className="min-w-0 max-w-full" />
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[280px_1fr]">
-        <div className="card-base">
+      <div className="grid min-w-0 gap-6 xl:grid-cols-[280px_1fr]">
+        <div className="card-base min-w-0">
           <p className="eyebrow mb-4">Build Path</p>
           <div className="space-y-3">
             {steps.map((step, index) => (
@@ -73,14 +73,18 @@ export function InstallPanel({
           </div>
         </div>
 
-        <div className="card-base">
-          <div className="mb-4 flex items-center justify-between gap-4">
+        <div className="card-base min-w-0">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <span className="eyebrow">First database</span>
             <CopyButton text={code} />
           </div>
-          <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <CodeBlock code={code} variant="typescript" />
-            <CodeBlock code={output} variant="json" />
+          <div className="grid min-w-0 gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="min-w-0">
+              <CodeBlock code={code} variant="typescript" />
+            </div>
+            <div className="min-w-0">
+              <CodeBlock code={output} variant="json" />
+            </div>
           </div>
         </div>
       </div>

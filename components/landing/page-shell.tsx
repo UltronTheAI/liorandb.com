@@ -37,6 +37,7 @@ import TextLoop from "./text-loop";
 import GlowCursor from "./glow-cursor";
 import ElectricBorder from "./electric-border";
 import { DrawHeading } from "./draw-heading";
+import { DesktopOnly } from "./desktop-only";
 
 function SectionHeading({
   eyebrow,
@@ -150,8 +151,8 @@ export function LandingPage() {
                 </div>
 
                 <div className="space-y-3 sm:space-y-4">
-                  <h1 className="max-w-xl text-3xl font-medium tracking-[-0.05em] text-[var(--color-ink)] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15] xl:text-[3.25rem]">
-                    <span className="block whitespace-nowrap">
+                  <h1 className="max-w-xl text-[1.75rem] font-medium tracking-[-0.05em] text-[var(--color-ink)] xs:text-3xl sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15] xl:text-[3.25rem]">
+                    <span className="block">
                       <DrawHeading strokeColor="var(--color-ink)">
                         India&apos;s developer-first
                       </DrawHeading>
@@ -169,14 +170,14 @@ export function LandingPage() {
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                  <Link href={siteConfig.docsUrl} target="_blank" rel="noreferrer" className="btn-primary">
+                  <Link href={siteConfig.docsUrl} target="_blank" rel="noreferrer" className="btn-primary w-full justify-center sm:w-auto">
                     Read Docs
                     <ArrowRight size={16} />
                   </Link>
-                  <Link href={siteConfig.discordUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                  <Link href={siteConfig.discordUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full justify-center sm:w-auto">
                     Join Community
                   </Link>
-                  <Link href={siteConfig.appUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                  <Link href={siteConfig.appUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full justify-center sm:w-auto">
                     Launch Dashboard
                   </Link>
                 </div>
@@ -197,7 +198,7 @@ export function LandingPage() {
               </Reveal>
 
               <Reveal delay={0.1} className="flex min-h-0 min-w-0 w-full">
-                <div className="flex w-full min-h-[360px] lg:min-h-[420px] lg:max-h-[520px]">
+                <div className="flex w-full min-h-0 sm:min-h-[360px] lg:min-h-[420px] lg:max-h-[520px]">
                   <HeroConsole collections={heroCollections} />
                 </div>
               </Reveal>
@@ -211,7 +212,7 @@ export function LandingPage() {
                     Live production adoption &amp; brand management
                   </p>
                 </div>
-                <div className="mt-5 grid gap-4 sm:grid-cols-3">
+                <div className="mt-5 grid gap-4 md:grid-cols-3">
                   {trustedPartners.map((partner) => (
                     <div
                       key={partner.name}
@@ -570,11 +571,11 @@ export function LandingPage() {
 
           {/* Workflow Explanation for Reviewers & Customers */}
           <Reveal className="mt-8 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 sm:p-6 md:p-8">
-            <div className="flex items-center gap-3">
-              <span className="grid h-8 w-8 place-items-center rounded-lg border border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] text-[var(--color-brand-green-dark)]">
+            <div className="flex items-start gap-3 sm:items-center">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] text-[var(--color-brand-green-dark)]">
                 <Zap size={16} />
               </span>
-              <h3 className="text-base font-semibold uppercase tracking-[0.16em] text-[var(--color-ink)]">
+              <h3 className="min-w-0 text-sm font-semibold uppercase tracking-[0.12em] text-[var(--color-ink)] text-balance sm:text-base sm:tracking-[0.16em]">
                 How Managed Provisioning Works
               </h3>
             </div>
@@ -616,7 +617,7 @@ export function LandingPage() {
           </Reveal>
 
           {/* Pricing Plans Grid */}
-          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+          <div className="mt-8 grid gap-5 overflow-x-clip lg:grid-cols-2">
             {pricingPlans.map((plan, index) => (
               <Reveal key={plan.id} delay={index * 0.05} className="flex">
                 <ElectricBorder
@@ -635,7 +636,7 @@ export function LandingPage() {
                     }`}
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className="rounded-full border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-charcoal)]">
                           {plan.name}
                         </span>
@@ -949,7 +950,7 @@ const result = await users.find({
                       </span>
                     ))}
                   </div>
-                  <p className="mt-6 rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-4 py-4 font-mono text-sm text-[var(--color-brand-green-dark)]">
+                  <p className="mt-6 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-4 py-4 font-mono text-xs text-[var(--color-brand-green-dark)] sm:text-sm break-all sm:break-normal">
                     swaraj@lioran:~/liorandb$ building_indias_infra
                   </p>
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -1033,10 +1034,10 @@ const result = await users.find({
                   ].map((item, index) => (
                     <div
                       key={item}
-                      className="flex items-center justify-between rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-4 py-3 font-mono text-sm text-[var(--color-slate)]"
+                      className="flex min-w-0 items-center justify-between gap-3 rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-3 py-3 font-mono text-xs text-[var(--color-slate)] sm:px-4 sm:text-sm"
                     >
-                      <span>{item}</span>
-                      <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-stone)]">
+                      <span className="min-w-0 truncate">{item}</span>
+                      <span className="shrink-0 text-[10px] uppercase tracking-[0.16em] text-[var(--color-stone)] sm:text-xs sm:tracking-[0.2em]">
                         {index < 2 ? "public" : "active"}
                       </span>
                     </div>
@@ -1072,14 +1073,14 @@ const result = await users.find({
                     Get started with the Docker Quickstart. Read the docs. Join the
                     community helping shape the production release.
                   </p>
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <Link href={siteConfig.docsUrl} target="_blank" rel="noreferrer" className="btn-primary">
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    <Link href={siteConfig.docsUrl} target="_blank" rel="noreferrer" className="btn-primary w-full justify-center sm:w-auto">
                       Read documentation
                     </Link>
-                    <Link href={siteConfig.discordUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                    <Link href={siteConfig.discordUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full justify-center sm:w-auto">
                       Join Discord
                     </Link>
-                    <Link href={siteConfig.orgGithubUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                    <Link href={siteConfig.orgGithubUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full justify-center sm:w-auto">
                       View GitHub
                     </Link>
                   </div>
@@ -1104,23 +1105,25 @@ $ liorandb start
         </Section>
       </main>
 
-      <div className="overflow-hidden">
-        <TextLoop
-          text="LioranDB ✦ Document Database ✦ Built in India"
-          shape="wave"
-          speed={90}
-          direction="forward"
-          separator="✦"
-          curviness={50}
-          fontSize={26}
-          fontWeight={700}
-          letterSpacing={1.5}
-          uppercase
-          color="var(--color-brand-green-dark)"
-          ribbon={false}
-          pauseOnHover={false}
-        />
-      </div>
+      <DesktopOnly>
+        <div className="overflow-hidden">
+          <TextLoop
+            text="LioranDB ✦ Document Database ✦ Built in India"
+            shape="wave"
+            speed={90}
+            direction="forward"
+            separator="✦"
+            curviness={50}
+            fontSize={26}
+            fontWeight={700}
+            letterSpacing={1.5}
+            uppercase
+            color="var(--color-brand-green-dark)"
+            ribbon={false}
+            pauseOnHover={false}
+          />
+        </div>
+      </DesktopOnly>
 
       <SiteFooter />
     </GlowCursor>

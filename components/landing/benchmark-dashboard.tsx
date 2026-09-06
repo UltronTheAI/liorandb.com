@@ -25,14 +25,14 @@ export function BenchmarkDashboard({ metrics }: BenchmarkDashboardProps) {
   return (
     <div className="space-y-6">
       <div className="card-feature">
-        <div className="mb-4 flex items-center justify-between gap-4">
-          <div>
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+          <div className="min-w-0">
             <p className="eyebrow">Representative development workload</p>
-            <h3 className="mt-2 text-xl font-semibold text-[var(--color-ink)]">
+            <h3 className="mt-2 text-lg font-semibold text-[var(--color-ink)] sm:text-xl">
               Internal development benchmarks
             </h3>
           </div>
-          <span className="rounded-full bg-[var(--color-semantic-warning-bg)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-semantic-warning-text)]">
+          <span className="shrink-0 self-start rounded-full bg-[var(--color-semantic-warning-bg)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-semantic-warning-text)]">
             Visual demo
           </span>
         </div>

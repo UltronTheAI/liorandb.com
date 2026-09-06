@@ -114,11 +114,11 @@ export function SiteHeader({
               priority
             />
           </span>
-          <span className="flex flex-col justify-center leading-none">
-            <span className="text-sm font-semibold tracking-tight text-[var(--color-ink)]">
+          <span className="flex min-w-0 flex-col justify-center leading-none">
+            <span className="truncate text-sm font-semibold tracking-tight text-[var(--color-ink)]">
               LioranDB
             </span>
-            <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-brand-green-dark)]">
+            <span className="mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-brand-green-dark)] min-[380px]:block">
               Developed in India
             </span>
           </span>
