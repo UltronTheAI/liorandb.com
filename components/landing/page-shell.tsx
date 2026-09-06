@@ -33,6 +33,8 @@ import { InstallPanel } from "./install-panel";
 import { Reveal } from "./reveal";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
+import TextLoop from "./text-loop";
+import GlowCursor from "./glow-cursor";
 
 function SectionHeading({
   eyebrow,
@@ -99,7 +101,27 @@ export function LandingPage() {
   ] as const;
 
   return (
-    <div id="top" className="min-h-screen overflow-x-clip bg-[var(--color-canvas)] text-[var(--color-ink)]">
+    <GlowCursor
+      id="top"
+      className="min-h-screen overflow-x-clip bg-[var(--color-canvas)] text-[var(--color-ink)]"
+      color="#7CFFB2"
+      secondaryColor="#00ed64"
+      trailLength={16}
+      trailWidth={9}
+      trailTaper={0.7}
+      followSpeed={0.12}
+      glowIntensity={1.8}
+      glowSpread={1.25}
+      hotspot={0.3}
+      brightness={1.25}
+      opacity={0.5}
+      pulseSpeed={0.4}
+      idleFade
+      idleTimeout={400}
+      fadeDuration={500}
+      blendMode="normal"
+      maxDevicePixelRatio={1}
+    >
       <SiteHeader
         navItems={navItems}
         appUrl={siteConfig.appUrl}
@@ -1052,7 +1074,25 @@ $ liorandb start
         </Section>
       </main>
 
+      <div className="overflow-hidden">
+        <TextLoop
+          text="LioranDB ✦ Document Database ✦ Built in India"
+          shape="wave"
+          speed={90}
+          direction="forward"
+          separator="✦"
+          curviness={50}
+          fontSize={26}
+          fontWeight={700}
+          letterSpacing={1.5}
+          uppercase
+          color="var(--color-brand-green-dark)"
+          ribbon={false}
+          pauseOnHover={false}
+        />
+      </div>
+
       <SiteFooter />
-    </div>
+    </GlowCursor>
   );
 }

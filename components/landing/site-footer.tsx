@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { footerColumns } from "@/data/site";
 
@@ -7,9 +8,23 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1280px] px-4 py-16 md:px-8 md:py-20">
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-5">
           <div className="xl:col-span-1">
-            <p className="text-xl font-semibold tracking-tight text-[var(--color-ink)]">
-              LioranDB
-            </p>
+            <Link
+              href="/#top"
+              className="inline-flex flex-col items-start gap-3 rounded-[var(--radius-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]"
+            >
+              <span className="grid h-11 w-11 place-items-center overflow-hidden">
+                <Image
+                  src="/favicon.ico"
+                  alt="LioranDB logo"
+                  width={28}
+                  height={28}
+                  className="h-7 w-7 rounded-[4px]"
+                />
+              </span>
+              <p className="text-xl font-semibold tracking-tight text-[var(--color-ink)]">
+                LioranDB
+              </p>
+            </Link>
             <p className="mt-3 text-sm leading-7 text-[var(--color-steel)]">
               Built with care, Rust, TypeScript and an unreasonable number of
               database benchmarks.
