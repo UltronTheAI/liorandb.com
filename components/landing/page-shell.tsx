@@ -482,7 +482,7 @@ export function LandingPage() {
               <p className="mt-2 text-xs text-[var(--color-steel)]">23K-25K writes/sec with stable WAL group commit</p>
               <div className="mt-4 space-y-2">
                 {benchmarkDetails.results.writePerformance.logs.map((log) => (
-                  <Link
+                  <a
                     key={log}
                     href={log}
                     target="_blank"
@@ -491,7 +491,7 @@ export function LandingPage() {
                   >
                     <ExternalLink size={12} />
                     {log.split("/").pop()}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </Reveal>
@@ -501,7 +501,7 @@ export function LandingPage() {
               <p className="mt-2 text-xs text-[var(--color-steel)]">Low millisecond latency with high parallel throughput</p>
               <div className="mt-4 space-y-2">
                 {benchmarkDetails.results.readPerformance.logs.map((log) => (
-                  <Link
+                  <a
                     key={log}
                     href={log}
                     target="_blank"
@@ -510,7 +510,7 @@ export function LandingPage() {
                   >
                     <ExternalLink size={12} />
                     {log.split("/").pop()}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </Reveal>
@@ -520,7 +520,7 @@ export function LandingPage() {
             <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6">
               <h3 className="text-base font-semibold text-[var(--color-ink)]">🔄 Mixed Workload (Soak Test)</h3>
               <p className="mt-2 text-xs text-[var(--color-steel)]">~10K writes/sec + ~25K reads/sec = ~35K ops/sec</p>
-              <Link
+              <a
                 href={benchmarkDetails.results.mixedWorkload.log}
                 target="_blank"
                 rel="noreferrer"
@@ -528,13 +528,13 @@ export function LandingPage() {
               >
                 <ExternalLink size={12} />
                 {benchmarkDetails.results.mixedWorkload.log.split("/").pop()}
-              </Link>
+              </a>
             </Reveal>
 
             <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6" delay={0.04}>
               <h3 className="text-base font-semibold text-[var(--color-ink)]">🛡️ Crash Recovery Test</h3>
               <p className="mt-2 text-xs text-[var(--color-steel)]">WAL replay & durability validation</p>
-              <Link
+              <a
                 href={benchmarkDetails.results.crashRecovery.log}
                 target="_blank"
                 rel="noreferrer"
@@ -542,7 +542,7 @@ export function LandingPage() {
               >
                 <ExternalLink size={12} />
                 {benchmarkDetails.results.crashRecovery.log.split("/").pop()}
-              </Link>
+              </a>
             </Reveal>
           </div>
           
