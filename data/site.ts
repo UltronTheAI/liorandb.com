@@ -8,9 +8,10 @@ export const siteConfig = {
   docsUrl: "https://docs.liorandb.com",
   studioUrl: "https://studio.liorandb.com",
   discordUrl: "https://discord.gg/WsWWThjPMp",
-  v1GithubUrl: "https://github.com/LioranGroupOfficial",
+  v1GithubUrl: "https://github.com/LioranGroupOfficial/Liorandb-V1",
   orgGithubUrl: "https://github.com/LioranGroupOfficial",
   founderGithubUrl: "https://github.com/UltronTheAI",
+  githubRepo: "LioranGroupOfficial/Liorandb-V1",
   founderImage: "https://avatars.githubusercontent.com/u/79976106?v=4",
   companyUrl: "https://lioransolutions.com",
   supportEmail: "support@liorandb.com",
@@ -58,16 +59,105 @@ export const navItems = [
   ["FAQ", "#faq"],
 ] as const;
 
-export const heroCode = `users.find({ age: 18 })`;
-
-export const heroOutput = `$ users.find({ age: 18 })
+export const heroCollections = [
+  {
+    id: "users",
+    name: "users",
+    docs: 1284,
+    code: `users.find({ age: 18 })`,
+    output: `$ users.find({ age: 18 })
 [
   {
     name: "Aarav",
     age: 18,
-    plan: "pro"
+    plan: "pro",
+    city: "Bengaluru"
+  },
+  {
+    name: "Meera",
+    age: 18,
+    plan: "starter",
+    city: "Pune"
   }
-]`;
+]`,
+    runtime: "4.8ms",
+    checkpoint: "11s",
+  },
+  {
+    id: "sessions",
+    name: "sessions",
+    docs: 8421,
+    code: `sessions.find({ active: true })`,
+    output: `$ sessions.find({ active: true })
+[
+  {
+    userId: "usr_9f2a",
+    device: "macOS",
+    active: true,
+    lastSeen: "2026-09-06T18:42:11Z"
+  },
+  {
+    userId: "usr_3c1b",
+    device: "Android",
+    active: true,
+    lastSeen: "2026-09-06T18:41:58Z"
+  }
+]`,
+    runtime: "3.2ms",
+    checkpoint: "8s",
+  },
+  {
+    id: "orders",
+    name: "orders",
+    docs: 3560,
+    code: `orders.find({ status: "paid" })`,
+    output: `$ orders.find({ status: "paid" })
+[
+  {
+    id: "ord_1042",
+    total: 2499,
+    currency: "INR",
+    status: "paid",
+    items: 3
+  },
+  {
+    id: "ord_1048",
+    total: 899,
+    currency: "INR",
+    status: "paid",
+    items: 1
+  }
+]`,
+    runtime: "5.1ms",
+    checkpoint: "14s",
+  },
+  {
+    id: "products",
+    name: "products",
+    docs: 412,
+    code: `products.find({ inStock: true })`,
+    output: `$ products.find({ inStock: true })
+[
+  {
+    sku: "ldb-pro-01",
+    name: "LioranDB Pro",
+    price: 1999,
+    inStock: true
+  },
+  {
+    sku: "ldb-starter",
+    name: "Starter Plan",
+    price: 0,
+    inStock: true
+  }
+]`,
+    runtime: "2.9ms",
+    checkpoint: "6s",
+  },
+] as const;
+
+export const heroCode = heroCollections[0].code;
+export const heroOutput = heroCollections[0].output;
 
 export const installCommands = {
   docker: "docker run -d --name liorandb -p 27018:27018 -p 27019:27019 -p 27201:27201 -v ldb-data:/var/lib/liorandb/data liorandb/liorandb:pre-alpha",

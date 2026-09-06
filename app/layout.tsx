@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
+import { Space_Grotesk, Source_Code_Pro } from "next/font/google";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
+
+const themeInitScript = `(function(){try{var t=localStorage.getItem("liorandb-theme");if(t==="dark"){document.documentElement.classList.add("dark");document.documentElement.style.colorScheme="dark";}else{document.documentElement.classList.remove("dark");document.documentElement.style.colorScheme="light";}}catch(e){}})();`;
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ["latin"],
+  variable: "--font-source-code",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -92,11 +108,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${sourceCodePro.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <body
-        className="min-h-full flex flex-col bg-[var(--color-bg)] text-[var(--color-text)]"
+        className="min-h-full flex flex-col bg-[var(--color-canvas)] text-[var(--color-ink)] font-sans"
         suppressHydrationWarning
       >
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
         <Script
           id="software-jsonld"
           type="application/ld+json"
@@ -107,7 +132,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

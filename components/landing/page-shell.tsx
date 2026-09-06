@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Clock, ExternalLink, Server, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, ExternalLink, Server, ShieldCheck, Zap } from "lucide-react";
 import {
   apiExplorerTabs,
   architectureFlow,
@@ -8,13 +8,11 @@ import {
   benchmarkDetails,
   benchmarkMetrics,
   faqs,
-  footerColumns,
   founderSkills,
   getStartedCode,
   getStartedOutput,
   getStartedSteps,
-  heroCode,
-  heroOutput,
+  heroCollections,
   indiaPillars,
   installCommands,
   navItems,
@@ -40,28 +38,51 @@ function SectionHeading({
   eyebrow,
   title,
   description,
+  onDark = false,
 }: {
   eyebrow: string;
   title: string;
   description: string;
+  onDark?: boolean;
 }) {
   return (
     <div className="max-w-3xl space-y-4">
-      <p className="text-xs font-medium uppercase tracking-[0.28em] text-[var(--color-primary)]">
-        {eyebrow}
-      </p>
-      <h2 className="text-balance text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl">
+      <p className={onDark ? "eyebrow-on-dark" : "eyebrow"}>{eyebrow}</p>
+      <h2
+        className={`text-balance text-3xl font-medium tracking-[-0.04em] sm:text-4xl lg:text-5xl ${
+          onDark ? "text-[var(--color-on-dark)]" : "text-[var(--color-ink)]"
+        }`}
+      >
         {title}
       </h2>
-      <p className="text-base leading-8 text-zinc-400 sm:text-lg">{description}</p>
+      <p
+        className={`text-base leading-8 sm:text-lg ${
+          onDark ? "text-[var(--color-on-dark-muted)]" : "text-[var(--color-steel)]"
+        }`}
+      >
+        {description}
+      </p>
     </div>
   );
 }
 
-function Section({ id, children }: { id: string; children: React.ReactNode }) {
+function Section({
+  id,
+  children,
+  surface = false,
+  className = "",
+}: {
+  id: string;
+  children: React.ReactNode;
+  surface?: boolean;
+  className?: string;
+}) {
   return (
-    <section id={id} className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:py-24">
-      {children}
+    <section
+      id={id}
+      className={`${surface ? "section-surface" : "bg-[var(--color-canvas)]"} ${className}`}
+    >
+      <div className="mx-auto max-w-[1280px] px-4 py-16 md:px-8 lg:py-24">{children}</div>
     </section>
   );
 }
@@ -78,10 +99,7 @@ export function LandingPage() {
   ] as const;
 
   return (
-    <div id="top" className="min-h-screen overflow-x-clip bg-[var(--color-bg)] text-[var(--color-text)]">
-      <div className="page-grid pointer-events-none fixed inset-0 opacity-100" />
-      <div className="page-glow page-glow-top" />
-      <div className="page-glow page-glow-mid" />
+    <div id="top" className="min-h-screen overflow-x-clip bg-[var(--color-canvas)] text-[var(--color-ink)]">
       <SiteHeader
         navItems={navItems}
         appUrl={siteConfig.appUrl}
@@ -89,170 +107,144 @@ export function LandingPage() {
         studioUrl={siteConfig.studioUrl}
         discordUrl={siteConfig.discordUrl}
         githubUrl={siteConfig.v1GithubUrl}
+        githubRepo={siteConfig.githubRepo}
       />
 
       <main>
-        <Section id="product">
-          <div className="grid items-center gap-10 pt-8 sm:gap-12 sm:pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pt-16">
-            <Reveal className="min-w-0 space-y-8">
-              <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-[rgba(46,229,157,0.25)] bg-[rgba(46,229,157,0.06)] px-3.5 py-2 text-[11px] font-medium tracking-[0.08em] text-zinc-200 sm:px-4 sm:text-xs">
-                <span className="h-2 w-2 rounded-full bg-[var(--color-primary)] animate-pulse" />
-                <span>
-                  LioranDB V2 pre-alpha is live • <strong className="text-white">Tested by 10+ developers &amp; received 3 real feedbacks</strong>
-                </span>
-              </div>
-              <div className="space-y-6">
-                <h1 className="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.065em] text-white xs:text-[2.8rem] sm:text-6xl lg:text-7xl">
-                  India&apos;s developer-first{" "}
-                  <span className="text-gradient">document database.</span>
-                </h1>
-                <p className="max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">
-                  High-performance document database developed in Rust.
-                </p>
-                <p className="max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg">
-                  LioranDB V2 is a developer-first document database with Rust performance, Docker deployment, and APIs designed for startups, SaaS platforms, APIs and data-intensive applications. Pre-alpha is live now.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={siteConfig.docsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-5 py-4 text-sm font-semibold text-black transition hover:bg-[var(--color-primary-bright)]"
-                >
-                  Read Docs
-                  <ArrowRight size={16} />
-                </Link>
-                <Link
-                  href={siteConfig.discordUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-[10px] border border-white/12 bg-white/5 px-5 py-4 text-sm font-medium text-white transition hover:bg-white/10"
-                >
-                  Join Community
-                </Link>
-                <Link
-                  href={siteConfig.appUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-[10px] border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.1)] px-5 py-4 text-sm font-semibold text-[var(--color-primary)] transition hover:bg-[rgba(46,229,157,0.18)]"
-                >
-                  Launch Dashboard
-                </Link>
-              </div>
-              <Link
-                href={siteConfig.v1GithubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
-              >
-                View source on GitHub
-                <ExternalLink size={14} />
-              </Link>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {[
-                  "Tested by 10+ Devs (3 Real Feedbacks)",
-                  "Developed in India",
-                  "Self-hostable",
-                  "Developer-first",
-                  "MongoDB-style API",
-                  "Rust-powered V2",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className={`inline-flex rounded-full px-3 py-2 text-xs sm:px-4 sm:text-sm ${
-                      item.includes("10+")
-                        ? "border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.1)] text-[#2ee59d] font-semibold"
-                        : "border border-white/10 bg-white/4 text-zinc-300"
-                    }`}
-                  >
-                    {item}
+        <section id="product" className="hero-band-dark border-b border-[var(--color-hairline)]">
+          <div className="mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-[1280px] flex-col justify-center px-4 py-12 md:px-8 md:py-16 lg:py-20">
+            <div className="grid w-full items-stretch gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+              <Reveal className="flex min-w-0 flex-col justify-center space-y-6 lg:space-y-8">
+                <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-[var(--color-brand-green-soft)] bg-[var(--color-surface-feature)] px-3.5 py-2 text-[10px] font-medium tracking-[0.04em] text-[var(--color-charcoal)] sm:px-4 sm:text-xs sm:tracking-[0.08em]">
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-brand-green)] animate-pulse" />
+                  <span className="min-w-0 truncate sm:overflow-visible sm:whitespace-normal sm:text-clip">
+                    LioranDB V2 pre-alpha is live •{" "}
+                    <strong className="text-[var(--color-ink)]">
+                      Tested by 10+ developers &amp; received 3 real feedbacks
+                    </strong>
                   </span>
-                ))}
-              </div>
-            </Reveal>
+                </div>
 
-            <Reveal delay={0.1} className="min-w-0">
-              <HeroConsole code={heroCode} output={heroOutput} />
+                <div className="space-y-4 sm:space-y-5">
+                  <h1 className="max-w-[18ch] text-balance text-4xl font-medium tracking-[-0.05em] text-[var(--color-ink)] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.12] xl:text-[4rem]">
+                    India&apos;s developer-first{" "}
+                    <span className="text-[var(--color-brand-green-dark)]">document database.</span>
+                  </h1>
+                  <p className="max-w-xl text-base leading-7 text-[var(--color-steel)] sm:text-lg sm:leading-8">
+                    High-performance document database developed in Rust — with Docker deployment and MongoDB-style APIs for startups and data-intensive apps.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <Link href={siteConfig.docsUrl} target="_blank" rel="noreferrer" className="btn-primary">
+                    Read Docs
+                    <ArrowRight size={16} />
+                  </Link>
+                  <Link href={siteConfig.discordUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                    Join Community
+                  </Link>
+                  <Link href={siteConfig.appUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                    Launch Dashboard
+                  </Link>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[var(--color-steel)]">
+                  <Link
+                    href={siteConfig.v1GithubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 transition hover:text-[var(--color-ink)]"
+                  >
+                    View source on GitHub
+                    <ExternalLink size={14} />
+                  </Link>
+                  <span className="hidden h-1 w-1 rounded-full bg-[var(--color-hairline-strong)] sm:inline-block" />
+                  <span>Self-hostable · Rust V2 · Developed in India</span>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.1} className="flex min-h-0 min-w-0 w-full">
+                <div className="flex w-full min-h-[420px] lg:min-h-full lg:max-h-[560px]">
+                  <HeroConsole collections={heroCollections} />
+                </div>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.15} className="mt-10 w-full lg:mt-12">
+              <div className="w-full rounded-[var(--radius-xl)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 sm:p-6 md:p-7">
+                <div className="flex flex-col gap-2 border-b border-[var(--color-hairline)] pb-4 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="eyebrow">Currently Used &amp; Managed By</p>
+                  <p className="text-xs text-[var(--color-steel)]">
+                    Live production adoption &amp; brand management
+                  </p>
+                </div>
+                <div className="mt-5 grid gap-4 sm:grid-cols-3">
+                  {trustedPartners.map((partner) => (
+                    <div
+                      key={partner.name}
+                      className="flex min-w-0 items-center gap-4 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4"
+                    >
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-md)] bg-white p-2 sm:h-14 sm:w-14">
+                        <Image
+                          src={partner.logo}
+                          alt={`${partner.name} logo`}
+                          width={56}
+                          height={56}
+                          className={`h-full w-full object-contain transition-transform ${
+                            partner.darkLogo
+                              ? "scale-[1.38] opacity-90 brightness-0 dark:brightness-0 dark:invert"
+                              : ""
+                          }`}
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-[var(--color-ink)] sm:text-base">
+                          {partner.name}
+                        </p>
+                        <p className="mt-0.5 text-xs font-medium text-[var(--color-brand-green-dark)]">
+                          {partner.role}
+                        </p>
+                        <p className="mt-1 line-clamp-1 text-xs text-[var(--color-steel)]">
+                          {partner.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </Reveal>
           </div>
-
-          {/* Full-width Real World Adoption & Management Bar */}
-          <Reveal delay={0.15} className="mt-10 w-full sm:mt-12">
-            <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(18,18,22,0.9),rgba(10,10,12,0.95))] p-5 sm:p-7 md:p-8">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-white/8 pb-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-primary)]">
-                  Currently Used &amp; Managed By
-                </p>
-                <p className="text-xs text-zinc-400">
-                  Live production adoption &amp; brand management
-                </p>
-              </div>
-
-              <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                {trustedPartners.map((partner) => (
-                  <div
-                    key={partner.name}
-                    className="flex items-center gap-4 rounded-[22px] border border-white/8 bg-white/[0.03] p-4 sm:p-5 transition hover:border-white/16 hover:bg-white/[0.06]"
-                  >
-                    <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white p-2 sm:p-2.5 shadow-[0_4px_16px_rgba(255,255,255,0.08)]">
-                      <Image
-                        src={partner.logo}
-                        alt={`${partner.name} logo`}
-                        width={64}
-                        height={64}
-                        className={`h-full w-full object-contain transition-transform ${
-                          partner.darkLogo ? "brightness-0 opacity-95 scale-[1.38]" : ""
-                        }`}
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-base font-semibold text-white">
-                        {partner.name}
-                      </p>
-                      <p className="mt-0.5 text-xs font-medium text-[var(--color-primary)]">
-                        {partner.role}
-                      </p>
-                      <p className="mt-1 line-clamp-1 text-xs text-zinc-400">
-                        {partner.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </Section>
+        </section>
 
         <Section id="status-strip">
-          <Reveal className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.9),rgba(10,10,12,0.92))] p-5 sm:p-6 md:p-8">
+          <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 sm:p-6 md:p-8">
             <div className="grid gap-5 xl:grid-cols-[0.85fr_1fr]">
               <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+                <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-stone)]">
                   Product status
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white">
+                <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[var(--color-ink)]">
                   V2 is live and ready.
                 </h2>
-                <p className="mt-2 text-sm text-zinc-400">
+                <p className="mt-2 text-sm text-[var(--color-steel)]">
                   Pre-alpha tested with real workloads by 10+ developers with 3 detailed feedbacks incorporated.
                 </p>
               </div>
-              <div className="rounded-[24px] border border-white/10 bg-black/30 p-5">
+              <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-5">
                 <div className="flex items-center justify-between">
-                  <span className="text-lg font-semibold text-white">V2 Pre-alpha</span>
-                  <span className="rounded-full border border-white/10 px-3 py-1 text-xs uppercase tracking-[0.18em] text-[var(--color-primary)]">
+                  <span className="text-lg font-semibold text-[var(--color-ink)]">V2 Pre-alpha</span>
+                  <span className="rounded-full border border-[var(--color-hairline)] px-3 py-1 text-xs uppercase tracking-[0.18em] text-[var(--color-brand-green-dark)]">
                     Launched
                   </span>
                 </div>
-                <dl className="mt-4 space-y-3 text-sm text-zinc-400">
+                <dl className="mt-4 space-y-3 text-sm text-[var(--color-steel)]">
                   <div className="flex justify-between gap-4">
                     <dt>Engine</dt>
                     <dd>Rust</dd>
                   </div>
                   <div className="flex justify-between gap-4">
                     <dt>Validation</dt>
-                    <dd className="text-right text-[var(--color-primary)] font-medium">10+ Devs (3 Real Feedbacks)</dd>
+                    <dd className="text-right text-[var(--color-brand-green-dark)] font-medium">10+ Devs (3 Real Feedbacks)</dd>
                   </div>
                   <div className="flex justify-between gap-4">
                     <dt>Released</dt>
@@ -267,7 +259,7 @@ export function LandingPage() {
                   href={siteConfig.docsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[var(--color-ink)]"
                 >
                   Read the docs
                   <ArrowRight size={16} />
@@ -277,7 +269,7 @@ export function LandingPage() {
           </Reveal>
         </Section>
 
-        <Section id="get-started">
+        <Section id="get-started" surface>
           <Reveal>
             <SectionHeading
               eyebrow="Get Started"
@@ -310,27 +302,27 @@ export function LandingPage() {
 
         <Section id="v2">
           <Reveal>
-            <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(22,22,24,0.94),rgba(10,10,12,0.98))] p-5 sm:p-6 md:p-8">
-              <span className="inline-flex rounded-full border border-[rgba(46,229,157,0.14)] bg-[rgba(46,229,157,0.05)] px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[#2ee59d]">
+            <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-5 sm:p-6 md:p-8">
+              <span className="inline-flex rounded-full border border-[var(--color-brand-green-soft)] bg-[var(--color-surface-feature)] px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-brand-green-dark)]">
                 Pre-alpha Launched
               </span>
               <div className="mt-6 grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
                 <div>
-                  <h2 className="max-w-3xl text-balance text-4xl font-semibold tracking-[-0.05em] text-white md:text-5xl">
+                  <h2 className="max-w-3xl text-balance text-4xl font-semibold tracking-[-0.05em] text-[var(--color-ink)] md:text-5xl">
                     LioranDB V2 is built in Rust. Now you can code it.
                   </h2>
-                  <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-300">
+                  <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--color-slate)]">
                     V2 is a high-performance storage engine designed for larger
                     datasets, predictable latency, and transactional workloads. Local Docker pre-alpha is available for developer evaluation and benchmarking, while production workloads are reviewed and managed via our Founder Program. Alpha launch coming on {siteConfig.alphaLaunchDate}.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
+                    <span className="rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-ink)]">
                       Rust engine
                     </span>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
+                    <span className="rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-ink)]">
                       Pre-alpha • {siteConfig.preAlphaDate}
                     </span>
-                    <span className="rounded-full border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.08)] px-4 py-2 text-sm text-[#2ee59d]">
+                    <span className="rounded-full border border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] px-4 py-2 text-sm text-[var(--color-brand-green-dark)]">
                       Managed Hosting Available
                     </span>
                   </div>
@@ -338,26 +330,26 @@ export function LandingPage() {
                     href={siteConfig.discordUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-8 inline-flex items-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-5 py-4 text-sm font-semibold text-black"
+                    className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--color-brand-green)] px-5 py-4 text-sm font-semibold text-[var(--color-on-primary)]"
                   >
                     Join the pre-alpha community
                     <ArrowRight size={16} />
                   </Link>
                 </div>
 
-                <div className="min-w-0 rounded-[24px] border border-white/10 bg-[rgba(8,10,12,0.72)] p-4 sm:p-5">
-                  <p className="mb-4 text-xs uppercase tracking-[0.22em] text-zinc-500">
+                <div className="min-w-0 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-4 sm:p-5">
+                  <p className="mb-4 text-xs uppercase tracking-[0.22em] text-[var(--color-stone)]">
                     Architecture direction
                   </p>
                   <div className="grid gap-3">
                     {architectureFlow.map((item, index) => (
                       <div
                         key={item}
-                        className="rounded-[18px] border border-white/8 bg-[rgba(255,255,255,0.02)] px-4 py-4 transition-colors hover:border-white/12 hover:bg-[rgba(255,255,255,0.03)]"
+                        className="rounded-[var(--radius-lg)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-4 py-4 transition-colors hover:border-[var(--color-hairline-strong)] hover:bg-[var(--color-surface-soft)]"
                       >
                         <div className="grid items-start gap-3 md:grid-cols-[1fr_140px] md:items-center">
-                          <span className="text-sm font-medium text-white">{item}</span>
-                          <span className="justify-self-start rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs uppercase tracking-[0.16em] text-zinc-400">
+                          <span className="text-sm font-medium text-[var(--color-ink)]">{item}</span>
+                          <span className="justify-self-start rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-1.5 text-xs uppercase tracking-[0.16em] text-[var(--color-steel)]">
                             {architectureStages[index]}
                           </span>
                         </div>
@@ -367,7 +359,7 @@ export function LandingPage() {
                       {architectureSideSystems.map((item) => (
                         <div
                           key={item}
-                          className="rounded-[14px] border border-white/8 bg-black/20 px-4 py-3 text-sm text-zinc-300"
+                          className="rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-slate)]"
                         >
                           {item}
                         </div>
@@ -379,11 +371,11 @@ export function LandingPage() {
               <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {v2Cards.map((item, index) => (
                   <Reveal key={item} delay={index * 0.04}>
-                    <div className="rounded-[20px] border border-white/10 bg-black/30 p-5 text-sm text-zinc-300">
-                      <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+                    <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-5 text-sm text-[var(--color-slate)]">
+                      <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-stone)]">
                         V2 focus
                       </p>
-                      <p className="mt-3 text-lg font-semibold text-white">{item}</p>
+                      <p className="mt-3 text-lg font-semibold text-[var(--color-ink)]">{item}</p>
                     </div>
                   </Reveal>
                 ))}
@@ -392,7 +384,7 @@ export function LandingPage() {
           </Reveal>
         </Section>
 
-        <Section id="benchmarks">
+        <Section id="benchmarks" surface>
           <Reveal>
             <SectionHeading
               eyebrow="Internal Benchmarking"
@@ -405,9 +397,9 @@ export function LandingPage() {
           </div>
           
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Hardware</h3>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-400">
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-brand-green-dark)]">Hardware</h3>
+              <ul className="mt-4 space-y-2 text-sm text-[var(--color-steel)]">
                 <li>{benchmarkDetails.hardware.processor}</li>
                 <li>{benchmarkDetails.hardware.cores}</li>
                 <li>{benchmarkDetails.hardware.memory}</li>
@@ -415,9 +407,9 @@ export function LandingPage() {
               </ul>
             </Reveal>
             
-            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5" delay={0.04}>
-              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Configuration</h3>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-400">
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5" delay={0.04}>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-brand-green-dark)]">Configuration</h3>
+              <ul className="mt-4 space-y-2 text-sm text-[var(--color-steel)]">
                 <li>Nodes: {benchmarkDetails.configuration.nodes}</li>
                 <li>Partitions: {benchmarkDetails.configuration.partitions}</li>
                 <li>Threads: {benchmarkDetails.configuration.workerThreads}</li>
@@ -425,25 +417,25 @@ export function LandingPage() {
               </ul>
             </Reveal>
             
-            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5" delay={0.08}>
-              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Write Performance</h3>
-              <p className="mt-4 text-sm text-zinc-300">{benchmarkDetails.results.writePerformance.throughput}</p>
-              <p className="mt-2 text-xs text-zinc-400">{benchmarkDetails.results.writePerformance.description}</p>
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5" delay={0.08}>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-brand-green-dark)]">Write Performance</h3>
+              <p className="mt-4 text-sm text-[var(--color-slate)]">{benchmarkDetails.results.writePerformance.throughput}</p>
+              <p className="mt-2 text-xs text-[var(--color-steel)]">{benchmarkDetails.results.writePerformance.description}</p>
             </Reveal>
             
-            <Reveal className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5" delay={0.12}>
-              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]">Recovery & Durability</h3>
-              <p className="mt-4 text-sm text-zinc-300">Crash Recovery</p>
-              <p className="mt-2 text-xs text-zinc-400">WAL replay, metadata consistency, and duplicate prevention validated through repeated crash cycles.</p>
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5" delay={0.12}>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-brand-green-dark)]">Recovery & Durability</h3>
+              <p className="mt-4 text-sm text-[var(--color-slate)]">Crash Recovery</p>
+              <p className="mt-2 text-xs text-[var(--color-steel)]">WAL replay, metadata consistency, and duplicate prevention validated through repeated crash cycles.</p>
             </Reveal>
           </div>
           
-          <Reveal className="mt-10 rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6">
-            <h3 className="text-lg font-semibold text-white">Features Tested</h3>
+          <Reveal className="mt-10 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6">
+            <h3 className="text-lg font-semibold text-[var(--color-ink)]">Features Tested</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {benchmarkDetails.features.map((feature) => (
-                <div key={feature} className="flex items-center gap-2 text-sm text-zinc-300">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-primary)]" />
+                <div key={feature} className="flex items-center gap-2 text-sm text-[var(--color-slate)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-green)]" />
                   {feature}
                 </div>
               ))}
@@ -451,9 +443,9 @@ export function LandingPage() {
           </Reveal>
 
           <div className="mt-10 grid gap-4 lg:grid-cols-2">
-            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6">
-              <h3 className="text-base font-semibold text-white">📊 Write Performance Logs</h3>
-              <p className="mt-2 text-xs text-zinc-400">23K-25K writes/sec with stable WAL group commit</p>
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6">
+              <h3 className="text-base font-semibold text-[var(--color-ink)]">📊 Write Performance Logs</h3>
+              <p className="mt-2 text-xs text-[var(--color-steel)]">23K-25K writes/sec with stable WAL group commit</p>
               <div className="mt-4 space-y-2">
                 {benchmarkDetails.results.writePerformance.logs.map((log) => (
                   <Link
@@ -461,7 +453,7 @@ export function LandingPage() {
                     href={log}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+                    className="flex items-center gap-2 rounded px-3 py-2 text-xs text-[var(--color-slate)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-green-dark)]"
                   >
                     <ExternalLink size={12} />
                     {log.split("/").pop()}
@@ -470,9 +462,9 @@ export function LandingPage() {
               </div>
             </Reveal>
 
-            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6" delay={0.04}>
-              <h3 className="text-base font-semibold text-white">📖 Read Performance Logs</h3>
-              <p className="mt-2 text-xs text-zinc-400">Low millisecond latency with high parallel throughput</p>
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6" delay={0.04}>
+              <h3 className="text-base font-semibold text-[var(--color-ink)]">📖 Read Performance Logs</h3>
+              <p className="mt-2 text-xs text-[var(--color-steel)]">Low millisecond latency with high parallel throughput</p>
               <div className="mt-4 space-y-2">
                 {benchmarkDetails.results.readPerformance.logs.map((log) => (
                   <Link
@@ -480,7 +472,7 @@ export function LandingPage() {
                     href={log}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+                    className="flex items-center gap-2 rounded px-3 py-2 text-xs text-[var(--color-slate)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-green-dark)]"
                   >
                     <ExternalLink size={12} />
                     {log.split("/").pop()}
@@ -491,28 +483,28 @@ export function LandingPage() {
           </div>
 
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6">
-              <h3 className="text-base font-semibold text-white">🔄 Mixed Workload (Soak Test)</h3>
-              <p className="mt-2 text-xs text-zinc-400">~10K writes/sec + ~25K reads/sec = ~35K ops/sec</p>
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6">
+              <h3 className="text-base font-semibold text-[var(--color-ink)]">🔄 Mixed Workload (Soak Test)</h3>
+              <p className="mt-2 text-xs text-[var(--color-steel)]">~10K writes/sec + ~25K reads/sec = ~35K ops/sec</p>
               <Link
                 href={benchmarkDetails.results.mixedWorkload.log}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-4 flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+                className="mt-4 flex items-center gap-2 rounded px-3 py-2 text-xs text-[var(--color-slate)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-green-dark)]"
               >
                 <ExternalLink size={12} />
                 {benchmarkDetails.results.mixedWorkload.log.split("/").pop()}
               </Link>
             </Reveal>
 
-            <Reveal className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-6" delay={0.04}>
-              <h3 className="text-base font-semibold text-white">🛡️ Crash Recovery Test</h3>
-              <p className="mt-2 text-xs text-zinc-400">WAL replay & durability validation</p>
+            <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6" delay={0.04}>
+              <h3 className="text-base font-semibold text-[var(--color-ink)]">🛡️ Crash Recovery Test</h3>
+              <p className="mt-2 text-xs text-[var(--color-steel)]">WAL replay & durability validation</p>
               <Link
                 href={benchmarkDetails.results.crashRecovery.log}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-4 flex items-center gap-2 rounded px-3 py-2 text-xs text-zinc-300 hover:bg-white/5 hover:text-[var(--color-primary)]"
+                className="mt-4 flex items-center gap-2 rounded px-3 py-2 text-xs text-[var(--color-slate)] hover:bg-[var(--color-surface)] hover:text-[var(--color-brand-green-dark)]"
               >
                 <ExternalLink size={12} />
                 {benchmarkDetails.results.crashRecovery.log.split("/").pop()}
@@ -520,13 +512,13 @@ export function LandingPage() {
             </Reveal>
           </div>
           
-          <Reveal className="mt-6 rounded-[20px] border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.06)] p-5 text-sm leading-7 text-zinc-300">
+          <Reveal className="mt-6 rounded-[var(--radius-lg)] border border-[#f0e0a8] bg-[var(--color-semantic-warning-bg)] p-5 text-sm leading-7 text-[var(--color-slate)]">
             <p>All raw benchmark logs are publicly available for inspection and validation. These results demonstrate current pre-alpha capabilities rather than production guarantees. Dedicated server hardware is expected to deliver significantly higher throughput than consumer laptop testing.</p>
             <Link
               href={benchmarkDetails.logsUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-3 inline-flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-bright)]"
+              className="mt-3 inline-flex items-center gap-2 text-[var(--color-brand-green-dark)] hover:text-[var(--color-brand-green)]"
             >
               View all benchmark logs
               <ExternalLink size={14} />
@@ -544,12 +536,12 @@ export function LandingPage() {
           </Reveal>
 
           {/* Workflow Explanation for Reviewers & Customers */}
-          <Reveal className="mt-8 rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.96))] p-5 sm:p-6 md:p-8">
+          <Reveal className="mt-8 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 sm:p-6 md:p-8">
             <div className="flex items-center gap-3">
-              <span className="grid h-8 w-8 place-items-center rounded-lg border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.1)] text-[var(--color-primary)]">
+              <span className="grid h-8 w-8 place-items-center rounded-lg border border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] text-[var(--color-brand-green-dark)]">
                 <Zap size={16} />
               </span>
-              <h3 className="text-base font-semibold uppercase tracking-[0.16em] text-white">
+              <h3 className="text-base font-semibold uppercase tracking-[0.16em] text-[var(--color-ink)]">
                 How Managed Provisioning Works
               </h3>
             </div>
@@ -578,13 +570,13 @@ export function LandingPage() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="rounded-[18px] border border-white/8 bg-black/30 p-4 transition hover:border-white/14"
+                  className="rounded-[var(--radius-lg)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] p-4 transition hover:border-[var(--color-hairline-strong)]"
                 >
-                  <span className="text-xs font-mono font-bold text-[var(--color-primary)]">
+                  <span className="text-xs font-mono font-bold text-[var(--color-brand-green-dark)]">
                     STEP {item.step}
                   </span>
-                  <h4 className="mt-2 text-sm font-semibold text-white">{item.title}</h4>
-                  <p className="mt-2 text-xs leading-5 text-zinc-400">{item.desc}</p>
+                  <h4 className="mt-2 text-sm font-semibold text-[var(--color-ink)]">{item.title}</h4>
+                  <p className="mt-2 text-xs leading-5 text-[var(--color-steel)]">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -595,48 +587,48 @@ export function LandingPage() {
             {pricingPlans.map((plan, index) => (
               <Reveal key={plan.id} delay={index * 0.05} className="flex">
                 <div
-                  className={`flex w-full flex-col justify-between rounded-[28px] border p-6 sm:p-8 transition ${
+                  className={`flex w-full flex-col justify-between rounded-[var(--radius-lg)] p-6 sm:p-8 transition ${
                     plan.highlight
-                      ? "border-[rgba(46,229,157,0.35)] bg-[linear-gradient(180deg,rgba(46,229,157,0.06),rgba(10,12,12,0.96))] shadow-[0_20px_60px_rgba(46,229,157,0.08)]"
-                      : "border-white/10 bg-[var(--color-elevated)]"
+                      ? "border-2 border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] shadow-[var(--shadow-2)]"
+                      : "border border-[var(--color-hairline)] bg-[var(--color-canvas)]"
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3">
-                      <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-200">
+                      <span className="rounded-full border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-charcoal)]">
                         {plan.name}
                       </span>
                       <span
-                        className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${
+                        className={
                           plan.highlight
-                            ? "border border-[rgba(46,229,157,0.3)] bg-[rgba(46,229,157,0.12)] text-[#2ee59d]"
-                            : "border border-white/10 bg-white/5 text-zinc-400"
-                        }`}
+                            ? "badge-popular"
+                            : "rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-steel)]"
+                        }
                       >
                         {plan.badge}
                       </span>
                     </div>
 
                     <div className="mt-6 flex items-baseline gap-2">
-                      <span className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                      <span className="text-4xl font-bold tracking-tight text-[var(--color-ink)] sm:text-5xl">
                         {plan.price}
                       </span>
-                      <span className="text-sm font-medium text-zinc-400">{plan.period}</span>
+                      <span className="text-sm font-medium text-[var(--color-steel)]">{plan.period}</span>
                     </div>
 
-                    <p className="mt-4 text-sm leading-6 text-zinc-300">{plan.description}</p>
+                    <p className="mt-4 text-sm leading-6 text-[var(--color-slate)]">{plan.description}</p>
 
-                    <div className="my-6 h-px w-full bg-white/10" />
+                    <div className="my-6 h-px w-full bg-[var(--color-hairline)]" />
 
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-steel)]">
                       Included with plan:
                     </p>
                     <ul className="mt-4 space-y-3">
                       {plan.features.map((feat) => (
-                        <li key={feat} className="flex items-start gap-3 text-sm text-zinc-300">
+                        <li key={feat} className="flex items-start gap-3 text-sm text-[var(--color-slate)]">
                           <CheckCircle2
                             size={16}
-                            className="mt-0.5 shrink-0 text-[var(--color-primary)]"
+                            className="mt-0.5 shrink-0 text-[var(--color-brand-green-dark)]"
                           />
                           <span>{feat}</span>
                         </li>
@@ -645,8 +637,8 @@ export function LandingPage() {
                   </div>
 
                   <div className="mt-8 space-y-4">
-                    <div className="flex items-center gap-2 rounded-[14px] border border-white/8 bg-black/35 px-3.5 py-2.5 text-xs text-zinc-300">
-                      <Clock size={14} className="shrink-0 text-[#ffd166]" />
+                    <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-3.5 py-2.5 text-xs text-[var(--color-slate)]">
+                      <Clock size={14} className="shrink-0 text-[var(--color-accent-orange)]" />
                       <span>{plan.supportNote}</span>
                     </div>
 
@@ -654,10 +646,10 @@ export function LandingPage() {
                       href={plan.ctaHref}
                       target="_blank"
                       rel="noreferrer"
-                      className={`inline-flex w-full items-center justify-center gap-2 rounded-[12px] px-5 py-4 text-sm font-semibold transition ${
+                      className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-4 text-sm font-semibold transition ${
                         plan.highlight
-                          ? "bg-[var(--color-primary)] text-black hover:bg-[var(--color-primary-bright)] shadow-[0_4px_20px_rgba(46,229,157,0.25)]"
-                          : "border border-white/14 bg-white/6 text-white hover:bg-white/12"
+                          ? "bg-[var(--color-brand-green)] text-[var(--color-on-primary)] hover:bg-[var(--color-primary-deep)] "
+                          : "border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[var(--color-surface-soft)]"
                       }`}
                     >
                       {plan.ctaText}
@@ -670,40 +662,40 @@ export function LandingPage() {
           </div>
 
           {/* Support & Policy Notice Box */}
-          <Reveal className="mt-8 rounded-[24px] border border-white/10 bg-[var(--color-card)] p-6 sm:p-7">
+          <Reveal className="mt-8 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6 sm:p-7">
             <div className="grid gap-6 md:grid-cols-3">
               <div>
-                <h4 className="flex items-center gap-2 text-sm font-semibold text-white">
-                  <Clock size={16} className="text-[var(--color-primary)]" />
+                <h4 className="flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)]">
+                  <Clock size={16} className="text-[var(--color-brand-green-dark)]" />
                   Support Schedule
                 </h4>
-                <p className="mt-2 text-xs leading-6 text-zinc-400">
-                  Direct Founder & engineering support is available daily from <strong className="text-zinc-200">6:00 PM to 10:00 PM IST (4 hours nightly)</strong>, Monday to Friday. Closed on Saturdays and Sundays.
+                <p className="mt-2 text-xs leading-6 text-[var(--color-steel)]">
+                  Direct Founder & engineering support is available daily from <strong className="text-[var(--color-charcoal)]">6:00 PM to 10:00 PM IST (4 hours nightly)</strong>, Monday to Friday. Closed on Saturdays and Sundays.
                 </p>
               </div>
               <div>
-                <h4 className="flex items-center gap-2 text-sm font-semibold text-white">
-                  <Server size={16} className="text-[var(--color-cyan)]" />
+                <h4 className="flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)]">
+                  <Server size={16} className="text-[var(--color-brand-green-mid)]" />
                   Digital Provisioning
                 </h4>
-                <p className="mt-2 text-xs leading-6 text-zinc-400">
+                <p className="mt-2 text-xs leading-6 text-[var(--color-steel)]">
                   LioranDB provides digital cloud software and database infrastructure. Server instances and connection credentials are provisioned within 1 to 24 hours of approval. No physical shipment.
                 </p>
               </div>
               <div>
-                <h4 className="flex items-center gap-2 text-sm font-semibold text-white">
-                  <ShieldCheck size={16} className="text-[#ffd166]" />
+                <h4 className="flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)]">
+                  <ShieldCheck size={16} className="text-[var(--color-accent-orange)]" />
                   Subscription & Refund Terms
                 </h4>
-                <p className="mt-2 text-xs leading-6 text-zinc-400">
-                  Subscriptions are billed monthly. Due to immediate allocation of dedicated server compute and storage resources upon provisioning, all payments are covered under our <Link href="/refund" className="underline text-zinc-200 hover:text-white">Strict No-Refund Policy</Link>. Cancel anytime before the next billing cycle.
+                <p className="mt-2 text-xs leading-6 text-[var(--color-steel)]">
+                  Subscriptions are billed monthly. Due to immediate allocation of dedicated server compute and storage resources upon provisioning, all payments are covered under our <Link href="/refund" className="underline text-[var(--color-charcoal)] hover:text-[var(--color-ink)]">Strict No-Refund Policy</Link>. Cancel anytime before the next billing cycle.
                 </p>
               </div>
             </div>
           </Reveal>
         </Section>
 
-        <Section id="why-india">
+        <Section id="why-india" surface>
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <Reveal>
               <SectionHeading
@@ -711,11 +703,11 @@ export function LandingPage() {
                 title="Indian data deserves Indian infrastructure."
                 description="India’s software ecosystem should not depend entirely on infrastructure designed, owned and controlled elsewhere. LioranDB is one step toward a stronger domestic developer platform ecosystem."
               />
-              <div className="india-mark mt-8 rounded-[28px] border border-white/10 bg-[var(--color-elevated)] p-6">
-                <p className="text-2xl font-semibold tracking-[-0.04em] text-white">
+              <div className="india-mark mt-8 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6">
+                <p className="text-2xl font-semibold tracking-[-0.04em] text-[var(--color-ink)]">
                   Developed in India. Built for the world.
                 </p>
-                <p className="mt-3 text-sm leading-7 text-zinc-400">
+                <p className="mt-3 text-sm leading-7 text-[var(--color-steel)]">
                   LioranDB is independently developed and is not presented as an
                   official government product or initiative.
                 </p>
@@ -725,12 +717,12 @@ export function LandingPage() {
             <div className="grid gap-4">
               {indiaPillars.map(([title, description], index) => (
                 <Reveal key={title} delay={index * 0.04}>
-                  <div className="rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-6">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-black/25 text-[var(--color-primary)]">
+                  <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] text-[var(--color-brand-green-dark)]">
                       <ShieldCheck size={20} />
                     </div>
-                    <h3 className="text-xl font-semibold text-white">{title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-zinc-400">{description}</p>
+                    <h3 className="text-xl font-semibold text-[var(--color-ink)]">{title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-[var(--color-steel)]">{description}</p>
                   </div>
                 </Reveal>
               ))}
@@ -749,16 +741,16 @@ export function LandingPage() {
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {useCases.map(([title, collections, query, benefit], index) => (
               <Reveal key={title} delay={index * 0.03}>
-                <div className="rounded-[22px] border border-white/10 bg-[var(--color-card)] p-5">
-                  <h3 className="text-lg font-semibold text-white">{title}</h3>
-                  <p className="mt-4 text-xs uppercase tracking-[0.18em] text-zinc-500">
+                <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5">
+                  <h3 className="text-lg font-semibold text-[var(--color-ink)]">{title}</h3>
+                  <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[var(--color-stone)]">
                     Collections
                   </p>
-                  <p className="mt-2 text-sm text-zinc-300">{collections}</p>
-                  <div className="mt-4 rounded-[14px] border border-white/8 bg-black/35 px-3 py-3 font-mono text-xs text-[var(--color-primary)]">
+                  <p className="mt-2 text-sm text-[var(--color-slate)]">{collections}</p>
+                  <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-3 py-3 font-mono text-xs text-[var(--color-brand-green-dark)]">
                     {query}
                   </div>
-                  <p className="mt-4 text-sm leading-7 text-zinc-400">{benefit}</p>
+                  <p className="mt-4 text-sm leading-7 text-[var(--color-steel)]">{benefit}</p>
                 </div>
               </Reveal>
             ))}
@@ -798,23 +790,23 @@ const result = await users.find({
               },
             ].map((panel, index) => (
               <Reveal key={panel.title} delay={index * 0.04}>
-                <div className="rounded-[24px] border border-white/10 bg-[var(--color-elevated)] p-6">
-                  <h3 className="text-xl font-semibold text-white">{panel.title}</h3>
+                <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-6">
+                  <h3 className="text-xl font-semibold text-[var(--color-ink)]">{panel.title}</h3>
                   {index === 0 ? (
                     <CodeBlock
                       code={panel.body}
                       variant="typescript"
-                      className="mt-5 bg-[linear-gradient(180deg,rgba(8,10,14,0.92),rgba(6,7,10,0.96))] text-zinc-200"
+                      className="mt-5 "
                     />
                   ) : (
-                    <p className="mt-5 text-sm leading-7 text-zinc-400">{panel.body}</p>
+                    <p className="mt-5 text-sm leading-7 text-[var(--color-steel)]">{panel.body}</p>
                   )}
                   <div className="mt-6 flex flex-wrap gap-2">
                     {["TypeScript", "Node.js", "JSON", "Rust V2", "Self-hosted", "No vendor lock-in"].map(
                       (badge) => (
                         <span
                           key={badge}
-                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-zinc-300"
+                          className="rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-1 text-xs uppercase tracking-[0.14em] text-[var(--color-slate)]"
                         >
                           {badge}
                         </span>
@@ -827,7 +819,7 @@ const result = await users.find({
           </div>
         </Section>
 
-        <Section id="roadmap">
+        <Section id="roadmap" surface>
           <Reveal>
             <SectionHeading
               eyebrow="Roadmap"
@@ -838,13 +830,13 @@ const result = await users.find({
           <div className="mt-10 grid gap-4 xl:grid-cols-4">
             {roadmap.map((phase, index) => (
               <Reveal key={phase.title} delay={index * 0.04}>
-                <div className="relative h-full rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5">
-                  <span className="absolute left-5 top-0 h-1 w-16 rounded-full bg-[linear-gradient(90deg,var(--color-primary),var(--color-cyan))]" />
-                  <h3 className="pt-4 text-lg font-semibold text-white">{phase.title}</h3>
-                  <ul className="mt-4 space-y-3 text-sm leading-7 text-zinc-400">
+                <div className="relative h-full rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5">
+                  <span className="absolute left-5 top-0 h-1 w-16 rounded-full bg-[linear-gradient(90deg,var(--color-brand-green),var(--color-brand-green-dark))]" />
+                  <h3 className="pt-4 text-lg font-semibold text-[var(--color-ink)]">{phase.title}</h3>
+                  <ul className="mt-4 space-y-3 text-sm leading-7 text-[var(--color-steel)]">
                     {phase.items.map((item) => (
                       <li key={item} className="flex gap-3">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-primary)]" />
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-green)]" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -857,11 +849,11 @@ const result = await users.find({
 
         <Section id="founder">
           <Reveal>
-            <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(12,12,15,0.94),rgba(8,8,10,0.98))] p-6 md:p-8">
+            <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 md:p-8">
               <div className="grid gap-8 lg:grid-cols-[320px_1fr] lg:items-center">
                 <div className="relative mx-auto w-full max-w-[320px]">
-                  <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(46,229,157,0.28),rgba(46,229,157,0))] blur-3xl" />
-                  <div className="relative overflow-hidden rounded-full border border-[var(--color-border-strong)] p-2">
+                  <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(0,237,100,0.22),rgba(0,237,100,0))] blur-3xl" />
+                  <div className="relative overflow-hidden rounded-full border border-[var(--color-hairline-strong)] p-2">
                     <Image
                       src={siteConfig.founderImage}
                       alt="Swaraj Puppalwar, Founder and CTO of Lioran Group"
@@ -870,28 +862,28 @@ const result = await users.find({
                       className="h-auto w-full rounded-full object-cover"
                     />
                   </div>
-                  <div className="absolute bottom-10 right-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/75 px-3 py-2 text-xs text-zinc-300">
+                  <div className="absolute bottom-10 right-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-hairline)] bg-[var(--color-canvas)] px-3 py-2 text-xs text-[var(--color-steel)] shadow-[var(--shadow-1)]">
                     <span className="status-dot" />
                     building
                   </div>
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-primary)]">
+                  <p className="text-xs uppercase tracking-[0.24em] text-[var(--color-brand-green-dark)]">
                     Founder
                   </p>
-                  <h2 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-white">
+                  <h2 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-[var(--color-ink)]">
                     Swaraj Puppalwar
                   </h2>
-                  <p className="mt-2 text-base text-zinc-400">
+                  <p className="mt-2 text-base text-[var(--color-steel)]">
                     Founder &amp; CTO, Lioran Group
                   </p>
-                  <p className="mt-5 max-w-3xl text-base leading-8 text-zinc-300">
+                  <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--color-slate)]">
                     Swaraj Puppalwar is an 18-year-old full-stack developer,
                     database engineer and founder building developer infrastructure
                     from India. He began programming at 11 and is leading the
                     architecture and development of LioranDB.
                   </p>
-                  <blockquote className="mt-6 max-w-3xl border-l border-[var(--color-primary)] pl-5 text-xl font-medium tracking-[-0.03em] text-white">
+                  <blockquote className="mt-6 max-w-3xl border-l-2 border-[var(--color-brand-green)] pl-5 text-xl font-medium tracking-[-0.03em] text-[var(--color-ink)]">
                     “I don&apos;t want India to only consume developer infrastructure.
                     I want us to build it.”
                   </blockquote>
@@ -899,13 +891,13 @@ const result = await users.find({
                     {founderSkills.map((skill) => (
                       <span
                         key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.16em] text-zinc-300"
+                        className="rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 text-xs uppercase tracking-[0.16em] text-[var(--color-slate)]"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
-                  <p className="mt-6 rounded-[16px] border border-white/10 bg-black/30 px-4 py-4 font-mono text-sm text-[var(--color-primary)]">
+                  <p className="mt-6 rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-4 py-4 font-mono text-sm text-[var(--color-brand-green-dark)]">
                     swaraj@lioran:~/liorandb$ building_indias_infra
                   </p>
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -913,7 +905,7 @@ const result = await users.find({
                       href={siteConfig.founderGithubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-5 py-4 text-sm font-medium text-white"
+                      className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] px-5 py-4 text-sm font-medium text-[var(--color-ink)]"
                     >
                       <GitHubMark className="h-4 w-4" />
                       GitHub profile
@@ -922,7 +914,7 @@ const result = await users.find({
                       href={siteConfig.orgGithubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-[10px] border border-white/12 bg-white/5 px-5 py-4 text-sm font-medium text-white"
+                      className="inline-flex items-center justify-center rounded-full border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] px-5 py-4 text-sm font-medium text-[var(--color-ink)]"
                     >
                       Follow Lioran Group
                     </Link>
@@ -930,7 +922,7 @@ const result = await users.find({
                       href={siteConfig.discordUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-[10px] bg-[var(--color-primary)] px-5 py-4 text-sm font-semibold text-black"
+                      className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand-green)] px-5 py-4 text-sm font-semibold text-[var(--color-on-primary)]"
                     >
                       Join Discord
                     </Link>
@@ -962,13 +954,13 @@ const result = await users.find({
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-full min-h-[176px] flex-col rounded-[22px] border border-white/10 bg-[var(--color-elevated)] p-5 sm:p-6 transition hover:border-[var(--color-border-strong)]"
+                    className="flex h-full min-h-[176px] flex-col rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 sm:p-6 transition hover:border-[var(--color-hairline-strong)] hover:shadow-[var(--shadow-1)]"
                   >
-                    <p className="text-lg font-semibold text-white">{label}</p>
-                    <p className="mt-3 text-sm leading-7 text-zinc-400">
+                    <p className="text-lg font-semibold text-[var(--color-ink)]">{label}</p>
+                    <p className="mt-3 text-sm leading-7 text-[var(--color-steel)]">
                       Public development. Source available. Feedback welcome.
                     </p>
-                    <span className="mt-auto pt-6 text-sm font-medium text-[var(--color-primary)]">
+                    <span className="mt-auto pt-6 text-sm font-medium text-[var(--color-brand-green-dark)]">
                       Open link →
                     </span>
                   </Link>
@@ -976,8 +968,8 @@ const result = await users.find({
               ))}
             </div>
             <Reveal delay={0.08}>
-              <div className="min-w-0 rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,18,0.92),rgba(8,8,10,0.98))] p-5 sm:p-6">
-                <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
+              <div className="min-w-0 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 sm:p-6">
+                <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-stone)]">
                   GitHub activity panel
                 </p>
                 <div className="mt-5 grid gap-3">
@@ -989,10 +981,10 @@ const result = await users.find({
                   ].map((item, index) => (
                     <div
                       key={item}
-                      className="flex items-center justify-between rounded-[16px] border border-white/8 bg-black/25 px-4 py-3 font-mono text-sm text-zinc-300"
+                      className="flex items-center justify-between rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-4 py-3 font-mono text-sm text-[var(--color-slate)]"
                     >
                       <span>{item}</span>
-                      <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                      <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-stone)]">
                         {index < 2 ? "public" : "active"}
                       </span>
                     </div>
@@ -1003,7 +995,7 @@ const result = await users.find({
           </div>
         </Section>
 
-        <Section id="faq">
+        <Section id="faq" surface>
           <Reveal>
             <SectionHeading
               eyebrow="FAQ"
@@ -1016,49 +1008,34 @@ const result = await users.find({
           </div>
         </Section>
 
-        <Section id="final-cta">
+        <Section id="final-cta" surface>
           <Reveal>
-            <div className="rounded-[30px] border border-[var(--color-border-strong)] bg-[linear-gradient(180deg,rgba(46,229,157,0.08),rgba(8,8,10,0.98))] p-6 md:p-8">
+            <div className="cta-banner-dark p-8 md:p-12">
               <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
                 <div>
-                  <h2 className="text-balance text-4xl font-semibold tracking-[-0.05em] text-white md:text-5xl">
+                  <h2 className="text-balance text-4xl font-medium tracking-[-0.05em] text-[var(--color-ink)] md:text-5xl">
                     Now you can code it. Pre-alpha is live.
                   </h2>
-                  <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-300">
+                  <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--color-steel)]">
                     Get started with the Docker Quickstart. Read the docs. Join the
                     community helping shape the production release.
                   </p>
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <Link
-                      href={siteConfig.docsUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-[10px] bg-[var(--color-primary)] px-5 py-4 text-sm font-semibold text-black"
-                    >
+                    <Link href={siteConfig.docsUrl} target="_blank" rel="noreferrer" className="btn-primary">
                       Read documentation
                     </Link>
-                    <Link
-                      href={siteConfig.discordUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-[10px] border border-white/12 bg-white/5 px-5 py-4 text-sm font-medium text-white"
-                    >
+                    <Link href={siteConfig.discordUrl} target="_blank" rel="noreferrer" className="btn-secondary">
                       Join Discord
                     </Link>
-                    <Link
-                      href={siteConfig.orgGithubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-[10px] border border-white/12 bg-white/5 px-5 py-4 text-sm font-medium text-white"
-                    >
+                    <Link href={siteConfig.orgGithubUrl} target="_blank" rel="noreferrer" className="btn-secondary">
                       View GitHub
                     </Link>
                   </div>
-                  <p className="mt-6 text-sm text-zinc-400">
+                  <p className="mt-6 text-sm text-[var(--color-stone)]">
                     From India to the global developer community.
                   </p>
                 </div>
-                <div className="rounded-[24px] border border-white/10 bg-black/45 p-5">
+                <div className="code-mockup-card p-5">
                   <CodeBlock
                     code={`$ npm install @liorandb/driver
 ✓ package installed
@@ -1066,7 +1043,7 @@ const result = await users.find({
 $ liorandb start
 ✓ database ready`}
                     variant="terminal"
-                    className="border-0 bg-transparent p-0 text-zinc-200"
+                    className="border-0 bg-transparent p-0"
                   />
                 </div>
               </div>

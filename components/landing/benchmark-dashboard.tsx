@@ -24,22 +24,20 @@ export function BenchmarkDashboard({ metrics }: BenchmarkDashboardProps) {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[24px] border border-white/10 bg-[var(--color-elevated)] p-5">
+      <div className="card-feature">
         <div className="mb-4 flex items-center justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
-              Representative development workload
-            </p>
-            <h3 className="mt-2 text-xl font-semibold text-white">
+            <p className="eyebrow">Representative development workload</p>
+            <h3 className="mt-2 text-xl font-semibold text-[var(--color-ink)]">
               Internal development benchmarks
             </h3>
           </div>
-          <span className="rounded-full border border-[rgba(255,209,102,0.16)] bg-[rgba(255,209,102,0.08)] px-3 py-2 text-xs uppercase tracking-[0.18em] text-[#ffd166]">
+          <span className="rounded-full bg-[var(--color-semantic-warning-bg)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-semantic-warning-text)]">
             Visual demo
           </span>
         </div>
 
-        <div className="rounded-[20px] border border-white/8 bg-black/35 p-4">
+        <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4">
           <svg
             viewBox="0 0 960 280"
             className="h-auto w-full"
@@ -48,9 +46,9 @@ export function BenchmarkDashboard({ metrics }: BenchmarkDashboardProps) {
           >
             <defs>
               <linearGradient id="bench-line" x1="0" x2="1" y1="0" y2="0">
-                <stop offset="0%" stopColor="#2EE59D" />
-                <stop offset="55%" stopColor="#55D6FF" />
-                <stop offset="100%" stopColor="#B084FF" />
+                <stop offset="0%" stopColor="#00ED64" />
+                <stop offset="55%" stopColor="#00A35C" />
+                <stop offset="100%" stopColor="#00684A" />
               </linearGradient>
             </defs>
             {[0, 1, 2, 3].map((row) => (
@@ -60,7 +58,7 @@ export function BenchmarkDashboard({ metrics }: BenchmarkDashboardProps) {
                 x2="960"
                 y1={48 + row * 56}
                 y2={48 + row * 56}
-                stroke="rgba(255,255,255,0.07)"
+                stroke="#e1e5e8"
                 strokeDasharray="4 10"
               />
             ))}
@@ -71,7 +69,7 @@ export function BenchmarkDashboard({ metrics }: BenchmarkDashboardProps) {
                 x2={80 + column * 144}
                 y1="20"
                 y2="252"
-                stroke="rgba(255,255,255,0.05)"
+                stroke="#eceff1"
               />
             ))}
             <motion.path
@@ -97,14 +95,14 @@ export function BenchmarkDashboard({ metrics }: BenchmarkDashboardProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.35, delay: index * 0.06 }}
-            className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)] p-5"
+            className="card-base"
           >
-            <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
-              {metric.label}
-            </p>
-            <p className="mt-3 text-3xl font-semibold tracking-tight text-white">
+            <p className="eyebrow">{metric.label}</p>
+            <p className="mt-3 text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
               {formatMetric(metric.value)}
-              <span className="ml-2 text-base text-zinc-500">{metric.suffix}</span>
+              <span className="ml-2 text-base text-[var(--color-stone)]">
+                {metric.suffix}
+              </span>
             </p>
           </motion.div>
         ))}

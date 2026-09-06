@@ -13,24 +13,23 @@ export function Faq({ items }: FaqProps) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="space-y-3">
+    <div className="divide-y divide-[var(--color-hairline)] rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)]">
       {items.map(([question, answer], index) => {
         const isOpen = open === index;
 
         return (
-          <div
-            key={question}
-            className="rounded-[20px] border border-white/10 bg-[var(--color-elevated)]"
-          >
+          <div key={question}>
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
+              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? -1 : index)}
             >
-              <span className="text-base font-medium text-white">{question}</span>
+              <span className="text-base font-semibold text-[var(--color-ink)]">
+                {question}
+              </span>
               <motion.span animate={{ rotate: isOpen ? 180 : 0 }}>
-                <ChevronDown size={18} className="text-zinc-500" />
+                <ChevronDown size={18} className="text-[var(--color-steel)]" />
               </motion.span>
             </button>
             <AnimatePresence initial={false}>
@@ -42,7 +41,9 @@ export function Faq({ items }: FaqProps) {
                   transition={{ duration: 0.22 }}
                   className="overflow-hidden"
                 >
-                  <p className="px-5 pb-5 text-sm leading-7 text-zinc-400">{answer}</p>
+                  <p className="px-6 pb-5 text-sm leading-7 text-[var(--color-steel)]">
+                    {answer}
+                  </p>
                 </motion.div>
               ) : null}
             </AnimatePresence>

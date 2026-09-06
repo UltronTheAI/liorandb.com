@@ -161,14 +161,14 @@ export function CodeBlock({
 
   return (
     <pre
-      className={`code-scroll overflow-x-auto rounded-[18px] border border-white/8 p-4 text-sm leading-7 ${className}`}
+      className={`code-block code-scroll overflow-x-auto p-4 font-mono text-sm leading-7 ${className}`}
     >
       <code>
         {lines.map((line, index) => {
           const content = (
             <>
               {showLineNumbers ? (
-                <span className="mr-4 inline-block w-6 text-right text-zinc-600">
+                <span className="mr-4 inline-block w-6 text-right text-[var(--color-stone)]">
                   {index + 1}
                 </span>
               ) : null}
@@ -178,7 +178,7 @@ export function CodeBlock({
                   aria-hidden
                   animate={reduceMotion ? {} : { opacity: [1, 0, 1] }}
                   transition={{ repeat: Infinity, duration: 1.25 }}
-                  className="ml-1 inline-block h-5 w-[2px] bg-[var(--color-primary)] align-middle"
+                  className="ml-1 inline-block h-5 w-[2px] bg-[var(--color-brand-green)] align-middle"
                 />
               ) : null}
             </>

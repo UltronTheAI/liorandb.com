@@ -5,7 +5,9 @@ import { BookOpen, LayoutDashboard, Menu, MessageSquareText, X } from "lucide-re
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { GitHubMark } from "./github-mark";
+import { GitHubStars } from "./github-stars";
 
 type NavItem = readonly [string, string];
 
@@ -16,6 +18,7 @@ type SiteHeaderProps = {
   studioUrl: string;
   discordUrl: string;
   githubUrl: string;
+  githubRepo: string;
 };
 
 export function SiteHeader({
@@ -25,6 +28,7 @@ export function SiteHeader({
   studioUrl,
   discordUrl,
   githubUrl,
+  githubRepo,
 }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -32,10 +36,11 @@ export function SiteHeader({
   const reduceMotion = useReducedMotion();
 
   const ids = useMemo(
-    () => navItems
-      .map(([, href]) => href)
-      .filter(href => !href.startsWith("external:"))
-      .map(href => href.replace("#", "")),
+    () =>
+      navItems
+        .map(([, href]) => href)
+        .filter((href) => !href.startsWith("external:"))
+        .map((href) => href.replace("#", "")),
     [navItems],
   );
 
@@ -74,52 +79,52 @@ export function SiteHeader({
   useEffect(() => {
     if (!open) return;
     const onResize = () => {
-      if (window.innerWidth >= 1024) {
-        setOpen(false);
-      }
+      if (window.innerWidth >= 1024) setOpen(false);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [open]);
 
   const linkClass =
-    "rounded-full px-2.5 py-2 text-xs font-medium text-zinc-400 transition hover:text-white xl:px-3 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]";
+    "inline-flex h-10 items-center rounded-full px-3 text-sm font-medium text-[var(--color-steel)] transition hover:text-[var(--color-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]";
+
+  const iconBtnClass =
+    "inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-hairline-strong)] text-[var(--color-charcoal)] transition hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]";
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4 md:px-6">
-      <div
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-[18px] border px-4 py-3 backdrop-blur-xl transition md:px-5 ${
-          scrolled
-            ? "border-white/14 bg-black/80 shadow-[0_16px_60px_rgba(0,0,0,0.45)]"
-            : "border-white/8 bg-black/45"
-        }`}
-      >
+    <header
+      className={`sticky top-0 z-50 border-b transition ${
+        scrolled
+          ? "border-[var(--color-hairline)] bg-[var(--color-canvas)]/95 shadow-[var(--shadow-1)] backdrop-blur-md"
+          : "border-[var(--color-hairline)] bg-[var(--color-canvas)]"
+      }`}
+    >
+      <div className="mx-auto grid h-16 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center gap-3 px-4 md:gap-4 md:px-8">
         <Link
           href="/#top"
-          className="inline-flex items-center gap-3 rounded-full pr-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+          className="inline-flex h-10 items-center gap-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]"
         >
-          <span className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--color-border-strong)] bg-[linear-gradient(135deg,rgba(46,229,157,0.18),rgba(85,214,255,0.14))]">
+          <span className="grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)]">
             <Image
               src="/favicon.ico"
               alt="LioranDB logo"
-              width={24}
-              height={24}
-              className="h-6 w-6 rounded-[6px]"
+              width={20}
+              height={20}
+              className="h-5 w-5 rounded-[3px]"
               priority
             />
           </span>
-          <span>
-            <span className="block text-sm font-semibold tracking-[0.18em] text-white uppercase">
+          <span className="flex flex-col justify-center leading-none">
+            <span className="text-sm font-semibold tracking-tight text-[var(--color-ink)]">
               LioranDB
             </span>
-            <span className="inline-flex max-w-full rounded-full border border-[rgba(255,153,51,0.18)] bg-[rgba(255,153,51,0.07)] px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#ffbb6e]">
+            <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-brand-green-dark)]">
               Developed in India
             </span>
           </span>
         </Link>
 
-        {/* Always visible Desktop Menu Bar */}
-        <nav className="hidden items-center gap-0.5 lg:flex xl:gap-1">
+        <nav className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex">
           {navItems.map(([label, href]) => {
             const isExternal = href.startsWith("external:");
             const actualHref = isExternal
@@ -127,8 +132,8 @@ export function SiteHeader({
                 ? studioUrl
                 : href
               : href.startsWith("#")
-              ? `/${href}`
-              : href;
+                ? `/${href}`
+                : href;
 
             return (
               <Link
@@ -136,7 +141,11 @@ export function SiteHeader({
                 href={actualHref}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noreferrer" : undefined}
-                className={`${linkClass} ${!isExternal && active === href ? "text-white font-semibold" : ""}`}
+                className={`${linkClass} ${
+                  !isExternal && active === href
+                    ? "font-semibold text-[var(--color-ink)]"
+                    : ""
+                }`}
               >
                 {label}
               </Link>
@@ -144,66 +153,71 @@ export function SiteHeader({
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center justify-end gap-2 lg:flex">
+          <ThemeToggle />
           <Link
             href={githubUrl}
             target="_blank"
             rel="noreferrer"
             aria-label="View LioranDB on GitHub"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/12 bg-white/5 text-zinc-200 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className={`${iconBtnClass} gap-1.5 px-3`}
           >
-            <GitHubMark className="h-[18px] w-[18px]" />
+            <GitHubMark className="h-4 w-4" />
+            <GitHubStars repo={githubRepo} />
           </Link>
           <Link
             href={discordUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-3.5 py-3 text-xs font-medium text-white transition hover:bg-white/10 xl:px-4 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className={`${iconBtnClass} gap-1.5 px-3 text-sm font-semibold`}
           >
-            <MessageSquareText size={16} />
-            Join Discord
+            <MessageSquareText size={15} />
+            Discord
           </Link>
           <Link
             href={docsUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-3.5 py-3 text-xs font-medium text-white transition hover:bg-white/10 xl:px-4 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className={`${iconBtnClass} gap-1.5 px-3 text-sm font-semibold`}
           >
-            <BookOpen size={16} />
+            <BookOpen size={15} />
             Docs
           </Link>
           <Link
             href={appUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-3.5 py-3 text-xs font-semibold text-black transition hover:bg-[var(--color-primary-bright)] xl:px-4 xl:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className="btn-primary h-10 shrink-0 gap-1.5 !px-4 !py-0 text-sm"
           >
-            <LayoutDashboard size={16} />
-            Dashboard
+            <LayoutDashboard size={15} />
+            Try Free
           </Link>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/12 bg-white/5 text-white lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="col-start-3 flex items-center justify-end gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className={`${iconBtnClass} w-10`}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence initial={false}>
         {open ? (
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: -14 }}
+            initial={reduceMotion ? false : { opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -14 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="mx-auto mt-3 max-w-7xl rounded-[18px] border border-white/10 bg-[rgba(10,10,10,0.96)] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] lg:hidden"
+            className="border-t border-[var(--color-hairline)] bg-[var(--color-canvas)] px-4 py-4 shadow-[var(--shadow-2)] lg:hidden"
           >
-            <nav className="flex flex-col gap-2">
+            <nav className="mx-auto flex max-w-[1280px] flex-col gap-1">
               {navItems.map(([label, href]) => {
                 const isExternal = href.startsWith("external:");
                 const actualHref = isExternal
@@ -211,8 +225,8 @@ export function SiteHeader({
                     ? studioUrl
                     : href
                   : href.startsWith("#")
-                  ? `/${href}`
-                  : href;
+                    ? `/${href}`
+                    : href;
 
                 return (
                   <Link
@@ -220,7 +234,7 @@ export function SiteHeader({
                     href={actualHref}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noreferrer" : undefined}
-                    className="rounded-xl px-4 py-3 text-sm font-medium text-zinc-200 transition hover:bg-white/6"
+                    className="rounded-[var(--radius-md)] px-4 py-3 text-sm font-medium text-[var(--color-charcoal)] transition hover:bg-[var(--color-surface)]"
                     onClick={() => setOpen(false)}
                   >
                     {label}
@@ -228,33 +242,28 @@ export function SiteHeader({
                 );
               })}
             </nav>
-            <div className="mt-4 grid gap-2">
+            <div className="mx-auto mt-4 grid max-w-[1280px] gap-2">
               <Link
                 href={appUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-black"
+                className="btn-primary w-full"
                 onClick={() => setOpen(false)}
               >
                 <LayoutDashboard size={16} />
-                Open Dashboard (app.liorandb.com)
+                Try Free
               </Link>
-              <Link
-                href={docsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-4 py-3 text-sm font-medium text-white"
-              >
+              <Link href={docsUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full">
                 <BookOpen size={16} />
                 Docs
               </Link>
-              <Link
-                href={discordUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-[10px] border border-white/12 bg-white/5 px-4 py-3 text-center text-sm font-medium text-white"
-              >
+              <Link href={discordUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full">
                 Join Discord
+              </Link>
+              <Link href={githubUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full">
+                <GitHubMark className="h-4 w-4" />
+                GitHub
+                <GitHubStars repo={githubRepo} />
               </Link>
             </div>
           </motion.div>

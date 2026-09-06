@@ -25,24 +25,28 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[260px_1fr]">
-      <div className="rounded-[24px] border border-white/10 bg-[var(--color-elevated)] p-4">
-        <p className="mb-4 text-xs uppercase tracking-[0.22em] text-zinc-500">
-          Operations
-        </p>
+      <div className="card-base">
+        <p className="eyebrow mb-4">Operations</p>
         <div className="space-y-2">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setActive(tab.id)}
-              className={`flex w-full items-center justify-between rounded-[16px] border px-4 py-3 text-left text-sm transition ${
+              className={`flex w-full items-center justify-between rounded-[var(--radius-lg)] border px-4 py-3 text-left text-sm transition ${
                 tab.id === current.id
-                  ? "border-[var(--color-border-strong)] bg-[rgba(46,229,157,0.08)] text-white"
-                  : "border-white/8 bg-black/25 text-zinc-400 hover:text-white"
+                  ? "border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] text-[var(--color-ink)]"
+                  : "border-[var(--color-hairline)] bg-[var(--color-canvas)] text-[var(--color-steel)] hover:text-[var(--color-ink)]"
               }`}
             >
               {tab.label}
-              <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+              <span
+                className={`text-[10px] uppercase tracking-[0.2em] ${
+                  tab.id === current.id
+                    ? "text-[var(--color-brand-green-dark)]"
+                    : "text-[var(--color-muted)]"
+                }`}
+              >
                 API
               </span>
             </button>
@@ -50,13 +54,13 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
         </div>
       </div>
 
-      <div className="rounded-[24px] border border-white/10 bg-[var(--color-elevated)] p-5">
+      <div className="card-feature">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              MongoDB-style workflow
-            </p>
-            <h3 className="mt-2 text-xl font-semibold text-white">{current.label}</h3>
+            <p className="eyebrow">MongoDB-style workflow</p>
+            <h3 className="mt-2 text-xl font-semibold text-[var(--color-ink)]">
+              {current.label}
+            </h3>
           </div>
           <button
             type="button"
@@ -64,7 +68,7 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
               setRunning(true);
               window.setTimeout(() => setRunning(false), 1100);
             }}
-            className="inline-flex items-center gap-2 rounded-[10px] bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-black transition hover:bg-[var(--color-primary-bright)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            className="btn-primary"
           >
             {running ? <LoaderCircle size={16} className="animate-spin" /> : <Play size={16} />}
             Run query
@@ -81,11 +85,7 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
               transition={{ duration: 0.2 }}
               className="min-w-0"
             >
-              <CodeBlock
-                code={current.code}
-                variant="typescript"
-                className="bg-[linear-gradient(180deg,rgba(8,10,14,0.92),rgba(6,7,10,0.96))] text-zinc-200"
-              />
+              <CodeBlock code={current.code} variant="typescript" />
             </motion.div>
           </AnimatePresence>
 
@@ -96,11 +96,9 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
               transition={{ duration: 0.2 }}
-              className="rounded-[18px] border border-white/8 bg-[linear-gradient(180deg,rgba(85,214,255,0.06),rgba(0,0,0,0))] p-4"
+              className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4"
             >
-              <p className="mb-4 text-xs uppercase tracking-[0.22em] text-zinc-500">
-                Result
-              </p>
+              <p className="eyebrow mb-4">Result</p>
               {running ? (
                 <div className="space-y-3">
                   {[1, 2, 3].map((bar) => (
@@ -108,16 +106,12 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
                       key={bar}
                       animate={reduceMotion ? {} : { opacity: [0.35, 0.9, 0.35] }}
                       transition={{ repeat: Infinity, duration: 1.1, delay: bar * 0.08 }}
-                      className="h-4 rounded-full bg-white/8"
+                      className="h-4 rounded-full bg-[var(--color-hairline)]"
                     />
                   ))}
                 </div>
               ) : (
-                <CodeBlock
-                  code={current.output}
-                  variant="json"
-                  className="border-0 bg-transparent p-0 text-zinc-200"
-                />
+                <CodeBlock code={current.output} variant="json" />
               )}
             </motion.div>
           </AnimatePresence>

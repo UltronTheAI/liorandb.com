@@ -24,7 +24,7 @@ export function CopyButton({
     <button
       type="button"
       aria-label={label}
-      className="inline-flex shrink-0 items-center gap-2 rounded-[10px] border border-white/12 bg-white/5 px-3 py-2 text-xs font-medium text-zinc-200 transition hover:border-[var(--color-border-strong)] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+      className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[var(--color-hairline-strong)] bg-[var(--color-canvas)] px-3 py-2 text-xs font-semibold text-[var(--color-charcoal)] transition hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]"
       onClick={async () => {
         await navigator.clipboard.writeText(text);
         setCopied(true);

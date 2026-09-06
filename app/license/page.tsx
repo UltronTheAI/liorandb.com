@@ -54,7 +54,7 @@ export default function LicensePage() {
       title="LioranDB License"
       intro="These are the current licensing terms for LioranDB, including the non-commercial usage grant and the additional product-specific restrictions you provided."
     >
-      <pre className="code-scroll overflow-x-auto whitespace-pre-wrap rounded-[20px] border border-white/8 bg-black/30 p-5 font-mono text-sm leading-7 text-zinc-200">
+      <pre className="code-block code-scroll overflow-x-auto whitespace-pre-wrap p-5 font-mono text-sm leading-7">
         {licenseText}
       </pre>
     </LegalPage>
