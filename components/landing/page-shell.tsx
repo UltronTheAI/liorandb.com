@@ -35,6 +35,8 @@ import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import TextLoop from "./text-loop";
 import GlowCursor from "./glow-cursor";
+import ElectricBorder from "./electric-border";
+import { DrawHeading } from "./draw-heading";
 
 function SectionHeading({
   eyebrow,
@@ -84,7 +86,7 @@ function Section({
       id={id}
       className={`${surface ? "section-surface" : "bg-[var(--color-canvas)]"} ${className}`}
     >
-      <div className="mx-auto max-w-[1280px] px-4 py-16 md:px-8 lg:py-24">{children}</div>
+      <div className="mx-auto max-w-[1280px] px-4 py-12 md:px-8 lg:py-16">{children}</div>
     </section>
   );
 }
@@ -134,9 +136,9 @@ export function LandingPage() {
 
       <main>
         <section id="product" className="hero-band-dark border-b border-[var(--color-hairline)]">
-          <div className="mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-[1280px] flex-col justify-center px-4 py-12 md:px-8 md:py-16 lg:py-20">
-            <div className="grid w-full items-stretch gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-              <Reveal className="flex min-w-0 flex-col justify-center space-y-6 lg:space-y-8">
+          <div className="mx-auto flex w-full max-w-[1280px] flex-col justify-start px-4 py-6 md:px-8 md:py-8 lg:py-10">
+            <div className="grid w-full items-start gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+              <Reveal className="flex min-w-0 flex-col justify-start space-y-4 lg:space-y-5">
                 <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-[var(--color-brand-green-soft)] bg-[var(--color-surface-feature)] px-3.5 py-2 text-[10px] font-medium tracking-[0.04em] text-[var(--color-charcoal)] sm:px-4 sm:text-xs sm:tracking-[0.08em]">
                   <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-brand-green)] animate-pulse" />
                   <span className="min-w-0 truncate sm:overflow-visible sm:whitespace-normal sm:text-clip">
@@ -147,10 +149,19 @@ export function LandingPage() {
                   </span>
                 </div>
 
-                <div className="space-y-4 sm:space-y-5">
-                  <h1 className="max-w-[18ch] text-balance text-4xl font-medium tracking-[-0.05em] text-[var(--color-ink)] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.12] xl:text-[4rem]">
-                    India&apos;s developer-first{" "}
-                    <span className="text-[var(--color-brand-green-dark)]">document database.</span>
+                <div className="space-y-3 sm:space-y-4">
+                  <h1 className="max-w-xl text-3xl font-medium tracking-[-0.05em] text-[var(--color-ink)] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15] xl:text-[3.25rem]">
+                    <span className="block whitespace-nowrap">
+                      <DrawHeading strokeColor="var(--color-ink)">
+                        India&apos;s developer-first
+                      </DrawHeading>
+                    </span>
+                    <DrawHeading
+                      className="text-[var(--color-brand-green-dark)]"
+                      strokeColor="var(--color-brand-green-dark)"
+                    >
+                      document database.
+                    </DrawHeading>
                   </h1>
                   <p className="max-w-xl text-base leading-7 text-[var(--color-steel)] sm:text-lg sm:leading-8">
                     High-performance document database developed in Rust — with Docker deployment and MongoDB-style APIs for startups and data-intensive apps.
@@ -186,13 +197,13 @@ export function LandingPage() {
               </Reveal>
 
               <Reveal delay={0.1} className="flex min-h-0 min-w-0 w-full">
-                <div className="flex w-full min-h-[420px] lg:min-h-full lg:max-h-[560px]">
+                <div className="flex w-full min-h-[360px] lg:min-h-[420px] lg:max-h-[520px]">
                   <HeroConsole collections={heroCollections} />
                 </div>
               </Reveal>
             </div>
 
-            <Reveal delay={0.15} className="mt-10 w-full lg:mt-12">
+            <Reveal delay={0.15} className="mt-6 w-full lg:mt-8">
               <div className="w-full rounded-[var(--radius-xl)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-5 sm:p-6 md:p-7">
                 <div className="flex flex-col gap-2 border-b border-[var(--color-hairline)] pb-4 sm:flex-row sm:items-center sm:justify-between">
                   <p className="eyebrow">Currently Used &amp; Managed By</p>
@@ -605,80 +616,99 @@ export function LandingPage() {
           </Reveal>
 
           {/* Pricing Plans Grid */}
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
             {pricingPlans.map((plan, index) => (
               <Reveal key={plan.id} delay={index * 0.05} className="flex">
-                <div
-                  className={`flex w-full flex-col justify-between rounded-[var(--radius-lg)] p-6 sm:p-8 transition ${
-                    plan.highlight
-                      ? "border-2 border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] shadow-[var(--shadow-2)]"
-                      : "border border-[var(--color-hairline)] bg-[var(--color-canvas)]"
-                  }`}
+                <ElectricBorder
+                  color="#00ed64"
+                  speed={plan.highlight ? 1.15 : 0.9}
+                  chaos={plan.highlight ? 0.14 : 0.1}
+                  borderRadius={14}
+                  className="flex w-full"
+                  style={{ width: "100%", borderRadius: 14 }}
                 >
-                  <div>
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="rounded-full border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-charcoal)]">
-                        {plan.name}
-                      </span>
-                      <span
-                        className={
+                  <div
+                    className={`flex h-full w-full flex-col justify-between rounded-[14px] p-4 sm:p-5 ${
+                      plan.highlight
+                        ? "bg-[var(--color-surface-feature)]"
+                        : "bg-[var(--color-canvas)]"
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="rounded-full border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-charcoal)]">
+                          {plan.name}
+                        </span>
+                        <span
+                          className={
+                            plan.highlight
+                              ? "badge-popular"
+                              : "rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-steel)]"
+                          }
+                        >
+                          {plan.badge}
+                        </span>
+                      </div>
+
+                      <div className="mt-4 flex items-baseline gap-1.5">
+                        <span className="text-3xl font-bold tracking-tight text-[var(--color-ink)] sm:text-4xl">
+                          {plan.price}
+                        </span>
+                        <span className="text-xs font-medium text-[var(--color-steel)]">
+                          {plan.period}
+                        </span>
+                      </div>
+
+                      <p className="mt-2.5 text-xs leading-5 text-[var(--color-slate)] sm:text-sm sm:leading-6">
+                        {plan.description}
+                      </p>
+
+                      <div className="my-4 h-px w-full bg-[var(--color-hairline)]" />
+
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-steel)]">
+                        Included with plan:
+                      </p>
+                      <ul className="mt-2.5 space-y-2">
+                        {plan.features.map((feat) => (
+                          <li
+                            key={feat}
+                            className="flex items-start gap-2 text-xs text-[var(--color-slate)] sm:text-sm"
+                          >
+                            <CheckCircle2
+                              size={14}
+                              className="mt-0.5 shrink-0 text-[var(--color-brand-green-dark)]"
+                            />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="mt-5 space-y-3">
+                      <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-3 py-2 text-[11px] leading-4 text-[var(--color-slate)]">
+                        <Clock
+                          size={12}
+                          className="shrink-0 text-[var(--color-accent-orange)]"
+                        />
+                        <span>{plan.supportNote}</span>
+                      </div>
+
+                      <Link
+                        href={plan.ctaHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold transition ${
                           plan.highlight
-                            ? "badge-popular"
-                            : "rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-steel)]"
-                        }
+                            ? "bg-[var(--color-brand-green)] text-[var(--color-on-primary)] hover:bg-[var(--color-primary-deep)] "
+                            : "border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[var(--color-surface-soft)]"
+                        }`}
                       >
-                        {plan.badge}
-                      </span>
+                        {plan.ctaText}
+                        <ArrowRight size={14} />
+                      </Link>
                     </div>
-
-                    <div className="mt-6 flex items-baseline gap-2">
-                      <span className="text-4xl font-bold tracking-tight text-[var(--color-ink)] sm:text-5xl">
-                        {plan.price}
-                      </span>
-                      <span className="text-sm font-medium text-[var(--color-steel)]">{plan.period}</span>
-                    </div>
-
-                    <p className="mt-4 text-sm leading-6 text-[var(--color-slate)]">{plan.description}</p>
-
-                    <div className="my-6 h-px w-full bg-[var(--color-hairline)]" />
-
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-steel)]">
-                      Included with plan:
-                    </p>
-                    <ul className="mt-4 space-y-3">
-                      {plan.features.map((feat) => (
-                        <li key={feat} className="flex items-start gap-3 text-sm text-[var(--color-slate)]">
-                          <CheckCircle2
-                            size={16}
-                            className="mt-0.5 shrink-0 text-[var(--color-brand-green-dark)]"
-                          />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-
-                  <div className="mt-8 space-y-4">
-                    <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-hairline-soft)] bg-[var(--color-surface)] px-3.5 py-2.5 text-xs text-[var(--color-slate)]">
-                      <Clock size={14} className="shrink-0 text-[var(--color-accent-orange)]" />
-                      <span>{plan.supportNote}</span>
-                    </div>
-
-                    <Link
-                      href={plan.ctaHref}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-4 text-sm font-semibold transition ${
-                        plan.highlight
-                          ? "bg-[var(--color-brand-green)] text-[var(--color-on-primary)] hover:bg-[var(--color-primary-deep)] "
-                          : "border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[var(--color-surface-soft)]"
-                      }`}
-                    >
-                      {plan.ctaText}
-                      <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </div>
+                </ElectricBorder>
               </Reveal>
             ))}
           </div>
