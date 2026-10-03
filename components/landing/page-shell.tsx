@@ -79,7 +79,7 @@ function Section({
   return (
     <section
       id={id}
-      className={`py-16 md:py-24 border-b border-[var(--color-hairline)] ${
+      className={`py-12 sm:py-16 md:py-24 border-b border-[var(--color-hairline)] ${
         surface ? "section-surface" : "bg-[var(--color-canvas)]"
       } ${className}`}
     >
@@ -113,20 +113,20 @@ export function LandingPage() {
 
       <main>
         {/* Hero Section */}
-        <section id="product" className="relative border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] py-14 sm:py-18 md:py-24">
+        <section id="product" className="relative border-b border-[var(--color-hairline)] bg-[var(--color-canvas)] py-10 sm:py-16 md:py-24">
           <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
-            <div className="grid w-full items-start gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+            <div className="grid w-full items-start gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
               <Reveal className="flex min-w-0 flex-col justify-start space-y-6">
                 <div className="space-y-4">
-                  <h1 className="text-3xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] sm:text-5xl lg:text-[56px] lg:leading-[1.08] xl:text-[64px]">
+                  <h1 className="text-2xl min-[360px]:text-3xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] sm:text-5xl lg:text-[56px] lg:leading-[1.08] xl:text-[64px]">
                     India&apos;s developer-first document database.
                   </h1>
-                  <p className="max-w-xl text-base leading-relaxed text-[var(--color-body)] sm:text-lg">
+                  <p className="max-w-xl text-sm leading-relaxed text-[var(--color-body)] sm:text-lg">
                     High-performance document database developed in Rust — with Docker deployment and MongoDB-style APIs for startups and data-intensive apps.
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
                   <Link
                     href={siteConfig.docsUrl}
                     target="_blank"
@@ -170,7 +170,7 @@ export function LandingPage() {
               </Reveal>
 
               <Reveal delay={0.1} className="flex min-h-0 min-w-0 w-full">
-                <div className="flex w-full min-h-[360px] sm:min-h-[420px] lg:min-h-[480px]">
+                <div className="flex w-full min-h-[340px] sm:min-h-[420px] lg:min-h-[480px]">
                   <HeroConsole collections={heroCollections} />
                 </div>
               </Reveal>
@@ -180,7 +180,7 @@ export function LandingPage() {
 
         {/* Status Strip */}
         <Section id="status-strip">
-          <Reveal className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-6 md:p-8">
+          <Reveal className="card-base">
             <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-center">
               <div>
                 <p className="eyebrow">Product status</p>
@@ -191,27 +191,27 @@ export function LandingPage() {
                   Pre-alpha tested with real workloads by 10+ developers with 3 detailed feedbacks incorporated.
                 </p>
               </div>
-              <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-5">
+              <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4 sm:p-5">
                 <div className="flex items-center justify-between">
                   <span className="text-base font-semibold text-[var(--color-ink)]">V2 Pre-alpha</span>
                   <span className="badge-pill">Launched</span>
                 </div>
                 <dl className="mt-4 space-y-2.5 text-sm text-[var(--color-body)]">
-                  <div className="flex justify-between gap-4">
+                  <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-0.5 min-[380px]:gap-4">
                     <dt className="text-[var(--color-muted)]">Engine</dt>
                     <dd className="font-mono text-xs font-semibold text-[var(--color-ink)]">Rust</dd>
                   </div>
-                  <div className="flex justify-between gap-4">
+                  <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-0.5 min-[380px]:gap-4">
                     <dt className="text-[var(--color-muted)]">Validation</dt>
-                    <dd className="text-right font-medium text-[var(--color-ink)]">10+ Devs (3 Real Feedbacks)</dd>
+                    <dd className="font-medium text-[var(--color-ink)] min-[380px]:text-right">10+ Devs (3 Real Feedbacks)</dd>
                   </div>
-                  <div className="flex justify-between gap-4">
+                  <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-0.5 min-[380px]:gap-4">
                     <dt className="text-[var(--color-muted)]">Released</dt>
                     <dd>{siteConfig.preAlphaDate}</dd>
                   </div>
-                  <div className="flex justify-between gap-4">
+                  <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-0.5 min-[380px]:gap-4">
                     <dt className="text-[var(--color-muted)]">Alpha Launch</dt>
-                    <dd className="text-right font-medium text-[var(--color-ink)]">{siteConfig.alphaLaunchDate}</dd>
+                    <dd className="font-medium text-[var(--color-ink)] min-[380px]:text-right">{siteConfig.alphaLaunchDate}</dd>
                   </div>
                 </dl>
                 <Link
@@ -264,16 +264,16 @@ export function LandingPage() {
         {/* V2 Architecture & Features */}
         <Section id="v2" surface>
           <Reveal>
-            <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-6 md:p-8">
+            <div className="card-base">
               <span className="badge-pill">
                 Pre-alpha Launched
               </span>
               <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                 <div>
-                  <h2 className="text-balance text-3xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] md:text-4xl">
+                  <h2 className="text-balance text-2xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] sm:text-3xl md:text-4xl">
                     LioranDB V2 is built in Rust. Now you can code it.
                   </h2>
-                  <p className="mt-4 text-base leading-relaxed text-[var(--color-body)]">
+                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--color-body)]">
                     V2 is a high-performance storage engine designed for larger datasets, predictable latency, and transactional workloads. Local Docker pre-alpha is available for developer evaluation and benchmarking, while production workloads are reviewed and managed via our Founder Program. Alpha launch coming on {siteConfig.alphaLaunchDate}.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
@@ -286,7 +286,7 @@ export function LandingPage() {
                       href={siteConfig.discordUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-primary"
+                      className="btn-primary w-full sm:w-auto"
                     >
                       Join the pre-alpha community
                       <ArrowRight size={15} />
@@ -294,23 +294,23 @@ export function LandingPage() {
                   </div>
                 </div>
 
-                <div className="min-w-0 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4 sm:p-5">
+                <div className="min-w-0 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-3.5 sm:p-5">
                   <p className="mb-4 eyebrow">Architecture direction</p>
                   <div className="grid gap-2.5">
                     {architectureFlow.map((item, index) => (
                       <div
                         key={item}
-                        className="rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] px-3.5 py-2.5 transition hover:border-[var(--color-hairline-strong)]"
+                        className="rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] px-3 py-2 sm:px-3.5 sm:py-2.5 transition hover:border-[var(--color-hairline-strong)]"
                       >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-medium text-[var(--color-ink)]">{item}</span>
-                          <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">
+                        <div className="flex flex-col min-[420px]:flex-row min-[420px]:items-center min-[420px]:justify-between gap-1 min-[420px]:gap-3">
+                          <span className="text-xs sm:text-sm font-medium text-[var(--color-ink)]">{item}</span>
+                          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--color-muted)]">
                             {architectureStages[index]}
                           </span>
                         </div>
                       </div>
                     ))}
-                    <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                    <div className="mt-2 grid gap-2 grid-cols-1 min-[420px]:grid-cols-2">
                       {architectureSideSystems.map((item) => (
                         <div
                           key={item}
@@ -324,12 +324,12 @@ export function LandingPage() {
                 </div>
               </div>
 
-              <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-8 border-t border-[var(--color-hairline)]">
+              <div className="mt-10 grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 pt-8 border-t border-[var(--color-hairline)]">
                 {v2Cards.map((item, index) => (
                   <Reveal key={item} delay={index * 0.03}>
-                    <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-5 transition hover:border-[var(--color-hairline-strong)]">
+                    <div className="rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4 sm:p-5 transition hover:border-[var(--color-hairline-strong)]">
                       <p className="eyebrow">V2 focus</p>
-                      <p className="mt-2 text-base font-semibold text-[var(--color-ink)]">{item}</p>
+                      <p className="mt-2 text-sm sm:text-base font-semibold text-[var(--color-ink)]">{item}</p>
                     </div>
                   </Reveal>
                 ))}
@@ -351,7 +351,7 @@ export function LandingPage() {
             <BenchmarkDashboard metrics={benchmarkMetrics} />
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-3 sm:gap-4 grid-cols-1 min-[440px]:grid-cols-2 lg:grid-cols-4">
             <Reveal className="card-base">
               <p className="eyebrow">Hardware</p>
               <ul className="mt-3 space-y-1.5 text-xs text-[var(--color-body)] font-mono">
@@ -393,13 +393,13 @@ export function LandingPage() {
             </Reveal>
           </div>
 
-          <Reveal className="mt-8 card-base">
+          <Reveal className="mt-6 sm:mt-8 card-base">
             <h3 className="text-base font-semibold text-[var(--color-ink)]">Features Tested</h3>
-            <div className="mt-3 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-3 grid gap-2.5 grid-cols-1 min-[440px]:grid-cols-2 lg:grid-cols-3">
               {benchmarkDetails.features.map((feature) => (
                 <div key={feature} className="flex items-center gap-2 text-xs text-[var(--color-body)]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-ink)]" />
-                  {feature}
+                  <span>{feature}</span>
                 </div>
               ))}
             </div>
@@ -416,10 +416,10 @@ export function LandingPage() {
                     href={log}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)]"
+                    className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)] truncate"
                   >
-                    <ExternalLink size={12} />
-                    {log.split("/").pop()}
+                    <ExternalLink size={12} className="shrink-0" />
+                    <span className="truncate">{log.split("/").pop()}</span>
                   </a>
                 ))}
               </div>
@@ -435,10 +435,10 @@ export function LandingPage() {
                     href={log}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)]"
+                    className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)] truncate"
                   >
-                    <ExternalLink size={12} />
-                    {log.split("/").pop()}
+                    <ExternalLink size={12} className="shrink-0" />
+                    <span className="truncate">{log.split("/").pop()}</span>
                   </a>
                 ))}
               </div>
@@ -453,10 +453,10 @@ export function LandingPage() {
                 href={benchmarkDetails.results.mixedWorkload.log}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)]"
+                className="mt-3 flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)] truncate"
               >
-                <ExternalLink size={12} />
-                {benchmarkDetails.results.mixedWorkload.log.split("/").pop()}
+                <ExternalLink size={12} className="shrink-0" />
+                <span className="truncate">{benchmarkDetails.results.mixedWorkload.log.split("/").pop()}</span>
               </a>
             </Reveal>
 
@@ -467,10 +467,10 @@ export function LandingPage() {
                 href={benchmarkDetails.results.crashRecovery.log}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)]"
+                className="mt-3 flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)] transition hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)] truncate"
               >
-                <ExternalLink size={12} />
-                {benchmarkDetails.results.crashRecovery.log.split("/").pop()}
+                <ExternalLink size={12} className="shrink-0" />
+                <span className="truncate">{benchmarkDetails.results.crashRecovery.log.split("/").pop()}</span>
               </a>
             </Reveal>
           </div>
@@ -496,7 +496,7 @@ export function LandingPage() {
                 How Managed Provisioning Works
               </h3>
             </div>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-6 grid gap-3 sm:gap-4 grid-cols-1 min-[440px]:grid-cols-2 lg:grid-cols-4">
               {[
                 {
                   step: "01",
@@ -521,20 +521,20 @@ export function LandingPage() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4 transition hover:border-[var(--color-hairline-strong)]"
+                  className="rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-3.5 sm:p-4 transition hover:border-[var(--color-hairline-strong)]"
                 >
-                  <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+                  <span className="font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
                     STEP {item.step}
                   </span>
-                  <h4 className="mt-2 text-sm font-semibold text-[var(--color-ink)]">{item.title}</h4>
-                  <p className="mt-1.5 text-xs leading-5 text-[var(--color-body)]">{item.desc}</p>
+                  <h4 className="mt-1.5 sm:mt-2 text-sm font-semibold text-[var(--color-ink)]">{item.title}</h4>
+                  <p className="mt-1 text-xs leading-5 text-[var(--color-body)]">{item.desc}</p>
                 </div>
               ))}
             </div>
           </Reveal>
 
           {/* Pricing Plans Grid */}
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <div className="mt-8 grid gap-6 grid-cols-1 lg:grid-cols-2">
             {/* Developer Starter */}
             <Reveal className="pricing-card flex flex-col justify-between">
               <div>
@@ -548,7 +548,7 @@ export function LandingPage() {
                 </div>
 
                 <div className="mt-4 flex items-baseline gap-1.5">
-                  <span className="text-4xl font-semibold tracking-tight text-[var(--color-ink)]">
+                  <span className="text-3xl sm:text-4xl font-semibold tracking-tight text-[var(--color-ink)]">
                     {pricingPlans[0].price}
                   </span>
                   <span className="text-sm text-[var(--color-muted)]">
@@ -606,7 +606,7 @@ export function LandingPage() {
                 </div>
 
                 <div className="mt-4 flex items-baseline gap-1.5">
-                  <span className="text-4xl font-semibold tracking-tight text-[var(--color-on-dark)]">
+                  <span className="text-3xl sm:text-4xl font-semibold tracking-tight text-[var(--color-on-dark)]">
                     {pricingPlans[1].price}
                   </span>
                   <span className="text-sm text-[#8b949e]">
@@ -654,7 +654,7 @@ export function LandingPage() {
 
           {/* Support & Policy Notice Box */}
           <Reveal className="mt-8 card-base">
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
               <div>
                 <h4 className="flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)]">
                   <Clock size={15} className="text-[var(--color-muted)]" />
@@ -696,7 +696,7 @@ export function LandingPage() {
                 description="India’s software ecosystem should not depend entirely on infrastructure designed, owned and controlled elsewhere. LioranDB is one step toward a stronger domestic developer platform ecosystem."
               />
               <div className="mt-6 card-base">
-                <p className="text-xl font-semibold tracking-tight text-[var(--color-ink)]">
+                <p className="text-lg sm:text-xl font-semibold tracking-tight text-[var(--color-ink)]">
                   Developed in India. Built for the world.
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--color-body)]">
@@ -712,7 +712,7 @@ export function LandingPage() {
                     <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] text-[var(--color-ink)]">
                       <ShieldCheck size={18} />
                     </div>
-                    <h3 className="text-lg font-semibold text-[var(--color-ink)]">{title}</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--color-ink)]">{title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-[var(--color-body)]">{description}</p>
                   </div>
                 </Reveal>
@@ -730,7 +730,7 @@ export function LandingPage() {
               description="From internal tools to SaaS backends, the page maps real collection names, query shapes and operating benefits instead of generic market segments."
             />
           </Reveal>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-3 sm:gap-4 grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4">
             {useCases.map(([title, collections, query, benefit], index) => (
               <Reveal key={title} delay={index * 0.02}>
                 <div className="card-base h-full flex flex-col justify-between">
@@ -738,7 +738,7 @@ export function LandingPage() {
                     <h3 className="text-base font-semibold text-[var(--color-ink)]">{title}</h3>
                     <p className="mt-3 eyebrow">Collections</p>
                     <p className="mt-1 font-mono text-xs text-[var(--color-body)]">{collections}</p>
-                    <div className="mt-3 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-2.5 py-2 font-mono text-xs text-[var(--color-ink)]">
+                    <div className="mt-3 overflow-x-auto rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-2.5 py-2 font-mono text-[11px] sm:text-xs text-[var(--color-ink)]">
                       {query}
                     </div>
                   </div>
@@ -758,7 +758,7 @@ export function LandingPage() {
               description="The experience starts with MongoDB-style syntax, stays self-hostable by default, and keeps storage plus performance visible to the engineers running it."
             />
           </Reveal>
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 grid-cols-1 lg:grid-cols-3">
             {[
               {
                 title: "MongoDB-style syntax",
@@ -785,7 +785,7 @@ const result = await users.find({
               <Reveal key={panel.title} delay={index * 0.04}>
                 <div className="card-base h-full flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold text-[var(--color-ink)]">{panel.title}</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--color-ink)]">{panel.title}</h3>
                     {index === 0 ? (
                       <div className="mt-4">
                         <CodeBlock
@@ -824,7 +824,7 @@ const result = await users.find({
               description="The roadmap separates what is live, what is being actively built, and what the August 16, 2026 pre-alpha is actually meant to validate."
             />
           </Reveal>
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {roadmap.map((phase, index) => (
               <Reveal key={phase.title} delay={index * 0.04}>
                 <div className="card-base h-full flex flex-col justify-between border-t-2 border-t-[var(--color-ink)]">
@@ -848,9 +848,9 @@ const result = await users.find({
         {/* Founder */}
         <Section id="founder">
           <Reveal>
-            <div className="card-base p-6 md:p-8">
-              <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:items-center">
-                <div className="mx-auto w-full max-w-[280px]">
+            <div className="card-base p-4 sm:p-6 md:p-8">
+              <div className="grid gap-6 sm:gap-8 lg:grid-cols-[280px_1fr] lg:items-center">
+                <div className="mx-auto w-full max-w-[240px] sm:max-w-[280px]">
                   <div className="relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] p-2">
                     <Image
                       src={siteConfig.founderImage}
@@ -868,16 +868,16 @@ const result = await users.find({
 
                 <div>
                   <p className="eyebrow">Founder</p>
-                  <h2 className="mt-2 text-3xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] sm:text-4xl">
+                  <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] sm:text-3xl md:text-4xl">
                     Swaraj Puppalwar
                   </h2>
                   <p className="mt-1 text-sm text-[var(--color-muted)]">
                     Founder &amp; CTO, Lioran Group
                   </p>
-                  <p className="mt-4 text-base leading-relaxed text-[var(--color-body)]">
+                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--color-body)]">
                     Swaraj Puppalwar is an 18-year-old full-stack developer, database engineer and founder building developer infrastructure from India. He began programming at 11 and is leading the architecture and development of LioranDB.
                   </p>
-                  <blockquote className="mt-5 border-l-2 border-[var(--color-ink)] pl-4 text-base font-medium italic text-[var(--color-ink)]">
+                  <blockquote className="mt-5 border-l-2 border-[var(--color-ink)] pl-4 text-sm sm:text-base font-medium italic text-[var(--color-ink)]">
                     “I don&apos;t want India to only consume developer infrastructure. I want us to build it.”
                   </blockquote>
                   <div className="mt-5 flex flex-wrap gap-1.5">
@@ -887,7 +887,7 @@ const result = await users.find({
                       </span>
                     ))}
                   </div>
-                  <div className="mt-5 rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3.5 py-2.5 font-mono text-xs text-[var(--color-ink)]">
+                  <div className="mt-5 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3.5 py-2.5 font-mono text-xs text-[var(--color-ink)] whitespace-nowrap">
                     swaraj@lioran:~/liorandb$ building_indias_infra
                   </div>
                   <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
@@ -895,7 +895,7 @@ const result = await users.find({
                       href={siteConfig.founderGithubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-secondary"
+                      className="btn-secondary w-full sm:w-auto"
                     >
                       <GitHubMark className="h-4 w-4" />
                       GitHub Profile
@@ -904,7 +904,7 @@ const result = await users.find({
                       href={siteConfig.orgGithubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-secondary"
+                      className="btn-secondary w-full sm:w-auto"
                     >
                       Follow Lioran Group
                     </Link>
@@ -912,7 +912,7 @@ const result = await users.find({
                       href={siteConfig.discordUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-primary"
+                      className="btn-primary w-full sm:w-auto"
                     >
                       Join Discord
                     </Link>
@@ -933,7 +933,7 @@ const result = await users.find({
             />
           </Reveal>
           <div className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-3 grid-cols-1 min-[420px]:grid-cols-2">
               {[
                 ["Explore V2 source", siteConfig.v1GithubUrl],
                 ["Read the documentation", siteConfig.docsUrl],
@@ -948,7 +948,7 @@ const result = await users.find({
                     className="card-base h-full flex flex-col justify-between transition hover:border-[var(--color-hairline-strong)]"
                   >
                     <div>
-                      <p className="text-base font-semibold text-[var(--color-ink)]">{label}</p>
+                      <p className="text-sm sm:text-base font-semibold text-[var(--color-ink)]">{label}</p>
                       <p className="mt-2 text-xs leading-5 text-[var(--color-body)]">
                         Public development. Source available. Feedback welcome.
                       </p>
@@ -974,10 +974,10 @@ const result = await users.find({
                     ].map((item, index) => (
                       <div
                         key={item}
-                        className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)]"
+                        className="flex items-center justify-between gap-2 rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 font-mono text-xs text-[var(--color-body)]"
                       >
                         <span className="truncate">{item}</span>
-                        <span className="font-sans text-[10px] font-semibold uppercase tracking-wider text-[var(--color-muted)]">
+                        <span className="shrink-0 font-sans text-[10px] font-semibold uppercase tracking-wider text-[var(--color-muted)]">
                           {index < 2 ? "public" : "active"}
                         </span>
                       </div>
@@ -1006,16 +1006,16 @@ const result = await users.find({
         {/* Pre-Footer CTA Band */}
         <Section id="final-cta" surface>
           <Reveal>
-            <div className="card-base p-8 md:p-12">
+            <div className="card-base p-6 sm:p-8 md:p-12">
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
                 <div>
-                  <h2 className="text-balance text-3xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] sm:text-4xl">
+                  <h2 className="text-balance text-2xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] sm:text-3xl md:text-4xl">
                     Now you can code it. Pre-alpha is live.
                   </h2>
-                  <p className="mt-4 text-base leading-relaxed text-[var(--color-body)]">
+                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--color-body)]">
                     Get started with the Docker Quickstart. Read the docs. Join the community helping shape the production release.
                   </p>
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
                     <Link
                       href={siteConfig.docsUrl}
                       target="_blank"
@@ -1047,7 +1047,7 @@ const result = await users.find({
                   </p>
                 </div>
 
-                <div>
+                <div className="overflow-hidden">
                   <CodeBlock
                     code={`$ npm install @liorandb/driver
 ✓ package installed

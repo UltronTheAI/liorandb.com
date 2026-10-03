@@ -163,14 +163,14 @@ export function CodeBlock({
 
   return (
     <pre
-      className={`code-block code-scroll overflow-x-auto p-4 font-mono text-[13px] leading-6 bg-[#171717] text-[#e6edf3] border border-[#28282c] rounded-[var(--radius-lg)] ${className}`}
+      className={`code-block code-scroll overflow-x-auto p-3 sm:p-4 font-mono text-xs sm:text-[13px] leading-5 sm:leading-6 bg-[#171717] text-[#e6edf3] border border-[#28282c] rounded-[var(--radius-lg)] ${className}`}
     >
       <code>
         {lines.map((line, index) => {
           const content = (
             <>
               {showLineNumbers ? (
-                <span className="mr-4 inline-block w-6 select-none text-right text-[#6e7681]">
+                <span className="mr-3 sm:mr-4 inline-block w-5 sm:w-6 select-none text-right text-[#6e7681]">
                   {index + 1}
                 </span>
               ) : null}

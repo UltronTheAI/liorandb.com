@@ -49,12 +49,12 @@ export function HeroConsole({ collections }: HeroConsoleProps) {
 
       {/* Main console content */}
       <div className="grid min-h-0 flex-1 gap-0 lg:grid-cols-[190px_1fr] xl:grid-cols-[210px_1fr]">
-        <aside className="min-w-0 border-b border-[#28282c] p-3.5 bg-[#141414] lg:border-r lg:border-b-0">
-          <div className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8b949e]">
+        <aside className="min-w-0 border-b border-[#28282c] p-2.5 sm:p-3.5 bg-[#141414] lg:border-r lg:border-b-0">
+          <div className="mb-2 sm:mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8b949e]">
             <DatabaseZap size={13} />
             Collections
           </div>
-          <div className="space-y-1.5" role="tablist" aria-label="Database collections">
+          <div className="flex gap-1.5 overflow-x-auto pb-1 lg:flex-col lg:gap-0 lg:space-y-1.5 lg:overflow-visible lg:pb-0" role="tablist" aria-label="Database collections">
             {collections.map((collection, index) => {
               const isActive = collection.id === active.id;
 
@@ -65,13 +65,14 @@ export function HeroConsole({ collections }: HeroConsoleProps) {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.25, delay: index * 0.05 }}
+                  className="shrink-0 lg:shrink"
                 >
                   <button
                     type="button"
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => setActiveId(collection.id)}
-                    className={`flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2 text-left font-mono text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffffff] ${
+                    className={`flex items-center gap-2 rounded-[var(--radius-md)] border px-2.5 py-1.5 sm:px-3 sm:py-2 text-left font-mono text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffffff] lg:w-full lg:justify-between ${
                       isActive
                         ? "border-[#404048] bg-[#222228] text-[#ffffff] font-semibold"
                         : "border-transparent text-[#8b949e] hover:bg-[#1c1c20] hover:text-[#e6edf3]"
@@ -107,7 +108,7 @@ export function HeroConsole({ collections }: HeroConsoleProps) {
           </div>
         </aside>
 
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col p-4 bg-[#171717]">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col p-3 sm:p-4 bg-[#171717]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}

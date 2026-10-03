@@ -27,7 +27,7 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
     <div className="grid min-w-0 gap-6 lg:grid-cols-[240px_1fr]">
       <div className="card-base min-w-0">
         <p className="eyebrow mb-4">Operations</p>
-        <div className="space-y-1.5" role="tablist" aria-label="API Operations">
+        <div className="flex gap-1.5 overflow-x-auto pb-1 lg:flex-col lg:gap-0 lg:space-y-1.5 lg:overflow-visible lg:pb-0" role="tablist" aria-label="API Operations">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -35,7 +35,7 @@ export function ApiExplorer({ tabs }: ApiExplorerProps) {
               role="tab"
               aria-selected={tab.id === current.id}
               onClick={() => setActive(tab.id)}
-              className={`flex w-full min-w-0 items-center justify-between gap-3 rounded-[var(--radius-md)] border px-3.5 py-2.5 text-left text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)] ${
+              className={`flex shrink-0 items-center justify-between gap-2.5 rounded-[var(--radius-md)] border px-3 py-2 text-left text-xs sm:text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)] lg:w-full lg:shrink ${
                 tab.id === current.id
                   ? "border-[var(--color-ink)] bg-[var(--color-surface-strong)] font-semibold text-[var(--color-ink)]"
                   : "border-transparent bg-transparent text-[var(--color-body)] hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-ink)]"

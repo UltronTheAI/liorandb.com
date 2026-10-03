@@ -349,28 +349,28 @@ export function InstallPanel({
           </div>
 
           {/* Clean Bottom Step Navigation */}
-          <div className="mt-6 flex items-center justify-between pt-4 border-t border-[var(--color-hairline)]">
+          <div className="mt-6 flex items-center justify-between gap-2 pt-4 border-t border-[var(--color-hairline)]">
             <button
               type="button"
               disabled={activeStep === 0}
               onClick={() => setActiveStep((prev) => Math.max(0, prev - 1))}
-              className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] px-3 py-2 text-xs font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] disabled:opacity-30 disabled:pointer-events-none"
+              className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] px-2.5 sm:px-3 py-2 text-xs font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] disabled:opacity-30 disabled:pointer-events-none"
             >
               <ArrowLeft size={13} />
-              Previous Step
+              <span>Previous<span className="hidden sm:inline"> Step</span></span>
             </button>
 
             <span className="font-mono text-xs text-[var(--color-muted)]">
-              Step {activeStep + 1} of {steps.length}
+              {activeStep + 1} / {steps.length}
             </span>
 
             <button
               type="button"
               disabled={activeStep === steps.length - 1}
               onClick={() => setActiveStep((prev) => Math.min(steps.length - 1, prev + 1))}
-              className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] px-3 py-2 text-xs font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] disabled:opacity-30 disabled:pointer-events-none"
+              className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] px-2.5 sm:px-3 py-2 text-xs font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] disabled:opacity-30 disabled:pointer-events-none"
             >
-              Next Step
+              <span>Next<span className="hidden sm:inline"> Step</span></span>
               <ArrowRight size={13} />
             </button>
           </div>

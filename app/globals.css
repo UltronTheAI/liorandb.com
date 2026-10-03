@@ -308,14 +308,14 @@ html.dark ::selection {
   background: var(--color-surface-card);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 16px;
 }
 
 .card-feature {
   background: var(--color-surface-card);
   border: 1px solid var(--color-hairline-strong);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 18px;
   min-width: 0;
 }
 
@@ -323,7 +323,7 @@ html.dark ::selection {
   background: var(--color-surface-card);
   border: 1px solid var(--color-hairline-strong);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 20px;
 }
 
 .pricing-card-featured {
@@ -331,7 +331,7 @@ html.dark ::selection {
   color: var(--color-on-dark);
   border: 1px solid var(--color-surface-dark-elevated);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 20px;
 }
 
 @media (min-width: 640px) {
@@ -340,6 +340,11 @@ html.dark ::selection {
   }
 
   .card-feature {
+    padding: 32px;
+  }
+
+  .pricing-card,
+  .pricing-card-featured {
     padding: 32px;
   }
 }

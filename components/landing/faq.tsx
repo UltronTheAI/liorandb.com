@@ -21,11 +21,11 @@ export function Faq({ items }: FaqProps) {
           <div key={question}>
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-[var(--color-surface-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
+              className="flex w-full items-center justify-between gap-3 px-4 sm:px-6 py-4 sm:py-5 text-left transition hover:bg-[var(--color-surface-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? -1 : index)}
             >
-              <span className="text-base font-semibold text-[var(--color-ink)]">
+              <span className="text-sm sm:text-base font-semibold text-[var(--color-ink)]">
                 {question}
               </span>
               <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -41,7 +41,7 @@ export function Faq({ items }: FaqProps) {
                   transition={{ duration: 0.2 }}
                   className="overflow-hidden"
                 >
-                  <p className="px-6 pb-5 text-sm leading-relaxed text-[var(--color-body)]">
+                  <p className="px-4 sm:px-6 pb-4 sm:pb-5 text-xs sm:text-sm leading-relaxed text-[var(--color-body)]">
                     {answer}
                   </p>
                 </motion.div>
