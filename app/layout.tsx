@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Source_Code_Pro } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/data/site";
@@ -7,15 +7,15 @@ import "./globals.css";
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem("liorandb-theme");if(t==="dark"){document.documentElement.classList.add("dark");document.documentElement.style.colorScheme="dark";}else{document.documentElement.classList.remove("dark");document.documentElement.style.colorScheme="light";}}catch(e){}})();`;
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-inter",
   display: "swap",
 });
 
-const sourceCodePro = Source_Code_Pro({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-source-code",
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -110,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${sourceCodePro.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body

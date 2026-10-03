@@ -1,18 +1,34 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { BookOpen, LayoutDashboard, Menu, MessageSquareText, X } from "lucide-react";
+import {
+  Activity,
+  BookOpen,
+  ChevronDown,
+  Cpu,
+  Database,
+  FileCode,
+  Globe,
+  HelpCircle,
+  LayoutDashboard,
+  Layers,
+  MapPin,
+  Menu,
+  MessageSquareText,
+  Milestone,
+  Shield,
+  User,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { GitHubMark } from "./github-mark";
 import { GitHubStars } from "./github-stars";
 
-type NavItem = readonly [string, string];
-
 type SiteHeaderProps = {
-  navItems: readonly NavItem[];
+  navItems?: readonly (readonly [string, string])[];
   appUrl: string;
   docsUrl: string;
   studioUrl: string;
@@ -22,59 +38,24 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({
-  navItems,
   appUrl,
   docsUrl,
-  studioUrl,
   discordUrl,
   githubUrl,
   githubRepo,
 }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState(navItems[0]?.[1] ?? "#product");
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
-
-  const ids = useMemo(
-    () =>
-      navItems
-        .map(([, href]) => href)
-        .filter((href) => !href.startsWith("external:"))
-        .map((href) => href.replace("#", "")),
-    [navItems],
-  );
+  const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    const sections = ids
-      .map((id) => document.getElementById(id))
-      .filter((node): node is HTMLElement => Boolean(node));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visible?.target.id) {
-          setActive(`#${visible.target.id}`);
-        }
-      },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: [0.2, 0.45, 0.7],
-      },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, [ids]);
 
   useEffect(() => {
     if (!open) return;
@@ -85,26 +66,110 @@ export function SiteHeader({
     return () => window.removeEventListener("resize", onResize);
   }, [open]);
 
-  const linkClass =
-    "inline-flex h-10 items-center rounded-full px-3 text-sm font-medium text-[var(--color-steel)] transition hover:text-[var(--color-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]";
+  const handleMouseEnter = (menuName: string) => {
+    if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+    setActiveMenu(menuName);
+  };
 
-  const iconBtnClass =
-    "inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-hairline-strong)] text-[var(--color-charcoal)] transition hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]";
+  const handleMouseLeave = () => {
+    menuTimeoutRef.current = setTimeout(() => {
+      setActiveMenu(null);
+    }, 150);
+  };
+
+  const productItems = [
+    {
+      title: "Overview",
+      description: "Developer-first document database architecture",
+      href: "/#product",
+      icon: Database,
+    },
+    {
+      title: "V2 Rust Engine",
+      description: "High-performance storage engine with MVCC",
+      href: "/#v2",
+      icon: Cpu,
+    },
+    {
+      title: "Benchmarks",
+      description: "Stress test waveforms, latency, and logs",
+      href: "/#benchmarks",
+      icon: Activity,
+    },
+    {
+      title: "Developer API",
+      description: "MongoDB-style queries & TypeScript SDK",
+      href: "/#api-explorer",
+      icon: FileCode,
+    },
+    {
+      title: "Use Cases",
+      description: "Workload patterns from SaaS to AI backends",
+      href: "/#use-cases",
+      icon: Layers,
+    },
+  ];
+
+  const resourceItems = [
+    {
+      title: "Documentation",
+      description: "Guides, tutorials, and driver installation",
+      href: docsUrl,
+      external: true,
+      icon: BookOpen,
+    },
+    {
+      title: "Roadmap",
+      description: "Pre-alpha milestones & Alpha launch plan",
+      href: "/#roadmap",
+      external: false,
+      icon: Milestone,
+    },
+    {
+      title: "Why India",
+      description: "Data sovereignty & domestic infrastructure",
+      href: "/#why-india",
+      external: false,
+      icon: Shield,
+    },
+    {
+      title: "Founder",
+      description: "Swaraj Puppalwar & engineering mission",
+      href: "/#founder",
+      external: false,
+      icon: User,
+    },
+    {
+      title: "Community & Discord",
+      description: "Join real-time discussions and updates",
+      href: discordUrl,
+      external: true,
+      icon: MessageSquareText,
+    },
+    {
+      title: "FAQ",
+      description: "Straight answers on V1, V2, and hosting",
+      href: "/#faq",
+      external: false,
+      icon: HelpCircle,
+    },
+  ];
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition ${
+      className={`sticky top-0 z-50 transition border-b ${
         scrolled
-          ? "border-[var(--color-hairline)] bg-[var(--color-canvas)]/95 shadow-[var(--shadow-1)] backdrop-blur-md"
+          ? "border-[var(--color-hairline)] bg-[var(--color-canvas)]/98 shadow-[var(--shadow-1)] backdrop-blur-sm"
           : "border-[var(--color-hairline)] bg-[var(--color-canvas)]"
       }`}
     >
-      <div className="mx-auto grid h-16 max-w-[1280px] grid-cols-[auto_1fr_auto] items-center gap-3 px-4 md:gap-4 md:px-8">
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        {/* Brand Logo */}
         <Link
           href="/#top"
-          className="inline-flex h-10 items-center gap-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)]"
+          className="inline-flex h-10 items-center gap-2.5 rounded-[var(--radius-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
         >
-          <span className="grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)]">
+          <span className="grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)]">
             <Image
               src="/favicon.ico"
               alt="LioranDB logo"
@@ -118,153 +183,275 @@ export function SiteHeader({
             <span className="truncate text-sm font-semibold tracking-tight text-[var(--color-ink)]">
               LioranDB
             </span>
-            <span className="mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-brand-green-dark)] min-[380px]:block">
+            <span className="mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)] min-[380px]:block">
               Developed in India
             </span>
           </span>
         </Link>
 
-        <nav className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex">
-          {navItems.map(([label, href]) => {
-            const isExternal = href.startsWith("external:");
-            const actualHref = isExternal
-              ? href === "external:studio"
-                ? studioUrl
-                : href
-              : href.startsWith("#")
-                ? `/${href}`
-                : href;
-
-            return (
-              <Link
-                key={href}
-                href={actualHref}
-                target={isExternal ? "_blank" : undefined}
-                rel={isExternal ? "noreferrer" : undefined}
-                className={`${linkClass} ${
-                  !isExternal && active === href
-                    ? "font-semibold text-[var(--color-ink)]"
-                    : ""
+        {/* Desktop Navigation Menus */}
+        <nav className="hidden items-center gap-1 lg:flex">
+          {/* Product Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("product")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveMenu(activeMenu === "product" ? null : "product")}
+              aria-expanded={activeMenu === "product"}
+              className={`inline-flex h-9 items-center gap-1 px-3 text-sm font-medium rounded-[var(--radius-md)] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)] ${
+                activeMenu === "product"
+                  ? "bg-[var(--color-surface-strong)] text-[var(--color-ink)]"
+                  : "text-[var(--color-body)] hover:text-[var(--color-ink)]"
+              }`}
+            >
+              <span>Product</span>
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${
+                  activeMenu === "product" ? "rotate-180" : ""
                 }`}
-              >
-                {label}
-              </Link>
-            );
-          })}
+              />
+            </button>
+
+            <AnimatePresence>
+              {activeMenu === "product" ? (
+                <motion.div
+                  initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 6 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 top-full mt-1.5 w-[320px] rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-2 shadow-[var(--shadow-3)]"
+                >
+                  <div className="space-y-1">
+                    {productItems.map((item) => (
+                      <Link
+                        key={item.title}
+                        href={item.href}
+                        onClick={() => setActiveMenu(null)}
+                        className="flex items-start gap-3 rounded-[var(--radius-md)] p-2.5 transition hover:bg-[var(--color-surface-soft)]"
+                      >
+                        <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] text-[var(--color-ink)]">
+                          <item.icon size={14} />
+                        </span>
+                        <div>
+                          <p className="text-sm font-semibold text-[var(--color-ink)]">
+                            {item.title}
+                          </p>
+                          <p className="mt-0.5 text-xs text-[var(--color-body)] line-clamp-1">
+                            {item.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
+          {/* Pricing Direct Link */}
+          <Link
+            href="/#pricing"
+            className="inline-flex h-9 items-center px-3 text-sm font-medium text-[var(--color-body)] transition hover:text-[var(--color-ink)] rounded-[var(--radius-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
+          >
+            Pricing
+          </Link>
+
+          {/* Docs Direct Link */}
+          <Link
+            href={docsUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-9 items-center px-3 text-sm font-medium text-[var(--color-body)] transition hover:text-[var(--color-ink)] rounded-[var(--radius-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
+          >
+            Docs
+          </Link>
+
+          {/* Resources Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("resources")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveMenu(activeMenu === "resources" ? null : "resources")}
+              aria-expanded={activeMenu === "resources"}
+              className={`inline-flex h-9 items-center gap-1 px-3 text-sm font-medium rounded-[var(--radius-md)] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)] ${
+                activeMenu === "resources"
+                  ? "bg-[var(--color-surface-strong)] text-[var(--color-ink)]"
+                  : "text-[var(--color-body)] hover:text-[var(--color-ink)]"
+              }`}
+            >
+              <span>Resources</span>
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${
+                  activeMenu === "resources" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {activeMenu === "resources" ? (
+                <motion.div
+                  initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 6 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 top-full mt-1.5 w-[330px] rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-2 shadow-[var(--shadow-3)]"
+                >
+                  <div className="space-y-1">
+                    {resourceItems.map((item) => (
+                      <Link
+                        key={item.title}
+                        href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noreferrer" : undefined}
+                        onClick={() => setActiveMenu(null)}
+                        className="flex items-start gap-3 rounded-[var(--radius-md)] p-2.5 transition hover:bg-[var(--color-surface-soft)]"
+                      >
+                        <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-[var(--radius-sm)] border border-[var(--color-hairline)] bg-[var(--color-surface)] text-[var(--color-ink)]">
+                          <item.icon size={14} />
+                        </span>
+                        <div>
+                          <p className="text-sm font-semibold text-[var(--color-ink)]">
+                            {item.title}
+                          </p>
+                          <p className="mt-0.5 text-xs text-[var(--color-body)] line-clamp-1">
+                            {item.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
         </nav>
 
-        <div className="hidden items-center justify-end gap-2 lg:flex">
+        {/* Right Actions */}
+        <div className="hidden items-center justify-end gap-2.5 lg:flex">
           <ThemeToggle />
           <Link
             href={githubUrl}
             target="_blank"
             rel="noreferrer"
             aria-label="View LioranDB on GitHub"
-            className={`${iconBtnClass} gap-1.5 px-3`}
+            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] px-3 text-sm font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
           >
-            <GitHubMark className="h-4 w-4" />
+            <GitHubMark className="h-4 w-4 text-[var(--color-ink)]" />
             <GitHubStars repo={githubRepo} />
-          </Link>
-          <Link
-            href={discordUrl}
-            target="_blank"
-            rel="noreferrer"
-            className={`${iconBtnClass} gap-1.5 px-3 text-sm font-semibold`}
-          >
-            <MessageSquareText size={15} />
-            Discord
-          </Link>
-          <Link
-            href={docsUrl}
-            target="_blank"
-            rel="noreferrer"
-            className={`${iconBtnClass} gap-1.5 px-3 text-sm font-semibold`}
-          >
-            <BookOpen size={15} />
-            Docs
           </Link>
           <Link
             href={appUrl}
             target="_blank"
             rel="noreferrer"
-            className="btn-primary h-10 shrink-0 gap-1.5 !px-4 !py-0 text-sm"
+            className="btn-primary gap-1.5 px-4"
           >
             <LayoutDashboard size={15} />
             Try Free
           </Link>
         </div>
 
-        <div className="col-start-3 flex items-center justify-end gap-2 lg:hidden">
+        {/* Mobile menu button */}
+        <div className="flex items-center justify-end gap-2 lg:hidden">
           <ThemeToggle />
           <button
             type="button"
-            className={`${iconBtnClass} w-10`}
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
+      {/* Mobile Drawer Navigation */}
       <AnimatePresence initial={false}>
         {open ? (
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: -10 }}
+            initial={reduceMotion ? false : { opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="border-t border-[var(--color-hairline)] bg-[var(--color-canvas)] px-4 py-4 shadow-[var(--shadow-2)] lg:hidden"
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className="border-t border-[var(--color-hairline)] bg-[var(--color-canvas)] px-4 py-5 shadow-[var(--shadow-2)] lg:hidden max-h-[85vh] overflow-y-auto"
           >
-            <nav className="mx-auto flex max-w-[1280px] flex-col gap-1">
-              {navItems.map(([label, href]) => {
-                const isExternal = href.startsWith("external:");
-                const actualHref = isExternal
-                  ? href === "external:studio"
-                    ? studioUrl
-                    : href
-                  : href.startsWith("#")
-                    ? `/${href}`
-                    : href;
+            <div className="mx-auto flex max-w-[1200px] flex-col gap-6">
+              {/* Product Category */}
+              <div>
+                <p className="eyebrow px-2 mb-2">Product</p>
+                <div className="grid gap-1">
+                  {productItems.map((item) => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium text-[var(--color-body)] transition hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-ink)]"
+                      onClick={() => setOpen(false)}
+                    >
+                      <item.icon size={15} className="text-[var(--color-muted)]" />
+                      <span>{item.title}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
 
-                return (
-                  <Link
-                    key={href}
-                    href={actualHref}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noreferrer" : undefined}
-                    className="rounded-[var(--radius-md)] px-4 py-3 text-sm font-medium text-[var(--color-charcoal)] transition hover:bg-[var(--color-surface)]"
-                    onClick={() => setOpen(false)}
-                  >
-                    {label}
-                  </Link>
-                );
-              })}
-            </nav>
-            <div className="mx-auto mt-4 grid max-w-[1280px] gap-2">
-              <Link
-                href={appUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary w-full"
-                onClick={() => setOpen(false)}
-              >
-                <LayoutDashboard size={16} />
-                Try Free
-              </Link>
-              <Link href={docsUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full">
-                <BookOpen size={16} />
-                Docs
-              </Link>
-              <Link href={discordUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full">
-                Join Discord
-              </Link>
-              <Link href={githubUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full">
-                <GitHubMark className="h-4 w-4" />
-                GitHub
-                <GitHubStars repo={githubRepo} />
-              </Link>
+              {/* Resources Category */}
+              <div>
+                <p className="eyebrow px-2 mb-2">Resources &amp; Company</p>
+                <div className="grid gap-1">
+                  {resourceItems.map((item) => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
+                      className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium text-[var(--color-body)] transition hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-ink)]"
+                      onClick={() => setOpen(false)}
+                    >
+                      <item.icon size={15} className="text-[var(--color-muted)]" />
+                      <span>{item.title}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Direct Quick Links & CTA */}
+              <div className="grid gap-2 pt-3 border-t border-[var(--color-hairline)]">
+                <Link
+                  href="/#pricing"
+                  className="rounded-[var(--radius-md)] px-3 py-2 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)]"
+                  onClick={() => setOpen(false)}
+                >
+                  Pricing &amp; Plans →
+                </Link>
+                <Link
+                  href={appUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary w-full justify-center mt-2"
+                  onClick={() => setOpen(false)}
+                >
+                  <LayoutDashboard size={16} />
+                  Try Free
+                </Link>
+                <Link
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-secondary w-full justify-center"
+                >
+                  <GitHubMark className="h-4 w-4" />
+                  GitHub Star
+                  <GitHubStars repo={githubRepo} />
+                </Link>
+              </div>
             </div>
           </motion.div>
         ) : null}

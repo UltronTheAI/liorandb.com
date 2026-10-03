@@ -28,57 +28,59 @@ export function HeroConsole({ collections }: HeroConsoleProps) {
   if (!active) return null;
 
   return (
-    <div className="code-mockup-card relative flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden">
-      <div className="flex shrink-0 flex-col gap-3 border-b border-[var(--color-hairline)] px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-4">
-        <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
-          <div className="flex gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-          </div>
+    <div className="relative flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[#28282c] bg-[#171717] text-[#e6edf3]">
+      {/* Header bar */}
+      <div className="flex shrink-0 items-center justify-between border-b border-[#28282c] px-4 py-3 bg-[#141414]">
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+          <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+          <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+          <span className="ml-2 hidden font-mono text-xs text-[#8b949e] sm:inline">
+            liorandb-studio :: {active.name}
+          </span>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full border border-[var(--color-hairline)] px-2 py-1 text-[10px] text-[var(--color-steel)] sm:text-[11px]">
-            V2
+        <div className="flex items-center gap-2">
+          <span className="rounded-[var(--radius-sm)] border border-[#333338] bg-[#1f1f23] px-2 py-0.5 font-mono text-[11px] text-[#8b949e]">
+            v2.0.4-pre-alpha
           </span>
           <CopyButton text={active.code} />
         </div>
       </div>
-      <div className="grid min-h-0 flex-1 gap-0 lg:grid-cols-[200px_1fr] xl:grid-cols-[220px_1fr]">
-        <aside className="min-w-0 border-b border-[var(--color-hairline)] p-4 lg:border-r lg:border-b-0">
-          <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[var(--color-stone)]">
-            <DatabaseZap size={14} />
+
+      {/* Main console content */}
+      <div className="grid min-h-0 flex-1 gap-0 lg:grid-cols-[190px_1fr] xl:grid-cols-[210px_1fr]">
+        <aside className="min-w-0 border-b border-[#28282c] p-3.5 bg-[#141414] lg:border-r lg:border-b-0">
+          <div className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8b949e]">
+            <DatabaseZap size={13} />
             Collections
           </div>
-          <div className="space-y-2" role="tablist" aria-label="Database collections">
+          <div className="space-y-1.5" role="tablist" aria-label="Database collections">
             {collections.map((collection, index) => {
               const isActive = collection.id === active.id;
 
               return (
                 <motion.div
                   key={collection.id}
-                  initial={reduceMotion ? false : { opacity: 0, x: -12 }}
+                  initial={reduceMotion ? false : { opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: index * 0.08 }}
+                  transition={{ duration: 0.25, delay: index * 0.05 }}
                 >
                   <button
                     type="button"
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => setActiveId(collection.id)}
-                    className={`flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-3 text-left text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-green)] ${
+                    className={`flex w-full items-center justify-between rounded-[var(--radius-md)] border px-3 py-2 text-left font-mono text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffffff] ${
                       isActive
-                        ? "border-[var(--color-brand-green)] bg-[var(--color-surface-feature)] text-[var(--color-ink)]"
-                        : "border-[var(--color-hairline)] bg-[var(--color-surface)] text-[var(--color-steel)] hover:border-[var(--color-hairline-strong)] hover:text-[var(--color-ink)]"
+                        ? "border-[#404048] bg-[#222228] text-[#ffffff] font-semibold"
+                        : "border-transparent text-[#8b949e] hover:bg-[#1c1c20] hover:text-[#e6edf3]"
                     }`}
                   >
-                    <span className="font-medium">{collection.name}</span>
+                    <span>{collection.name}</span>
                     <span
-                      className={`text-[10px] uppercase tracking-[0.14em] ${
-                        isActive
-                          ? "text-[var(--color-brand-green-dark)]"
-                          : "text-[var(--color-muted)]"
+                      className={`text-[10px] ${
+                        isActive ? "text-[#7ee787]" : "text-[#6e7681]"
                       }`}
                     >
                       {collection.docs.toLocaleString()}
@@ -88,52 +90,47 @@ export function HeroConsole({ collections }: HeroConsoleProps) {
               );
             })}
           </div>
-          <div className="mt-6 hidden grid-cols-1 gap-3 text-xs text-[var(--color-steel)] xl:grid">
-            <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2">
-              <Play size={13} className="text-[var(--color-brand-green-dark)]" />
-              query runtime: {active.runtime}
+
+          <div className="mt-6 hidden space-y-2 text-[11px] font-mono text-[#8b949e] lg:block">
+            <div className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[#28282c] bg-[#18181c] px-2.5 py-1.5">
+              <Play size={11} className="text-[#7ee787]" />
+              runtime: {active.runtime}
             </div>
-            <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2">
-              <Activity size={13} className="text-[var(--color-brand-green-mid)]" />
-              wal sync: healthy
+            <div className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[#28282c] bg-[#18181c] px-2.5 py-1.5">
+              <Activity size={11} className="text-[#79c0ff]" />
+              wal sync: ok
             </div>
-            <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2">
-              <TimerReset size={13} className="text-[var(--color-brand-green-dark)]" />
-              last checkpoint: {active.checkpoint}
+            <div className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[#28282c] bg-[#18181c] px-2.5 py-1.5">
+              <TimerReset size={11} className="text-[#d2a8ff]" />
+              checkpoint: {active.checkpoint}
             </div>
           </div>
         </aside>
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col p-4">
+
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col p-4 bg-[#171717]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
-              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-              className="grid min-h-0 flex-1 gap-4"
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+              transition={{ duration: 0.18 }}
+              className="flex min-h-0 flex-1 flex-col gap-4"
             >
-              <div className="min-h-0">
-                <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                  <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-stone)]">
-                    Query
-                  </span>
-                  <span className="text-xs text-[var(--color-stone)]">
-                    {active.name} collection
-                  </span>
+              <div>
+                <div className="mb-2 flex items-center justify-between text-xs text-[#8b949e]">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-[#6e7681]">Query</span>
+                  <span className="font-mono text-[11px]">{active.name}.find(...)</span>
                 </div>
-                <CodeBlock code={active.code} variant="typescript" animated />
+                <CodeBlock code={active.code} variant="typescript" animated className="!border-[#28282c] !bg-[#121214]" />
               </div>
+
               <div className="min-h-0 flex-1">
-                <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                  <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-stone)]">
-                    Terminal
-                  </span>
-                  <span className="text-xs text-[var(--color-stone)]">
-                    {active.docs.toLocaleString()} docs
-                  </span>
+                <div className="mb-2 flex items-center justify-between text-xs text-[#8b949e]">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-[#6e7681]">Output</span>
+                  <span className="font-mono text-[11px] text-[#7ee787]">2 documents matched</span>
                 </div>
-                <CodeBlock code={active.output} variant="terminal" className="max-h-[220px]" />
+                <CodeBlock code={active.output} variant="terminal" className="!border-[#28282c] !bg-[#121214] max-h-[220px]" />
               </div>
             </motion.div>
           </AnimatePresence>

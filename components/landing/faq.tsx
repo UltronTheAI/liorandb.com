@@ -13,7 +13,7 @@ export function Faq({ items }: FaqProps) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="divide-y divide-[var(--color-hairline)] rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)]">
+    <div className="divide-y divide-[var(--color-hairline)] rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)]">
       {items.map(([question, answer], index) => {
         const isOpen = open === index;
 
@@ -21,15 +21,15 @@ export function Faq({ items }: FaqProps) {
           <div key={question}>
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-[var(--color-surface-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? -1 : index)}
             >
               <span className="text-base font-semibold text-[var(--color-ink)]">
                 {question}
               </span>
-              <motion.span animate={{ rotate: isOpen ? 180 : 0 }}>
-                <ChevronDown size={18} className="text-[var(--color-steel)]" />
+              <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <ChevronDown size={18} className="shrink-0 text-[var(--color-muted)]" />
               </motion.span>
             </button>
             <AnimatePresence initial={false}>
@@ -38,10 +38,10 @@ export function Faq({ items }: FaqProps) {
                   initial={reduceMotion ? false : { height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.22 }}
+                  transition={{ duration: 0.2 }}
                   className="overflow-hidden"
                 >
-                  <p className="px-6 pb-5 text-sm leading-7 text-[var(--color-steel)]">
+                  <p className="px-6 pb-5 text-sm leading-relaxed text-[var(--color-body)]">
                     {answer}
                   </p>
                 </motion.div>
