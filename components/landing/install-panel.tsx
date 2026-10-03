@@ -284,9 +284,7 @@ export function InstallPanel({
                     </div>
                     {isSelected ? (
                       <CheckCircle2 size={15} className="shrink-0 text-[var(--color-ink)]" />
-                    ) : (
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-muted-soft)]" />
-                    )}
+                    ) : null}
                   </button>
                 );
               })}

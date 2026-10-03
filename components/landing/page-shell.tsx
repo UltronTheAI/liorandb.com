@@ -859,12 +859,9 @@ const result = await users.find({
                       height={280}
                       className="h-auto w-full rounded-[var(--radius-md)] object-cover"
                     />
-                    <div className="mt-2 flex items-center justify-between px-1 py-1 text-xs text-[var(--color-body)]">
-                      <span className="flex items-center gap-1.5">
-                        <span className="status-dot" />
-                        active development
-                      </span>
-                      <span className="font-mono text-[11px]">@UltronTheAI</span>
+                    <div className="mt-2 flex items-center justify-between px-1 py-0.5 text-xs text-[var(--color-body)]">
+                      <span className="text-xs font-medium text-[var(--color-ink)]">Swaraj Puppalwar</span>
+                      <span className="font-mono text-[11px] text-[var(--color-muted)]">@UltronTheAI</span>
                     </div>
                   </div>
                 </div>
