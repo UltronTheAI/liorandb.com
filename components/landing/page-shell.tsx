@@ -848,9 +848,9 @@ const result = await users.find({
         {/* Founder */}
         <Section id="founder">
           <Reveal>
-            <div className="card-base p-4 sm:p-6 md:p-8">
-              <div className="grid gap-6 sm:gap-8 lg:grid-cols-[280px_1fr] lg:items-center">
-                <div className="mx-auto w-full max-w-[240px] sm:max-w-[280px]">
+            <div className="card-base min-w-0 overflow-hidden p-4 sm:p-6 md:p-8">
+              <div className="grid min-w-0 w-full gap-6 sm:gap-8 lg:grid-cols-[280px_1fr] lg:items-center">
+                <div className="mx-auto w-full max-w-[240px] sm:max-w-[280px] min-w-0">
                   <div className="relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] p-2">
                     <Image
                       src={siteConfig.founderImage}
@@ -859,62 +859,62 @@ const result = await users.find({
                       height={280}
                       className="h-auto w-full rounded-[var(--radius-md)] object-cover"
                     />
-                    <div className="mt-2 flex items-center justify-between px-1 py-0.5 text-xs text-[var(--color-body)]">
-                      <span className="text-xs font-medium text-[var(--color-ink)]">Swaraj Puppalwar</span>
-                      <span className="font-mono text-[11px] text-[var(--color-muted)]">@UltronTheAI</span>
+                    <div className="mt-2 flex items-center justify-between gap-1 px-1 py-0.5 text-xs text-[var(--color-body)] min-w-0">
+                      <span className="text-xs font-medium text-[var(--color-ink)] truncate">Swaraj Puppalwar</span>
+                      <span className="font-mono text-[11px] text-[var(--color-muted)] shrink-0">@UltronTheAI</span>
                     </div>
                   </div>
                 </div>
 
-                <div>
+                <div className="min-w-0 w-full">
                   <p className="eyebrow">Founder</p>
-                  <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] sm:text-3xl md:text-4xl">
+                  <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] sm:text-3xl md:text-4xl break-words">
                     Swaraj Puppalwar
                   </h2>
                   <p className="mt-1 text-sm text-[var(--color-muted)]">
                     Founder &amp; CTO, Lioran Group
                   </p>
-                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--color-body)]">
+                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--color-body)] break-words">
                     Swaraj Puppalwar is an 18-year-old full-stack developer, database engineer and founder building developer infrastructure from India. He began programming at 11 and is leading the architecture and development of LioranDB.
                   </p>
-                  <blockquote className="mt-5 border-l-2 border-[var(--color-ink)] pl-4 text-sm sm:text-base font-medium italic text-[var(--color-ink)]">
+                  <blockquote className="mt-5 border-l-2 border-[var(--color-ink)] pl-4 text-sm sm:text-base font-medium italic text-[var(--color-ink)] break-words">
                     “I don&apos;t want India to only consume developer infrastructure. I want us to build it.”
                   </blockquote>
-                  <div className="mt-5 flex flex-wrap gap-1.5">
+                  <div className="mt-5 flex flex-wrap gap-1.5 min-w-0">
                     {founderSkills.map((skill) => (
-                      <span key={skill} className="badge-pill">
+                      <span key={skill} className="badge-pill max-w-full truncate">
                         {skill}
                       </span>
                     ))}
                   </div>
-                  <div className="mt-5 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3.5 py-2.5 font-mono text-xs text-[var(--color-ink)] whitespace-nowrap">
-                    swaraj@lioran:~/liorandb$ building_indias_infra
+                  <div className="mt-5 max-w-full overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 sm:px-3.5 sm:py-2.5 font-mono text-xs text-[var(--color-ink)]">
+                    <span className="block truncate sm:overflow-visible">swaraj@lioran:~/liorandb$ building_indias_infra</span>
                   </div>
-                  <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
+                  <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
                     <Link
                       href={siteConfig.founderGithubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-secondary w-full sm:w-auto"
+                      className="btn-secondary w-full sm:w-auto justify-center"
                     >
-                      <GitHubMark className="h-4 w-4" />
-                      GitHub Profile
+                      <GitHubMark className="h-4 w-4 shrink-0" />
+                      <span>GitHub Profile</span>
                     </Link>
                     <Link
                       href={siteConfig.orgGithubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-secondary w-full sm:w-auto"
+                      className="btn-secondary w-full sm:w-auto justify-center"
                     >
-                      Follow Lioran Group
+                      <span>Follow Lioran Group</span>
                     </Link>
                     <Link
                       href={siteConfig.discordUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-primary w-full sm:w-auto"
+                      className="btn-primary w-full sm:w-auto justify-center"
                     >
-                      Join Discord
+                      <span>Join Discord</span>
                     </Link>
                   </div>
                 </div>
