@@ -847,9 +847,9 @@ const result = await users.find({
 
         {/* Founder */}
         <Section id="founder">
-          <Reveal>
-            <div className="card-base min-w-0 overflow-hidden p-4 sm:p-6 md:p-8">
-              <div className="grid min-w-0 w-full gap-6 sm:gap-8 lg:grid-cols-[280px_1fr] lg:items-center">
+          <Reveal className="w-full min-w-0 max-w-full">
+            <div className="card-base w-full max-w-full min-w-0 overflow-hidden p-4 sm:p-6 md:p-8">
+              <div className="grid grid-cols-1 w-full max-w-full min-w-0 gap-6 sm:gap-8 lg:grid-cols-[280px_1fr] lg:items-center">
                 <div className="mx-auto w-full max-w-[240px] sm:max-w-[280px] min-w-0">
                   <div className="relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] p-2">
                     <Image
@@ -866,31 +866,38 @@ const result = await users.find({
                   </div>
                 </div>
 
-                <div className="min-w-0 w-full">
-                  <p className="eyebrow">Founder</p>
-                  <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] sm:text-3xl md:text-4xl break-words">
-                    Swaraj Puppalwar
-                  </h2>
-                  <p className="mt-1 text-sm text-[var(--color-muted)]">
-                    Founder &amp; CTO, Lioran Group
-                  </p>
-                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--color-body)] break-words">
+                <div className="w-full max-w-full min-w-0 flex flex-col space-y-4">
+                  <div>
+                    <p className="eyebrow">Founder</p>
+                    <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--color-ink)] sm:text-3xl md:text-4xl break-words">
+                      Swaraj Puppalwar
+                    </h2>
+                    <p className="mt-1 text-sm text-[var(--color-muted)]">
+                      Founder &amp; CTO, Lioran Group
+                    </p>
+                  </div>
+                  
+                  <p className="text-sm sm:text-base leading-relaxed text-[var(--color-body)] break-words">
                     Swaraj Puppalwar is an 18-year-old full-stack developer, database engineer and founder building developer infrastructure from India. He began programming at 11 and is leading the architecture and development of LioranDB.
                   </p>
-                  <blockquote className="mt-5 border-l-2 border-[var(--color-ink)] pl-4 text-sm sm:text-base font-medium italic text-[var(--color-ink)] break-words">
+                  
+                  <blockquote className="border-l-2 border-[var(--color-ink)] pl-3.5 sm:pl-4 text-sm sm:text-base font-medium italic text-[var(--color-ink)] break-words">
                     “I don&apos;t want India to only consume developer infrastructure. I want us to build it.”
                   </blockquote>
-                  <div className="mt-5 flex flex-wrap gap-1.5 min-w-0">
+                  
+                  <div className="flex flex-wrap gap-1.5 w-full min-w-0">
                     {founderSkills.map((skill) => (
-                      <span key={skill} className="badge-pill max-w-full truncate">
+                      <span key={skill} className="badge-pill max-w-full">
                         {skill}
                       </span>
                     ))}
                   </div>
-                  <div className="mt-5 max-w-full overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 sm:px-3.5 sm:py-2.5 font-mono text-xs text-[var(--color-ink)]">
+                  
+                  <div className="w-full max-w-full overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-3 py-2 sm:px-3.5 sm:py-2.5 font-mono text-xs text-[var(--color-ink)]">
                     <span className="block truncate sm:overflow-visible">swaraj@lioran:~/liorandb$ building_indias_infra</span>
                   </div>
-                  <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+                  
+                  <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap w-full min-w-0 pt-2">
                     <Link
                       href={siteConfig.founderGithubUrl}
                       target="_blank"
