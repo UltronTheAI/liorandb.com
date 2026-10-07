@@ -23,7 +23,7 @@ export default function RefundPage() {
 
       <h2>1. Rationale for Our No-Refund Policy</h2>
       <p>
-        LioranDB provides dedicated cloud database hosting and developer infrastructure services (such as our Developer Starter plan at ₹5,000/month). Upon successful payment and onboarding approval:
+        LioranDB provides dedicated cloud database hosting and developer infrastructure services (such as our Starter plan at ₹1/hour and Dedicated Server at ₹8/hour). Upon successful payment and onboarding approval:
       </p>
       <ul>
         <li>Dedicated compute nodes, high-speed NVMe storage, and memory allocations are instantly reserved and dedicated to your workload.</li>

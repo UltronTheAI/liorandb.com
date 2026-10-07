@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           <Link href={siteConfig.appUrl} target="_blank">app.liorandb.com</Link>), we collect your name, email address, organization/company name, and contact details.
         </li>
         <li>
-          <strong>Billing &amp; Transaction Details:</strong> When you subscribe to our managed plans (such as the Developer Starter plan at ₹5,000/mo), transaction processing is handled directly by our authorized payment gateway partner, <strong>Razorpay</strong>. We receive confirmation of payment, transaction IDs, billing address, and GSTIN (if provided). <em>We never store credit card numbers, CVVs, or net banking passwords on our servers.</em>
+          <strong>Billing &amp; Transaction Details:</strong> When you subscribe to our managed plans (such as the Starter plan at ₹1/hr or Dedicated Server at ₹8/hr), transaction processing is handled directly by our authorized payment gateway partner, <strong>Razorpay</strong>. We receive confirmation of payment, transaction IDs, billing address, and GSTIN (if provided). <em>We never store credit card numbers, CVVs, or net banking passwords on our servers.</em>
         </li>
         <li>
           <strong>Infrastructure &amp; Server Telemetry:</strong> To ensure high availability and monitor performance, our servers record standard operational logs, including IP addresses, browser/client types, connection timestamps, error rates, and query throughput metrics (e.g. read/write ops/sec).
@@ -114,7 +114,7 @@ export default function PrivacyPage() {
 
       <h2>8. Cookies &amp; Tracking</h2>
       <p>
-        The public LioranDB website does not use invasive third-party advertising cookies or cross-site tracking pixels. The customer dashboard (<Link href={siteConfig.appUrl} target="_blank">app.liorandb.com</Link>) utilizes essential session tokens and local storage strictly to keep you authenticated and maintain your dashboard preferences.
+        The public LioranDB website does not use invasive third-party advertising cookies or cross-site tracking pixels (Zero Cookies Policy). The customer dashboard (<Link href={siteConfig.appUrl} target="_blank">app.liorandb.com</Link>) utilizes essential session tokens and local storage strictly to keep you authenticated and maintain your dashboard preferences. For complete details, please review our dedicated <Link href="/cookies">Cookies Policy</Link>.
       </p>
 
       <h2>9. Grievance Redressal &amp; Contact</h2>

@@ -57,18 +57,18 @@ export default function TermsPage() {
 
       <h2>3. Pricing Plans &amp; Subscription Terms</h2>
       <p>
-        LioranDB offers transparent managed infrastructure tiers billed on a recurring monthly subscription basis:
+        LioranDB offers transparent managed infrastructure tiers billed on a predictable hourly or recurring subscription basis:
       </p>
       <ul>
         <li>
-          <strong>Developer Starter Plan (₹5,000 / month):</strong> Includes up to 45,000 total operations/second (10,000 write ops/sec and 35,000 read ops/sec), dataset capacity under 1,000,000 documents, daily automated snapshot backups, direct founder and core engineering support, basic feature requests, and single-node dedicated cloud provisioning.
+          <strong>Starter Plan (₹1 / hour):</strong> Designed for testing, prototypes, and lightweight development. Includes up to 3,000 operations/second (1,000 write ops/sec and 2,000 read ops/sec), capacity up to 100,000 documents. No automated backups included.
         </li>
         <li>
-          <strong>Growth &amp; Custom Scale Plan (Custom Quote):</strong> Designed for multi-million document workloads, throughput exceeding 45,000 ops/sec, multi-node clustering, replication, custom backup schedules, and private VPC network peering.
+          <strong>Dedicated Server Plan (₹8 / hour):</strong> Dedicated single-node cloud compute and NVMe storage for production. Includes up to 45,000 total operations/second (10,000 write ops/sec and 35,000 read ops/sec), dataset capacity up to 1,000,000 documents, daily automated snapshot backups, direct founder and core engineering support.
         </li>
       </ul>
       <p>
-        All prices are quoted in Indian Rupees (INR) unless explicitly specified otherwise. Subscriptions renew automatically every 30 days unless canceled by the customer prior to the renewal date.
+        All prices are quoted in Indian Rupees (INR) unless explicitly specified otherwise. Subscriptions renew automatically based on active hours unless canceled by the customer prior to the renewal date.
       </p>
 
       <h2>4. Support Schedule &amp; Communication Channels</h2>

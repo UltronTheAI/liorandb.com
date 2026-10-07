@@ -119,6 +119,27 @@ export function SiteHeader({
       icon: BookOpen,
     },
     {
+      title: "About LioranDB",
+      description: "Mission, vision, and Indian developer ecosystem",
+      href: "/about",
+      external: false,
+      icon: Shield,
+    },
+    {
+      title: "Founder",
+      description: "Swaraj Puppalwar & engineering story",
+      href: "/founder",
+      external: false,
+      icon: User,
+    },
+    {
+      title: "Cookies Policy",
+      description: "Zero-tracking guarantee & session cookie policy",
+      href: "/cookies",
+      external: false,
+      icon: Shield,
+    },
+    {
       title: "Roadmap",
       description: "Pre-alpha milestones & Alpha launch plan",
       href: "/#roadmap",
@@ -131,13 +152,6 @@ export function SiteHeader({
       href: "/#why-india",
       external: false,
       icon: Shield,
-    },
-    {
-      title: "Founder",
-      description: "Swaraj Puppalwar & engineering mission",
-      href: "/#founder",
-      external: false,
-      icon: User,
     },
     {
       title: "Community & Discord",
@@ -254,10 +268,26 @@ export function SiteHeader({
 
           {/* Pricing Direct Link */}
           <Link
-            href="/#pricing"
+            href="/pricing"
             className="inline-flex h-9 items-center px-3 text-sm font-medium text-[var(--color-body)] transition hover:text-[var(--color-ink)] rounded-[var(--radius-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
           >
             Pricing
+          </Link>
+
+          {/* About Direct Link */}
+          <Link
+            href="/about"
+            className="inline-flex h-9 items-center px-3 text-sm font-medium text-[var(--color-body)] transition hover:text-[var(--color-ink)] rounded-[var(--radius-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
+          >
+            About
+          </Link>
+
+          {/* Founder Direct Link */}
+          <Link
+            href="/founder"
+            className="inline-flex h-9 items-center px-3 text-sm font-medium text-[var(--color-body)] transition hover:text-[var(--color-ink)] rounded-[var(--radius-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]"
+          >
+            Founder
           </Link>
 
           {/* Docs Direct Link */}
@@ -384,6 +414,41 @@ export function SiteHeader({
             className="border-t border-[var(--color-hairline)] bg-[var(--color-canvas)] px-4 py-5 shadow-[var(--shadow-2)] lg:hidden max-h-[85vh] overflow-y-auto"
           >
             <div className="mx-auto flex max-w-[1200px] flex-col gap-6">
+              {/* Main Pages */}
+              <div>
+                <p className="eyebrow px-2 mb-2">Navigation</p>
+                <div className="grid gap-1">
+                  <Link
+                    href="/pricing"
+                    className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium text-[var(--color-body)] transition hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-ink)]"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span className="font-semibold">Pricing (₹1/hr &amp; ₹8/hr)</span>
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium text-[var(--color-body)] transition hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-ink)]"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span>About LioranDB</span>
+                  </Link>
+                  <Link
+                    href="/founder"
+                    className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium text-[var(--color-body)] transition hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-ink)]"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span>Founder (Swaraj Puppalwar)</span>
+                  </Link>
+                  <Link
+                    href="/cookies"
+                    className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium text-[var(--color-body)] transition hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-ink)]"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span>Cookies Policy</span>
+                  </Link>
+                </div>
+              </div>
+
               {/* Product Category */}
               <div>
                 <p className="eyebrow px-2 mb-2">Product</p>
@@ -404,7 +469,7 @@ export function SiteHeader({
 
               {/* Resources Category */}
               <div>
-                <p className="eyebrow px-2 mb-2">Resources &amp; Company</p>
+                <p className="eyebrow px-2 mb-2">Resources &amp; Community</p>
                 <div className="grid gap-1">
                   {resourceItems.map((item) => (
                     <Link
@@ -425,11 +490,11 @@ export function SiteHeader({
               {/* Direct Quick Links & CTA */}
               <div className="grid gap-2 pt-3 border-t border-[var(--color-hairline)]">
                 <Link
-                  href="/#pricing"
+                  href="/pricing"
                   className="rounded-[var(--radius-md)] px-3 py-2 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)]"
                   onClick={() => setOpen(false)}
                 >
-                  Pricing &amp; Plans →
+                  View All Pricing Plans →
                 </Link>
                 <Link
                   href={appUrl}

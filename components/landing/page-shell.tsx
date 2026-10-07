@@ -479,11 +479,19 @@ export function LandingPage() {
         {/* Pricing Section */}
         <Section id="pricing" surface>
           <Reveal>
-            <SectionHeading
-              eyebrow="Managed Database Hosting"
-              title="Transparent pricing for developer infrastructure."
-              description="Deploy high-performance LioranDB document database infrastructure with guaranteed throughput, automated daily backups, and direct founder engineering support."
-            />
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <SectionHeading
+                eyebrow="Managed Database Hosting"
+                title="Transparent pricing for developer infrastructure."
+                description="Deploy high-performance LioranDB document database infrastructure with predictable hourly pricing. From ₹1/hr starter testing to ₹8/hr dedicated production servers."
+              />
+              <Link
+                href="/pricing"
+                className="btn-secondary shrink-0 self-start sm:self-end"
+              >
+                View Full Pricing Page →
+              </Link>
+            </div>
           </Reveal>
 
           {/* Workflow Explanation */}
@@ -501,7 +509,7 @@ export function LandingPage() {
                 {
                   step: "01",
                   title: "Request on Dashboard",
-                  desc: "Submit your database request with target workloads on app.liorandb.com.",
+                  desc: "Select Starter (₹1/hr) or Dedicated (₹8/hr) on app.liorandb.com.",
                 },
                 {
                   step: "02",
@@ -511,12 +519,12 @@ export function LandingPage() {
                 {
                   step: "03",
                   title: "Server Provisioning",
-                  desc: "Dedicated instance is allocated and activated via secure monthly subscription checkout.",
+                  desc: "Dedicated instance is allocated and activated electronically within 1 to 24 hours.",
                 },
                 {
                   step: "04",
                   title: "Connect & Scale",
-                  desc: "Connect via @liorandb/driver or gRPC/REST endpoints with automated daily backups.",
+                  desc: "Connect via @liorandb/driver or gRPC/REST endpoints with live throughput metrics.",
                 },
               ].map((item) => (
                 <div
@@ -535,7 +543,7 @@ export function LandingPage() {
 
           {/* Pricing Plans Grid */}
           <div className="mt-8 grid gap-6 grid-cols-1 lg:grid-cols-2">
-            {/* Developer Starter */}
+            {/* Starter Plan (₹1/hr) */}
             <Reveal className="pricing-card flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between gap-2">
@@ -555,6 +563,9 @@ export function LandingPage() {
                     {pricingPlans[0].period}
                   </span>
                 </div>
+                <p className="mt-1 text-xs text-[var(--color-muted)]">
+                  {pricingPlans[0].billingNote}
+                </p>
 
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-body)]">
                   {pricingPlans[0].description}
@@ -593,7 +604,7 @@ export function LandingPage() {
               </div>
             </Reveal>
 
-            {/* Custom Scale (Dark featured tier per DESIGN.md pricing-tier-featured) */}
+            {/* Dedicated Server (₹8/hr - Featured) */}
             <Reveal className="pricing-card-featured flex flex-col justify-between" delay={0.05}>
               <div>
                 <div className="flex items-center justify-between gap-2">
@@ -613,6 +624,9 @@ export function LandingPage() {
                     {pricingPlans[1].period}
                   </span>
                 </div>
+                <p className="mt-1 text-xs text-[#8b949e]">
+                  {pricingPlans[1].billingNote}
+                </p>
 
                 <p className="mt-3 text-sm leading-relaxed text-[#b0b4ba]">
                   {pricingPlans[1].description}
@@ -679,7 +693,7 @@ export function LandingPage() {
                   Subscription &amp; Refund Terms
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--color-body)]">
-                  Subscriptions are billed monthly. Due to immediate allocation of dedicated server compute and storage resources upon provisioning, all payments are covered under our <Link href="/refund" className="underline text-[var(--color-ink)] hover:text-[var(--color-text-link)]">Strict No-Refund Policy</Link>. Cancel anytime before the next billing cycle.
+                  Billed hourly. Due to immediate allocation of dedicated server compute and storage resources upon provisioning, all payments are covered under our <Link href="/refund" className="underline text-[var(--color-ink)] hover:text-[var(--color-text-link)]">Strict No-Refund Policy</Link>. Cancel anytime before renewal.
                 </p>
               </div>
             </div>
@@ -702,6 +716,14 @@ export function LandingPage() {
                 <p className="mt-2 text-sm leading-relaxed text-[var(--color-body)]">
                   LioranDB is independently developed and is not presented as an official government product or initiative.
                 </p>
+                <div className="mt-4">
+                  <Link
+                    href="/about"
+                    className="btn-link text-sm font-medium inline-flex items-center gap-1"
+                  >
+                    Read more about our mission →
+                  </Link>
+                </div>
               </div>
             </Reveal>
 
@@ -899,6 +921,13 @@ const result = await users.find({
                   
                   <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap w-full min-w-0 pt-2">
                     <Link
+                      href="/founder"
+                      className="btn-primary w-full sm:w-auto justify-center"
+                    >
+                      <span>Read Founder Story</span>
+                      <ArrowRight size={14} />
+                    </Link>
+                    <Link
                       href={siteConfig.founderGithubUrl}
                       target="_blank"
                       rel="noreferrer"
@@ -919,7 +948,7 @@ const result = await users.find({
                       href={siteConfig.discordUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-primary w-full sm:w-auto justify-center"
+                      className="btn-secondary w-full sm:w-auto justify-center"
                     >
                       <span>Join Discord</span>
                     </Link>

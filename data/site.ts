@@ -50,13 +50,12 @@ export const trustedPartners = [
 ] as const;
 
 export const navItems = [
-  ["Product", "#product"],
-  ["V2", "#v2"],
-  ["Benchmarks", "#benchmarks"],
-  ["Pricing", "#pricing"],
-  ["Why India", "#why-india"],
-  ["Founder", "#founder"],
-  ["FAQ", "#faq"],
+  ["Product", "/#product"],
+  ["Pricing", "/pricing"],
+  ["About", "/about"],
+  ["Founder", "/founder"],
+  ["Benchmarks", "/#benchmarks"],
+  ["Docs", "https://docs.liorandb.com"],
 ] as const;
 
 export const heroCollections = [
@@ -492,12 +491,16 @@ export const faqs = [
     "LioranDB V2 is a developer-first document database developed in India. It features a high-performance Rust storage engine launched as pre-alpha on 16 August 2026, with the Alpha release coming on 23 October 2026.",
   ],
   [
-    "How does the Managed Developer Hosting / Founder Program differ from the Pre-alpha self-hosted release?",
-    "The standalone Docker release is an experimental pre-alpha meant for local benchmarking, testing, and community feedback. The Managed Developer Hosting / Founder Program (₹5,000/mo) is a dedicated cloud service where our core engineering team directly provisions, isolates, configures automated daily backups, monitors, and supports your database instance with guaranteed throughput limits and direct founder support.",
+    "How does the Managed Database Hosting work?",
+    "Managed Database Hosting is available in two predictable hourly pricing plans: the Starter Plan at ₹1/hour (up to 100K docs, 3K ops/sec, no backups) for lightweight development, and the Dedicated Server at ₹8/hour (up to 1M docs, 45K ops/sec, automated daily backups) for production workloads. You can request instances instantly via app.liorandb.com.",
+  ],
+  [
+    "What is the difference between the ₹1/hr and ₹8/hr plans?",
+    "The ₹1/hr Starter Plan is built for testing, side projects, and early development with up to 100,000 documents and 3,000 ops/sec (1,000 writes/sec + 2,000 reads/sec) without automated backups. The ₹8/hr Dedicated Server Plan provides a dedicated cloud server, up to 1,000,000 documents, 45,000 ops/sec (10,000 writes/sec + 35,000 reads/sec), automated daily backups, and direct founder engineering support.",
   ],
   [
     "What is the service provisioning & digital delivery timeline?",
-    "LioranDB is 100% digital cloud infrastructure. After you submit your database request on app.liorandb.com and complete payment verification, dedicated database instances and connection credentials are electronically provisioned within 1 to 24 hours.",
+    "LioranDB is 100% digital cloud infrastructure. After you submit your database request on app.liorandb.com and complete activation, dedicated database instances and connection credentials are electronically provisioned within 1 to 24 hours.",
   ],
   [
     "What is your cancellation and refund policy?",
@@ -521,56 +524,63 @@ export const faqs = [
   ],
   [
     "Who is building LioranDB?",
-    "LioranDB is built by Swaraj Puppalwar, Founder & CTO of Lioran Developer Solutions / Lioran Group, alongside contributors from the Indian developer ecosystem.",
+    "LioranDB is built by Swaraj Puppalwar (@UltronTheAI), Founder & CTO of Lioran Developer Solutions / Lioran Group, alongside contributors from the Indian developer ecosystem.",
   ],
 ] as const;
 
 export const pricingPlans = [
   {
-    id: "developer-starter",
-    name: "Developer Starter",
-    badge: "Most Popular",
-    price: "₹5,000",
-    period: "/ month",
+    id: "starter-plan",
+    name: "Starter Plan",
+    badge: "Pay-As-You-Go",
+    price: "₹1",
+    period: "/ hour",
+    billingNote: "~₹720 / month (approx. 720 hrs)",
+    capacityDocs: "Up to 100K documents",
+    backupPolicy: "No automated backup allowed",
+    opsSummary: "3,000 ops/sec (1,000 writes + 2,000 reads)",
     description:
-      "Fully managed, high-performance LioranDB instance for modern SaaS, APIs, and production startup workloads.",
-    highlight: true,
-    ctaText: "Request Database",
+      "Starter plan of our database management service. Ideal for testing, prototypes, and lightweight development instances.",
+    highlight: false,
+    ctaText: "Get Started for ₹1/hr",
     ctaHref: "https://app.liorandb.com",
     features: [
-      "45,000 Ops/sec throughput (10k write ops/sec + 35k read ops/sec)",
-      "Under 1 Million documents capacity (< 1M docs)",
-      "Automated daily snapshot backups",
+      "Up to 100,000 documents capacity (100K docs)",
+      "3,000 Total Ops/sec (1,000 writes/sec + 2,000 reads/sec)",
+      "No automated backups included (Starter tier)",
+      "Starter database management service instance",
+      "MongoDB-compatible driver & TypeScript SDK",
+      "gRPC & REST API endpoint access",
+      "Standard developer community & email support",
+    ],
+    supportNote: "Starter tier for database management service. No backup coverage.",
+  },
+  {
+    id: "dedicated-server",
+    name: "Dedicated Server",
+    badge: "Production Ready",
+    price: "₹8",
+    period: "/ hour",
+    billingNote: "~₹5,760 / month (approx. 720 hrs)",
+    capacityDocs: "Up to 1 Million documents",
+    backupPolicy: "Daily automated backup included",
+    opsSummary: "45,000 ops/sec (10,000 writes + 35,000 reads)",
+    description:
+      "Fully isolated dedicated cloud server with high throughput, automated daily backups, and direct founder engineering support.",
+    highlight: true,
+    ctaText: "Deploy Dedicated Server",
+    ctaHref: "https://app.liorandb.com",
+    features: [
+      "Up to 1,000,000 documents capacity (1M docs)",
+      "45,000 Total Ops/sec (10,000 writes/sec + 35,000 reads/sec)",
+      "Daily automated snapshot backup & recovery",
+      "Dedicated single-node cloud compute & NVMe storage",
       "Direct Founder & Core Engineering support",
-      "Basic feature & optimization requests",
-      "Dedicated single-node cloud provisioning",
       "MongoDB-compatible driver & gRPC/REST APIs",
+      "Workload performance review & indexing tuning",
       "Support window: 6:00 PM – 10:00 PM IST (Mon–Fri)",
     ],
     supportNote: "Support hours: 6:00 PM to 10:00 PM IST (Mon to Fri, Sat & Sun off).",
-  },
-  {
-    id: "custom-scale",
-    name: "Growth & Custom Scale",
-    badge: "High Scale",
-    price: "Custom",
-    period: "tailored architecture",
-    description:
-      "Custom multi-node cluster, high-throughput tuning, and enterprise SLAs for data-intensive systems.",
-    highlight: false,
-    ctaText: "Contact Founder",
-    ctaHref: "https://app.liorandb.com",
-    features: [
-      "High-throughput scaling (> 45k ops/sec custom limits)",
-      "Multi-million document storage (> 1M docs)",
-      "Custom backup intervals & Point-in-time recovery (PITR)",
-      "Priority founder SLA & dedicated engineering assistance",
-      "Custom query operators, driver tweaks & schema consulting",
-      "Multi-node clustering, replication & failover setup",
-      "Dedicated VPC / private peering deployment",
-      "Extended priority incident coverage",
-    ],
-    supportNote: "Dedicated engineering channel & priority escalation.",
   },
 ] as const;
 
@@ -578,12 +588,22 @@ export const footerColumns = [
   {
     title: "Product",
     links: [
+      ["Overview", "/#product"],
+      ["Pricing", "/pricing"],
+      ["V2 Engine", "/#v2"],
+      ["Benchmarks", "/#benchmarks"],
+      ["Documentation", siteConfig.docsUrl],
       ["Dashboard", siteConfig.appUrl],
-      ["Docs", siteConfig.docsUrl],
-      ["Pricing", "#pricing"],
-      ["V2 GitHub", siteConfig.v1GithubUrl],
-      ["Discord", siteConfig.discordUrl],
-      ["Roadmap", "#roadmap"],
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      ["About Us", "/about"],
+      ["Founder", "/founder"],
+      ["Lioran Developer Solutions", siteConfig.companyUrl],
+      ["Lioran Group", siteConfig.companyUrl],
+      ["Contact Us", "/contact"],
     ],
   },
   {
@@ -591,16 +611,8 @@ export const footerColumns = [
     links: [
       ["Join Discord", siteConfig.discordUrl],
       ["GitHub Organization", siteConfig.orgGithubUrl],
+      ["V2 GitHub Repo", siteConfig.v1GithubUrl],
       ["Report an Issue", siteConfig.v1GithubUrl],
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      ["Lioran Developer Solutions", siteConfig.companyUrl],
-      ["Lioran Group", siteConfig.companyUrl],
-      ["Founder", "#founder"],
-      ["Contact Us", "/contact"],
     ],
   },
   {
@@ -608,10 +620,11 @@ export const footerColumns = [
     links: [
       ["Terms & Conditions", "/terms"],
       ["Privacy Policy", "/privacy"],
+      ["Cookies Policy", "/cookies"],
       ["Cancellation & Refund", "/refund"],
       ["Shipping & Delivery", "/shipping"],
-      ["Contact Us", "/contact"],
       ["License", "/license"],
     ],
   },
 ] as const;
+
