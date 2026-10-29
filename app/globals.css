@@ -114,7 +114,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); 
 .page-intro { border-bottom: 1px solid var(--color-hairline); padding: 5rem 0 4rem; }
 .hero-section { border-bottom: 1px solid var(--color-hairline); padding: 6rem 0 5.5rem; background: var(--color-canvas); }
 .hero-grid { display: grid; align-items: center; gap: 4rem; grid-template-columns: minmax(0, 1fr) minmax(360px, .88fr); }
-.terminal-surface { min-width: 0; max-width: 100%; border: 1px solid var(--color-code-border); border-radius: var(--radius-lg); background: var(--color-code); color: var(--color-on-dark); }
+.terminal-surface { min-width: 0; max-width: 100%; border: 1px solid var(--color-code-border); border-radius: var(--radius-lg); background: var(--color-code); background-image: none; color: var(--color-on-dark); }
 .terminal-surface__header { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--color-code-border); padding: .8rem 1rem; color: var(--color-on-dark-soft); font-family: var(--font-code); font-size: .7rem; }
 .terminal-surface__label { min-width: 0; overflow-wrap: anywhere; }
 .terminal-surface__body { width: 100%; max-width: 100%; height: auto; max-height: none; margin: 0; overflow: visible; padding: 1.35rem; font-family: var(--font-code); font-size: .75rem; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
@@ -126,7 +126,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); 
 .lede { color: var(--color-body); font-size: clamp(1.02rem, 1.8vw, 1.25rem); line-height: 1.65; }
 .section-band { padding: 6rem 0; }
 .section-band--soft { border-block: 1px solid var(--color-hairline); background: var(--color-canvas-soft); }
-.section-band--dark { background: var(--color-surface-dark); color: var(--color-on-dark); }
+.section-band--dark { background: var(--color-surface-dark); background-image: none; color: var(--color-on-dark); }
 
 .panel { display: flex; min-width: 0; min-height: 100%; flex-direction: column; border-top: 1px solid var(--color-hairline-strong); padding: 1.4rem 0 1.6rem; }
 .grid > .panel { align-self: stretch; height: 100%; }
@@ -145,7 +145,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); 
 .inline-link:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 4px; }
 .eyebrow { color: var(--color-muted); font-size: 11px; font-weight: 600; letter-spacing: .88px; line-height: 1.4; text-transform: uppercase; }
 
-.code-surface { min-width: 0; max-width: 100%; border: 1px solid var(--color-code-border); border-radius: var(--radius-lg); background: var(--color-code); color: var(--color-on-dark); }
+.code-surface { min-width: 0; max-width: 100%; border: 1px solid var(--color-code-border); border-radius: var(--radius-lg); background: var(--color-code); background-image: none; color: var(--color-on-dark); }
 .code-surface__header { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--color-code-border); padding: .7rem .85rem; color: var(--color-on-dark-soft); font-family: var(--font-code); font-size: .68rem; }
 .code-surface__label { min-width: 0; overflow-wrap: anywhere; }
 .copy-button { height: 1.9rem; border-color: var(--color-hairline-dark); background: transparent; color: var(--color-on-dark-soft); padding: 0 .55rem; font-family: var(--font-code); font-size: .65rem; }
