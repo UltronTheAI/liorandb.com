@@ -14,6 +14,14 @@ The content voice is precise, confident, and restrained. It does not claim unive
 - Cards are compact and structural. Borders do more work than shadows.
 - Dark mode is a first-class theme, not an inverted afterthought.
 
+### Flat treatment (mandatory)
+
+- Use solid color surfaces only. Do not use linear, radial, or atmospheric gradients.
+- Do not use teal/blue glows, blurred circles, floating orbs, noise textures, or animated background decoration.
+- Do not use glassmorphism or backdrop blur.
+- Shadows are reserved for the navigation popover and should remain subtle; content panels do not float.
+- Status labels are plain text metadata, not decorative pills. Use borders, spacing, and typography to establish hierarchy.
+
 ## Tokens
 
 ### Color roles

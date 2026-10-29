@@ -19,7 +19,7 @@ export function LegalPage({ title, intro, children }: LegalPageProps) {
           ← Back to Overview
         </Link>
 
-        <div className="mt-4 sm:mt-6 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-4 sm:p-6 md:p-8">
+        <div className="mt-4 border-t border-[var(--color-hairline-strong)] pt-6 sm:mt-6 sm:pt-8">
           <p className="eyebrow">LioranDB Legal &amp; Compliance</p>
           <h1 className="mt-2.5 text-balance text-2xl font-semibold tracking-[-0.04em] text-[var(--color-ink)] sm:text-3xl md:text-4xl">
             {title}
@@ -29,7 +29,7 @@ export function LegalPage({ title, intro, children }: LegalPageProps) {
           </p>
         </div>
 
-        <article className="prose-legal mt-4 sm:mt-6 rounded-[var(--radius-lg)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-4 sm:p-6 md:p-8">
+        <article className="prose-legal mt-8 border-t border-[var(--color-hairline)] pt-6 sm:mt-10 sm:pt-8">
           {children}
         </article>
       </main>
