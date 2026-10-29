@@ -28,7 +28,7 @@ export default function CookiesPage() {
       </p>
 
       <div className="my-6 grid gap-4 grid-cols-1 md:grid-cols-2">
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] p-4">
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] p-4">
           <div className="flex items-center gap-2 font-semibold text-[var(--color-ink)]">
             <ShieldCheck size={18} className="text-emerald-600 dark:text-emerald-400" />
             <span>Official Website (liorandb.com)</span>
@@ -38,9 +38,9 @@ export default function CookiesPage() {
           </p>
         </div>
 
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface)] p-4">
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] p-4">
           <div className="flex items-center gap-2 font-semibold text-[var(--color-ink)]">
-            <CheckCircle2 size={18} className="text-blue-600 dark:text-blue-400" />
+            <CheckCircle2 size={18} className="text-[var(--color-accent)]" />
             <span>App Subdomain (app.liorandb.com)</span>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-[var(--color-body)]">
@@ -83,7 +83,7 @@ export default function CookiesPage() {
       </ul>
 
       <h2>4. Cookie Classification Table</h2>
-      <div className="my-6 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface)]">
+      <div className="my-6 overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-hairline)] bg-[var(--color-surface-card)]">
         <table className="w-full min-w-[540px] text-left text-xs border-collapse">
           <thead>
             <tr className="border-b border-[var(--color-hairline)] bg-[var(--color-surface-soft)] text-[var(--color-ink)] font-semibold">

@@ -2,10 +2,10 @@ import Link from "next/link";
 import { ArrowRight, Database, GitBranch, Server, ShieldCheck } from "lucide-react";
 import { ArchitectureDiagram } from "@/components/site/architecture-diagram";
 import { BenchmarkSummary } from "@/components/site/benchmark-charts";
-import { CodeBlock } from "@/components/site/code-block";
+import { CodeBlock, Terminal } from "@/components/site/code-block";
 import { PublicLayout } from "@/components/site/layout";
 import { Container, Panel, SectionHeading } from "@/components/site/ui";
-import { benchmarkData, featureGroups, getStartedCode, siteConfig } from "@/data/content";
+import { benchmarkData, featureGroups, getStartedCode, localDeveloperWorkflow, siteConfig } from "@/data/content";
 
 export function HomePage() {
   return (
@@ -22,17 +22,7 @@ export function HomePage() {
               </div>
               <p className="mt-5 text-xs text-[var(--color-muted)]">Self-hostable · V2 pre-alpha · APIs and deployment details live in the maintained docs</p>
             </div>
-            <div className="hero-console" aria-label="LioranDB local developer workflow">
-              <div className="hero-console__top"><span>liorandb / local</span><span className="ml-auto font-mono text-[var(--color-muted)]">27018</span></div>
-              <div className="hero-console__body">
-                <div className="font-mono text-xs leading-7 text-[var(--color-on-dark-soft)]">
-                  <p><span className="text-[var(--color-accent)]">$</span> docker run -d --name liorandb -p 27018:27018 -p 27019:27019 -p 27201:27201 -v ldb-data:/var/lib/liorandb/data liorandb/liorandb:pre-alpha</p>
-                  <p><span className="text-[var(--color-accent)]">$</span> npm install @liorandb/driver</p>
-                  <p className="mt-4 text-[var(--color-on-dark-soft)]">connect, insert, and query through the documented driver</p>
-                  <p><span className="text-[var(--color-accent)]">$</span> node index.ts</p>
-                </div>
-              </div>
-            </div>
+            <Terminal code={`$ ${localDeveloperWorkflow.replaceAll("\n", "\n$ ")}`} />
           </div>
         </Container>
       </section>
