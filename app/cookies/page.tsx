@@ -28,7 +28,7 @@ export default function CookiesPage() {
       </p>
 
       <div className="my-6 grid gap-4 grid-cols-1 md:grid-cols-2">
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] p-4">
+        <div className="panel-card rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] p-4">
           <div className="flex items-center gap-2 font-semibold text-[var(--color-ink)]">
             <ShieldCheck size={18} className="text-emerald-600 dark:text-emerald-400" />
             <span>Official Website (liorandb.com)</span>
@@ -38,7 +38,7 @@ export default function CookiesPage() {
           </p>
         </div>
 
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] p-4">
+        <div className="panel-card rounded-[var(--radius-md)] border border-[var(--color-hairline-strong)] bg-[var(--color-surface-card)] p-4">
           <div className="flex items-center gap-2 font-semibold text-[var(--color-ink)]">
             <CheckCircle2 size={18} className="text-[var(--color-accent)]" />
             <span>App Subdomain (app.liorandb.com)</span>

@@ -67,6 +67,7 @@ The content voice is precise, confident, and restrained. It does not claim unive
 - `PublicLayout` owns the site header and footer for all public product pages.
 - `PageIntro` provides a consistent route-level hierarchy.
 - `Panel`, `Pill`, `SectionHeading`, and `StatCard` are the basic content primitives.
+- Comparable card collections use the reusable `Panel`/`panel-card` parity system: odd cards use the theme canvas and even cards use the dark surface, restarting from the first card in each collection. Card rows stretch naturally without clipping content.
 - `CodeBlock` renders a labeled, scrollable, copyable code surface. Copy is progressive enhancement and does not hide the text.
 - `BenchmarkCharts` uses CSS bars and accessible tabs. Values remain understandable without animation.
 - `ArchitectureDiagram` is a semantic step sequence with a visual connector, not a decorative image.

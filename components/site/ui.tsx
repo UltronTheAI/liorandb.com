@@ -15,7 +15,7 @@ export function SectionHeading({ eyebrow, title, description, align = "left" }: 
 }
 
 export function Panel({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`panel ${className}`}>{children}</div>;
+  return <div className={`panel panel-card ${className}`}>{children}</div>;
 }
 
 export function Pill({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "green" | "amber" }) {
