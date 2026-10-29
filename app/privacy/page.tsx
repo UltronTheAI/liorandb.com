@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage } from "@/components/legal/legal-page";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — LioranDB",
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
         <li>To provision, configure, and isolate your dedicated cloud database instances.</li>
         <li>To authenticate access to the customer dashboard (<Link href={siteConfig.appUrl} target="_blank">app.liorandb.com</Link>) and secure API keys.</li>
         <li>To process monthly recurring billing and invoice generation via Razorpay.</li>
-        <li>To provide technical and founder support during our operational hours (6:00 PM – 10:00 PM IST, Monday to Friday).</li>
+        <li>To provide technical support during our operational hours (6:00 PM – 10:00 PM IST, Monday to Friday).</li>
         <li>To detect, prevent, and remediate security vulnerabilities, DDoS attacks, or violations of our Terms of Service.</li>
         <li>To send essential administrative notifications, scheduled maintenance alerts, and service updates.</li>
       </ul>
@@ -123,7 +123,7 @@ export default function PrivacyPage() {
       </p>
       <ul>
         <li><strong>Entity:</strong> {siteConfig.legalEntity} (Lioran Group)</li>
-        <li><strong>Attn:</strong> Swaraj Puppalwar (Founder &amp; CTO / Grievance Officer)</li>
+          <li><strong>Attn:</strong> LioranDB support / Grievance Officer</li>
         <li><strong>Support Email:</strong> <Link href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</Link></li>
         <li><strong>General Inquiries:</strong> <Link href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</Link></li>
         <li><strong>Operating Hours:</strong> 6:00 PM to 10:00 PM IST (Monday to Friday)</li>

@@ -1,8 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { navItems, siteConfig } from "@/data/site";
-import { SiteHeader } from "@/components/landing/site-header";
-import { SiteFooter } from "@/components/landing/site-footer";
+import { PublicLayout } from "@/components/site/layout";
 
 type LegalPageProps = {
   title: string;
@@ -12,17 +10,7 @@ type LegalPageProps = {
 
 export function LegalPage({ title, intro, children }: LegalPageProps) {
   return (
-    <div className="min-h-screen overflow-x-clip bg-[var(--color-canvas)] text-[var(--color-ink)]">
-      <SiteHeader
-        navItems={navItems}
-        appUrl={siteConfig.appUrl}
-        docsUrl={siteConfig.docsUrl}
-        studioUrl={siteConfig.studioUrl}
-        discordUrl={siteConfig.discordUrl}
-        githubUrl={siteConfig.v1GithubUrl}
-        githubRepo={siteConfig.githubRepo}
-      />
-
+    <PublicLayout>
       <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6 md:py-16 lg:px-8">
         <Link
           href="/"
@@ -46,7 +34,6 @@ export function LegalPage({ title, intro, children }: LegalPageProps) {
         </article>
       </main>
 
-      <SiteFooter />
-    </div>
+    </PublicLayout>
   );
 }

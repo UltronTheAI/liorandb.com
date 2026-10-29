@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage } from "@/components/legal/legal-page";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Terms and Conditions — LioranDB",
@@ -64,7 +64,7 @@ export default function TermsPage() {
           <strong>Starter Plan (₹1 / hour):</strong> Designed for testing, prototypes, and lightweight development. Includes up to 3,000 operations/second (1,000 write ops/sec and 2,000 read ops/sec), capacity up to 100,000 documents. No automated backups included.
         </li>
         <li>
-          <strong>Dedicated Server Plan (₹8 / hour):</strong> Dedicated single-node cloud compute and NVMe storage for production. Includes up to 45,000 total operations/second (10,000 write ops/sec and 35,000 read ops/sec), dataset capacity up to 1,000,000 documents, daily automated snapshot backups, direct founder and core engineering support.
+          <strong>Dedicated Server Plan (₹8 / hour):</strong> Dedicated single-node cloud compute and NVMe storage for production. Includes up to 45,000 total operations/second (10,000 write ops/sec and 35,000 read ops/sec), dataset capacity up to 1,000,000 documents, daily automated snapshot backups, and direct core engineering support.
         </li>
       </ul>
       <p>
@@ -73,7 +73,7 @@ export default function TermsPage() {
 
       <h2>4. Support Schedule &amp; Communication Channels</h2>
       <p>
-        We take pride in offering direct founder and core database engineer support:
+        We provide direct core database engineer support:
       </p>
       <ul>
         <li>
@@ -152,7 +152,7 @@ export default function TermsPage() {
       </p>
       <ul>
         <li><strong>Business Entity:</strong> {siteConfig.legalEntity} (Lioran Group)</li>
-        <li><strong>Founder &amp; CTO:</strong> Swaraj Puppalwar</li>
+        <li><strong>Support contact:</strong> LioranDB engineering team</li>
         <li><strong>Support Email:</strong> <Link href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</Link></li>
         <li><strong>Business Inquiries:</strong> <Link href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</Link></li>
         <li><strong>Website:</strong> <Link href={siteConfig.url}>{siteConfig.url}</Link></li>

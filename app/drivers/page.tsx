@@ -1,0 +1,13 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { CodeBlock } from "@/components/site/code-block";
+import { PublicLayout } from "@/components/site/layout";
+import { Container, PageIntro, Panel, SectionHeading } from "@/components/site/ui";
+import { driverMatrix, siteConfig } from "@/data/content";
+
+export const metadata: Metadata = { title: "Drivers", description: "Supported LioranDB SDK and driver entry points for TypeScript, Python, and CLI workflows." };
+
+export default function DriversPage() {
+  return <PublicLayout><PageIntro eyebrow="Developers / drivers" title="Use the client that matches your backend." description="The official docs and repositories are the source of truth for package versions and API compatibility. This page keeps the entry points discoverable without duplicating a drifting reference manual." /><section className="section-band"><Container><div className="grid gap-4 md:grid-cols-3">{driverMatrix.map((driver) => <Panel key={driver.name}><p className="eyebrow">{driver.status}</p><h2 className="mt-3 text-lg font-semibold">{driver.name}</h2><p className="mt-2 font-mono text-xs text-[var(--color-muted)]">{driver.packageName}</p><div className="mt-5"><CodeBlock code={driver.install} language="bash" /></div><Link href={driver.href} className="inline-link mt-5" target="_blank" rel="noreferrer">View source <ExternalLink size={13} /></Link></Panel>)}</div><div className="mt-12"><SectionHeading eyebrow="Transport surface" title="Driver, gRPC, and REST are separate integration paths." description="The official docs describe all three. Do not assume API parity, authentication, or endpoint availability across local, managed, and Studio deployments." /><div className="mt-8 table-wrap"><table className="data-table"><thead><tr><th>Path</th><th>Use it for</th><th>Verify</th></tr></thead><tbody>{[["TypeScript driver", "Node.js and TypeScript backend applications", "Package version and API compatibility"],["Python driver", "Async HTTP Python integrations", "Repository status and endpoint details"],["gRPC / REST", "Language-neutral service access", "Auth, TLS, endpoint shape, and deployment availability"]].map(([a,b,c]) => <tr key={a}><td>{a}</td><td>{b}</td><td>{c}</td></tr>)}</tbody></table></div></div><div className="mt-10 callout">Need the full reference? <Link href={siteConfig.docsUrl} className="font-semibold underline underline-offset-4" target="_blank" rel="noreferrer">Open docs.liorandb.com <ArrowRight className="inline" size={14} /></Link>.</div></Container></section></PublicLayout>;
+}

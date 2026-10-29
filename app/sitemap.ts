@@ -1,12 +1,21 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
+    "/benchmarks",
+    "/benchmarks/methodology",
+    "/architecture",
+    "/features",
+    "/developers",
+    "/drivers",
+    "/deployment",
+    "/cloud",
     "/pricing",
+    "/changelog",
+    "/community",
     "/about",
-    "/founder",
     "/cookies",
     "/terms",
     "/privacy",
@@ -20,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: currentDate,
-    changeFrequency: route === "" || route === "/pricing" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route === "/pricing" ? 0.9 : 0.7,
+    changeFrequency: route === "" || route === "/benchmarks" || route === "/changelog" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : route === "/pricing" || route === "/developers" ? 0.9 : 0.7,
   }));
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage } from "@/components/legal/legal-page";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Shipping and Delivery Policy — LioranDB",

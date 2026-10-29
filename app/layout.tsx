@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider } from "@/components/theme-provider";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/content";
 import "./globals.css";
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem("liorandb-theme");if(t==="dark"){document.documentElement.classList.add("dark");document.documentElement.style.colorScheme="dark";}else{document.documentElement.classList.remove("dark");document.documentElement.style.colorScheme="light";}}catch(e){}})();`;
+const themeInitScript = `(function(){try{var s=localStorage.getItem("liorandb-theme");var t=s||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.style.colorScheme=t;}catch(e){}})();`;
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,21 +21,15 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: siteConfig.title,
+  title: { default: siteConfig.title, template: "%s — LioranDB" },
   description: siteConfig.description,
   keywords: [
     "LioranDB",
-    "Indian database",
-    "NoSQL database",
     "document database",
-    "Node.js database",
     "TypeScript database",
     "Rust database",
-    "embedded database",
-    "MongoDB alternative",
-    "developer infrastructure India",
     "self-hosted database",
-    "document database India",
+    "database infrastructure",
   ],
   alternates: {
     canonical: "/",
@@ -77,12 +71,11 @@ const softwareJsonLd = {
   description: siteConfig.description,
   url: siteConfig.url,
   downloadUrl: siteConfig.docsUrl,
-  softwareVersion: "V1 live, V2 in development",
+  softwareVersion: "V2 pre-alpha",
   creator: {
     "@type": "Organization",
     name: "Lioran Developer Solutions",
   },
-  foundingDate: "2025",
 };
 
 const organizationJsonLd = {
@@ -90,16 +83,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "Lioran Developer Solutions",
   url: siteConfig.companyUrl,
-  sameAs: [
-    siteConfig.orgGithubUrl,
-    siteConfig.discordUrl,
-  ],
-  founder: {
-    "@type": "Person",
-    name: "Swaraj Puppalwar",
-    sameAs: siteConfig.founderGithubUrl,
-  },
-  foundingDate: "2025",
+  sameAs: [siteConfig.orgGithubUrl, siteConfig.discordUrl],
 };
 
 export default function RootLayout({

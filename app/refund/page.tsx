@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage } from "@/components/legal/legal-page";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Cancellation and Refund Policy — LioranDB",
@@ -28,7 +28,7 @@ export default function RefundPage() {
       <ul>
         <li>Dedicated compute nodes, high-speed NVMe storage, and memory allocations are instantly reserved and dedicated to your workload.</li>
         <li>Automated snapshot backup systems, monitoring telemetry, and Write-Ahead Log (WAL) partitions are initialized.</li>
-        <li>Direct founder and core engineering resources are assigned to configure, monitor, and support your database setup.</li>
+        <li>Core engineering resources are assigned to configure, monitor, and support your database setup.</li>
       </ul>
       <p>
         Because these third-party cloud infrastructure costs and engineering hours are incurred immediately and cannot be recovered, we enforce a strict <strong>No Refund</strong> policy on all active subscriptions and setup fees.

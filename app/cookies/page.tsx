@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage } from "@/components/legal/legal-page";
-import { siteConfig } from "@/data/site";
-import { CheckCircle2, ShieldCheck, XCircle } from "lucide-react";
+import { siteConfig } from "@/data/content";
+import { CheckCircle2, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Cookies Policy — LioranDB",
@@ -149,7 +149,7 @@ export default function CookiesPage() {
       </p>
       <ul>
         <li><strong>Entity:</strong> {siteConfig.legalEntity} (Lioran Group)</li>
-        <li><strong>Founder &amp; CTO:</strong> Swaraj Puppalwar</li>
+        <li><strong>Data controller contact:</strong> Lioran Developer Solutions</li>
         <li><strong>Support Email:</strong> <Link href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</Link></li>
         <li><strong>General Inquiries:</strong> <Link href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</Link></li>
         <li><strong>Official Website:</strong> <Link href={siteConfig.url}>{siteConfig.url}</Link></li>

@@ -1,6 +1,6 @@
-# LioranDB Landing Page
+# LioranDB developer infrastructure site
 
-Production-style single-page marketing site for LioranDB, built with Next.js App Router, TypeScript, Tailwind CSS v4, and Framer Motion.
+The LioranDB website is a multi-page, developer-first technical surface for a Rust-powered document database. It covers the engine, architecture, local development, drivers, deployment, cloud paths, pricing, release notes, community, and benchmark methodology.
 
 ## Stack
 
@@ -8,8 +8,9 @@ Production-style single-page marketing site for LioranDB, built with Next.js App
 - React 19
 - TypeScript
 - Tailwind CSS v4
-- Framer Motion
+- Inter and JetBrains Mono via `next/font`
 - Lucide React
+- Framer Motion remains available for compatible existing code, but the new site keeps motion restrained
 
 ## Run locally
 
@@ -18,24 +19,32 @@ npm install
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
+Open `http://localhost:3000`.
 
-## Commands used for validation
+## Validation
 
 ```bash
 npm run lint
 npx tsc --noEmit
+npm run build
 ```
 
-## Project notes
+## Project map
 
-- Main landing page: `app/page.tsx`
-- Shared metadata and JSON-LD: `app/layout.tsx`
-- Theme and visual system: `app/globals.css`
-- SEO helpers: `app/robots.ts`, `app/sitemap.ts`, `app/opengraph-image.tsx`
-- Reusable landing components: `components/landing/*`
-- Typed content/config: `data/site.ts`
+- `app/` — App Router routes, metadata, sitemap, robots, and legal pages
+- `components/site/` — shared technical layout, UI primitives, charts, code blocks, and architecture diagram
+- `data/content.ts` — typed navigation, product content, benchmark object, driver matrix, pricing terms, and changelog entries
+- `app/globals.css` — semantic light/dark tokens and responsive component styles
+- `DESIGN.md` — implementation-level design system and benchmark disclosure standards
+- `public/benchmark_ldb/` — related raw benchmark artifacts; the matched comparison on the site is labeled as user-reported pending publication of complete raw evidence
 
-## Sitemap guidance
+## Content accuracy
 
-The project includes `app/sitemap.ts` for the root route. Update `siteConfig.url` in `data/site.ts` if the production canonical domain changes.
+The maintained technical reference is [docs.liorandb.com](https://docs.liorandb.com). The official developer destinations are:
+
+- [Documentation](https://docs.liorandb.com)
+- [Dashboard](https://app.liorandb.com)
+- [Studio](https://studio.liorandb.com)
+- [GitHub organization](https://github.com/LioranGroupOfficial)
+
+Commercial terms remain on `/pricing` and the linked legal pages. Local benchmark results are scoped to their workload and are not managed-cloud performance guarantees.

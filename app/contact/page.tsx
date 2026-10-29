@@ -1,108 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LegalPage } from "@/components/legal/legal-page";
-import { siteConfig } from "@/data/site";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { PublicLayout } from "@/components/site/layout";
+import { Container, PageIntro, Panel } from "@/components/site/ui";
+import { siteConfig } from "@/data/content";
 
-export const metadata: Metadata = {
-  title: "Contact Us — LioranDB",
-  description:
-    "Contact information, support channels, and operating hours for LioranDB and Lioran Developer Solutions.",
-};
+export const metadata: Metadata = { title: "Contact", description: "Contact routes for LioranDB technical support, managed provisioning, and commercial questions." };
 
 export default function ContactPage() {
-  return (
-    <LegalPage
-      title="Contact Us"
-      intro="Get in touch with the LioranDB engineering team and founder for technical support, managed database provisioning, billing inquiries, and enterprise architecture consulting."
-    >
-      <div className="legal-highlight">
-        <p>
-          <strong>Direct Founder &amp; Engineering Support:</strong> We provide hands-on, direct developer support from our core engineering team led by Founder &amp; CTO Swaraj Puppalwar.
-        </p>
-      </div>
-
-      <h2>Official Contact Information</h2>
-      <div className="table-wrap">
-      <table>
-        <tbody>
-          <tr>
-            <th>Business Entity</th>
-            <td>{siteConfig.legalEntity} (Lioran Group)</td>
-          </tr>
-          <tr>
-            <th>Founder &amp; CTO</th>
-            <td>Swaraj Puppalwar</td>
-          </tr>
-          <tr>
-            <th>Technical Support Email</th>
-            <td>
-              <Link href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</Link>
-            </td>
-          </tr>
-          <tr>
-            <th>Business &amp; Enterprise Email</th>
-            <td>
-              <Link href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</Link>
-            </td>
-          </tr>
-          <tr>
-            <th>Customer Dashboard</th>
-            <td>
-              <Link href={siteConfig.appUrl} target="_blank">{siteConfig.appUrl}</Link>
-            </td>
-          </tr>
-          <tr>
-            <th>Primary Website</th>
-            <td>
-              <Link href={siteConfig.url}>{siteConfig.url}</Link>
-            </td>
-          </tr>
-          <tr>
-            <th>Operating Jurisdiction</th>
-            <td>Maharashtra, India</td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-
-      <h2>Support Schedule &amp; Working Hours</h2>
-      <ul>
-        <li>
-          <strong>Support Operating Window:</strong> Monday to Friday, <strong>6:00 PM to 10:00 PM IST (4 hours nightly)</strong>.
-        </li>
-        <li>
-          <strong>Weekends &amp; Holidays:</strong> Closed on Saturdays and Sundays. Support requests received during non-business hours are prioritized the next business evening.
-        </li>
-        <li>
-          <strong>Typical Response Time:</strong> Within 4 to 12 hours during business operational days.
-        </li>
-      </ul>
-
-      <h2>Developer Community &amp; Real-Time Channels</h2>
-      <p>
-        For fast community support, architecture discussions, and pre-alpha development updates:
-      </p>
-      <ul>
-        <li>
-          <strong>Discord Community:</strong> Join our active developer channel at{" "}
-          <Link href={siteConfig.discordUrl} target="_blank" rel="noreferrer">
-            {siteConfig.discordUrl}
-          </Link>
-        </li>
-        <li>
-          <strong>GitHub Organization:</strong> Track development and open source issues at{" "}
-          <Link href={siteConfig.orgGithubUrl} target="_blank" rel="noreferrer">
-            {siteConfig.orgGithubUrl}
-          </Link>
-        </li>
-        <li>
-          <strong>Founder GitHub:</strong>{" "}
-          <Link href={siteConfig.founderGithubUrl} target="_blank" rel="noreferrer">
-            {siteConfig.founderGithubUrl}
-          </Link>
-        </li>
-      </ul>
-    </LegalPage>
-  );
+  return <PublicLayout><PageIntro eyebrow="Contact" title="Bring a concrete question." description="For technical questions, include the version, deployment shape, workload, and evidence that will help the engineering team reproduce the issue." /><section className="section-band"><Container><div className="grid gap-4 md:grid-cols-3"><Panel><Mail size={20} /><h2 className="mt-5 text-lg font-semibold">Technical support</h2><p className="mt-2 text-sm leading-6 text-[var(--color-body)]">For account, connection, or workload questions, email the support team with enough context to investigate.</p><Link href={`mailto:${siteConfig.supportEmail}`} className="inline-link mt-5">{siteConfig.supportEmail} <ArrowUpRight size={13} /></Link></Panel><Panel><h2 className="text-lg font-semibold">Managed provisioning</h2><p className="mt-2 text-sm leading-6 text-[var(--color-body)]">Use the dashboard for current plan availability, sizing, and provisioning requests.</p><Link href={siteConfig.appUrl} className="inline-link mt-5" target="_blank" rel="noreferrer">Open dashboard <ArrowUpRight size={13} /></Link></Panel><Panel><h2 className="text-lg font-semibold">Community</h2><p className="mt-2 text-sm leading-6 text-[var(--color-body)]">Questions that benefit from public discussion belong in the official community channels.</p><Link href={siteConfig.discordUrl} className="inline-link mt-5" target="_blank" rel="noreferrer">Join Discord <ArrowUpRight size={13} /></Link></Panel></div></Container></section></PublicLayout>;
 }
-
