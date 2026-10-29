@@ -100,7 +100,7 @@ export const installCommands = {
   driver: "npm install @liorandb/driver",
 } as const;
 
-export const localDeveloperWorkflow = `${installCommands.docker}\n\n${installCommands.driver}\nnode index.ts`;
+export const localDeveloperWorkflow = `${installCommands.docker}\n${installCommands.driver}\nnode index.ts`;
 
 export const getStartedCode = `import { LioranDBClient } from "@liorandb/driver";
 
