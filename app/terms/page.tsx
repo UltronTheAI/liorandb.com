@@ -125,7 +125,7 @@ export default function TermsPage() {
 
       <h2>8. Intellectual Property</h2>
       <p>
-        All rights, title, and interest in and to the LioranDB storage engine, V2 Rust architecture, TypeScript drivers, branding, trademarks, logos, documentation, and website content belong exclusively to <strong>{siteConfig.legalEntity}</strong>.
+        All rights, title, and interest in and to the LioranDB storage engine, V2 Rust architecture, JavaScript and TypeScript SDKs, branding, trademarks, logos, documentation, and website content belong exclusively to <strong>{siteConfig.legalEntity}</strong>.
       </p>
       <p>
         You retain full, exclusive ownership of all application data, documents, and records that you store inside your LioranDB instances.

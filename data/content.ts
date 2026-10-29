@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "LioranDB",
   title: "LioranDB — Document storage, built for engineers.",
   description:
-    "A Rust-powered document database for backend applications, practical operations, and transparent performance engineering.",
+    "A Rust-powered document database for backend applications, practical operations, transparent performance engineering, and official JavaScript and TypeScript SDK support.",
   url: "https://liorandb.com",
   appUrl: "https://app.liorandb.com",
   docsUrl: "https://docs.liorandb.com",
@@ -117,16 +117,16 @@ try {
 }`;
 
 export const featureGroups = [
-  { title: "Document API", description: "Collections, familiar query operators, updates, pagination, and aggregation for application data.", status: "documented", details: ["MongoDB-style document model", "TypeScript driver", "Collections and indexes"] },
+  { title: "Document API", description: "Collections, familiar query operators, updates, pagination, and aggregation for application data.", status: "documented", details: ["MongoDB-style document model", "JavaScript and TypeScript SDK", "Collections and indexes"] },
   { title: "Storage engine", description: "A Rust-based engine with WAL and checkpoint paths exposed as part of the V2 architecture direction.", status: "implemented / pre-alpha", details: ["Rust engine", "WAL and checkpoints", "Persistent local storage"] },
   { title: "Search and indexing", description: "Secondary and text indexing are available in documented V2 test paths; workload-specific behavior matters.", status: "available in test paths", details: ["Secondary indexes", "Text index", "Compaction and recovery paths"] },
   { title: "Operations", description: "Run locally with Docker, connect through the dashboard, or review managed deployment options.", status: "documented", details: ["Docker quickstart", "CLI package", "Managed provisioning"] },
-  { title: "Transport", description: "The official docs describe TypeScript, gRPC, and REST access paths. Verify endpoint details against the docs for your version.", status: "version-sensitive", details: ["TypeScript driver", "gRPC endpoint", "REST endpoint"] },
+  { title: "Transport", description: "The official docs describe JavaScript and TypeScript SDK, gRPC, and REST access paths. Verify endpoint details against the docs for your version.", status: "version-sensitive", details: ["JavaScript / TypeScript SDK", "gRPC endpoint", "REST endpoint"] },
   { title: "Recovery", description: "WAL replay and recovery are part of the documented V2 test surface; durability semantics depend on the configured path.", status: "tested / pre-alpha", details: ["WAL replay", "Crash-recovery test artifacts", "Checkpoint lifecycle"] },
 ] as const;
 
 export const architectureFlow = [
-  ["01", "Client request", "TypeScript driver, REST, or gRPC"],
+  ["01", "Client request", "JavaScript / TypeScript SDK, REST, or gRPC"],
   ["02", "Document API", "Collections, filters, updates, and query execution"],
   ["03", "Storage paths", "Primary storage plus configured secondary/text indexes"],
   ["04", "Durability", "WAL and checkpoint lifecycle"],
@@ -172,18 +172,17 @@ export const benchmarkData = {
 } as const;
 
 export const driverMatrix = [
-  { name: "JavaScript / TypeScript", packageName: "@liorandb/driver", install: "npm install @liorandb/driver", status: "documented", href: siteConfig.docsUrl },
-  { name: "Python", packageName: "ldb-driver-python", install: "pip install ldb-driver-python", status: "official repository", href: "https://github.com/LioranGroupOfficial/ldb-driver-python" },
-  { name: "CLI", packageName: "@liorandb/cli", install: "npm install -g @liorandb/cli", status: "documented", href: siteConfig.docsUrl },
+  { name: "JavaScript", packageName: "@liorandb/driver", install: "npm install @liorandb/driver", status: "official SDK", href: siteConfig.docsUrl },
+  { name: "TypeScript", packageName: "@liorandb/driver", install: "npm install @liorandb/driver", status: "official SDK", href: siteConfig.docsUrl },
+  { name: "CLI", packageName: "@liorandb/cli", install: "npm install -g @liorandb/cli", status: "documented tooling", href: siteConfig.docsUrl },
 ] as const;
 
 export const pricingPlans = [
-  { id: "starter", name: "Starter", price: "₹1", unit: "/ hour", monthly: "~₹720 / month at 720 hours", description: "For testing, prototypes, and lightweight development instances.", highlights: ["Up to 100K documents", "3,000 total ops/sec", "No automated backups"], features: ["1,000 writes/sec + 2,000 reads/sec", "Managed instance", "MongoDB-compatible driver and TypeScript SDK", "gRPC and REST endpoint access", "Community and email support"], cta: "Open dashboard" },
-  { id: "dedicated", name: "Dedicated Server", price: "₹8", unit: "/ hour", monthly: "~₹5,760 / month at 720 hours", description: "For production workloads that need isolated compute and daily snapshots.", highlights: ["Up to 1M documents", "45,000 total ops/sec", "Daily automated snapshots"], features: ["10,000 writes/sec + 35,000 reads/sec", "Dedicated single-node cloud compute and NVMe storage", "MongoDB-compatible driver and TypeScript SDK", "gRPC and REST endpoint access", "Workload review and indexing assistance", "Support: 6:00 PM–10:00 PM IST, Mon–Fri"], cta: "Request deployment" },
+  { id: "starter", name: "Starter", price: "₹1", unit: "/ hour", monthly: "~₹720 / month at 720 hours", description: "For testing, prototypes, and lightweight development instances.", highlights: ["Up to 100K documents", "3,000 total ops/sec", "No automated backups"], features: ["1,000 writes/sec + 2,000 reads/sec", "Managed instance", "MongoDB-compatible driver and JavaScript / TypeScript SDK", "gRPC and REST endpoint access", "Community and email support"], cta: "Open dashboard" },
+  { id: "dedicated", name: "Dedicated Server", price: "₹8", unit: "/ hour", monthly: "~₹5,760 / month at 720 hours", description: "For production workloads that need isolated compute and daily snapshots.", highlights: ["Up to 1M documents", "45,000 total ops/sec", "Daily automated snapshots"], features: ["10,000 writes/sec + 35,000 reads/sec", "Dedicated single-node cloud compute and NVMe storage", "MongoDB-compatible driver and JavaScript / TypeScript SDK", "gRPC and REST endpoint access", "Workload review and indexing assistance", "Support: 6:00 PM–10:00 PM IST, Mon–Fri"], cta: "Request deployment" },
 ] as const;
 
 export const changelogEntries = [
   { date: "2026-10-23", tag: "V2 alpha", title: "Alpha release track opened", body: "The V2 alpha track is now the reference point for compatibility and deployment updates. Check the maintained docs for version-specific commands." },
   { date: "2026-08-16", tag: "V2 pre-alpha", title: "Rust engine pre-alpha released", body: "The V2 Rust engine became available for local Docker evaluation, driver work, and development benchmarking." },
-  { date: "2026-05-17", tag: "Drivers", title: "Python driver repository published", body: "The official Python async HTTP driver repository is available for experimentation and integration feedback." },
 ] as const;

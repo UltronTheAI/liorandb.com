@@ -26,7 +26,9 @@ export const metadata: Metadata = {
   keywords: [
     "LioranDB",
     "document database",
+    "JavaScript SDK",
     "TypeScript database",
+    "TypeScript SDK",
     "Rust database",
     "self-hosted database",
     "database infrastructure",

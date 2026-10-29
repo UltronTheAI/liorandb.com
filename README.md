@@ -1,6 +1,6 @@
 # LioranDB developer infrastructure site
 
-The LioranDB website is a multi-page, developer-first technical surface for a Rust-powered document database. It covers the engine, architecture, local development, drivers, deployment, cloud paths, pricing, release notes, community, and benchmark methodology.
+The LioranDB website is a multi-page, developer-first technical surface for a Rust-powered document database. It covers the engine, architecture, local development, drivers, deployment, cloud paths, pricing, release notes, community, and benchmark methodology. LioranDB currently provides official SDK support for JavaScript and TypeScript through `@liorandb/driver`.
 
 ## Stack
 
