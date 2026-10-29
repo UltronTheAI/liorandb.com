@@ -126,7 +126,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); 
 .lede { color: var(--color-body); font-size: clamp(1.02rem, 1.8vw, 1.25rem); line-height: 1.65; }
 .section-band { padding: 6rem 0; }
 .section-band--soft { border-block: 1px solid var(--color-hairline); background: var(--color-canvas-soft); }
-.section-band--dark { background: var(--color-surface-dark); background-image: none; color: var(--color-on-dark); }
+.section-band--dark { --color-ink: var(--color-on-dark); --color-body: var(--color-on-dark-soft); --color-muted: var(--color-on-dark-soft); --color-primary: #f4f4f6; --color-primary-active: #ffffff; --color-on-primary: #0b1117; --color-surface-card: #161d24; --color-surface-soft: #20272f; --color-hairline: #2b2b31; --color-hairline-strong: #3b434d; --color-accent: #5eead4; --color-accent-strong: #5eead4; background: var(--color-surface-dark); background-image: none; color: var(--color-ink); }
 
 .panel { display: flex; min-width: 0; min-height: 100%; flex-direction: column; border-top: 1px solid var(--color-hairline-strong); padding: 1.4rem 0 1.6rem; }
 .grid > .panel { align-self: stretch; height: 100%; }
