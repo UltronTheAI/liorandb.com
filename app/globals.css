@@ -117,7 +117,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); 
 .terminal-surface { min-width: 0; max-width: 100%; border: 1px solid var(--color-code-border); border-radius: var(--radius-lg); background: var(--color-code); color: var(--color-on-dark); }
 .terminal-surface__header { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--color-code-border); padding: .8rem 1rem; color: var(--color-on-dark-soft); font-family: var(--font-code); font-size: .7rem; }
 .terminal-surface__label { min-width: 0; overflow-wrap: anywhere; }
-.terminal-surface__body { max-width: 100%; margin: 0; overflow-x: auto; padding: 1.35rem; font-family: var(--font-code); font-size: .75rem; line-height: 1.8; scrollbar-color: #69727c var(--color-code); scrollbar-width: thin; white-space: pre; }
+.terminal-surface__body { width: 100%; max-width: 100%; height: auto; max-height: none; margin: 0; overflow: visible; padding: 1.35rem; font-family: var(--font-code); font-size: .75rem; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
 .display-mega, .display-xl, .display-lg, .display-md { color: var(--color-ink); font-weight: 600; letter-spacing: -.055em; line-height: 1.08; }
 .display-mega { font-size: clamp(2rem, 5vw, 4rem); }
 .display-xl { font-size: clamp(2rem, 4vw, 3rem); }
@@ -150,8 +150,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); 
 .code-surface__label { min-width: 0; overflow-wrap: anywhere; }
 .copy-button { height: 1.9rem; border-color: var(--color-hairline-dark); background: transparent; color: var(--color-on-dark-soft); padding: 0 .55rem; font-family: var(--font-code); font-size: .65rem; }
 .copy-button:hover { border-color: var(--color-on-dark-soft); color: var(--color-on-dark); }
-.code-surface__body { max-width: 100%; margin: 0; overflow-x: auto; padding: 1.1rem; font-family: var(--font-code); font-size: .75rem; line-height: 1.8; scrollbar-color: #69727c var(--color-code); scrollbar-width: thin; white-space: pre; }
-.code-surface__body code { display: block; min-width: max-content; }
+.code-surface__body { width: 100%; max-width: 100%; height: auto; max-height: none; margin: 0; overflow: visible; padding: 1.1rem; font-family: var(--font-code); font-size: .75rem; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
+.code-surface__body code { display: block; min-width: 0; max-width: 100%; white-space: inherit; overflow-wrap: inherit; word-break: inherit; }
 .syntax-comment { color: #8b949e; }
 .syntax-constant, .syntax-number { color: #79c0ff; }
 .syntax-function { color: #d2a8ff; }
@@ -162,8 +162,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); 
 .syntax-variable { color: #ffa657; }
 .syntax-command { color: #7ee787; }
 .syntax-plain { color: #e6edf3; }
-.code-block { border: 1px solid var(--color-code-border); border-radius: var(--radius-lg); background: var(--color-code); color: var(--color-on-dark); font-family: var(--font-code); }
-.code-scroll { scrollbar-color: #555 var(--color-code); scrollbar-width: thin; }
+.code-block { width: 100%; max-width: 100%; height: auto; max-height: none; overflow: visible; border: 1px solid var(--color-code-border); border-radius: var(--radius-lg); background: var(--color-code); color: var(--color-on-dark); font-family: var(--font-code); white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
 .architecture-diagram { border-left: 1px solid var(--color-hairline-strong); padding-left: 1.35rem; }
 .architecture-step { position: relative; display: grid; grid-template-columns: 2.2rem 1fr; gap: .9rem; padding-bottom: 2rem; }
 .architecture-step:last-child { padding-bottom: 0; }
