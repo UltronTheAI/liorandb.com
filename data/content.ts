@@ -142,7 +142,7 @@ export const benchmarkData = {
   title: "Local development workload",
   evidenceStatus: "user-reported development measurement; raw artifacts for the matched comparison are pending publication",
   sourceNotes: [
-    "Observed on an HP Omen Windows laptop. Exact CPU, memory capacity, SSD, Windows build, MongoDB version, and Docker environment were not recorded in the supplied result set.",
+    "Observed on an HP Omen Windows laptop. Exact CPU, SSD, Windows build, MongoDB version, and Docker environment were not recorded in the supplied result set. The comparison reports approximately 4 GiB of RAM for the MongoDB run, but the measurement method and whether this means host capacity or process usage were not recorded.",
     "The LioranDB and MongoDB values below are scoped to the supplied local comparison and are not certified independent benchmarks or representative production performance.",
     "The repository contains related LioranDB logs, but they use different workload configurations; they are linked as adjacent evidence, not treated as the matched comparison source.",
   ],
@@ -158,7 +158,7 @@ export const benchmarkData = {
     durability: "WAL enabled; checkpointing enabled",
   },
   liorandb: { peakWrites: 300000, averageWrites: 277777.78, writeSeconds: 36, reads: 35000, memoryGiB: 3.5, imageMb: 45 },
-  mongodb: { writes: 25000, writeSeconds: 400, reads: 16000, imageMb: 164, environment: "Official MongoDB installation on the same Windows laptop; not Atlas" },
+  mongodb: { documentShape: "{ username, age }", indexes: "Secondary and text indexes disabled", writes: 25000, writeSeconds: 400, reads: 16000, memoryGiB: 4, imageMb: 164, environment: "Official MongoDB installation on the same Windows laptop; not Atlas" },
   comparisons: { peakWriteRatio: 12, ingestionSpeedup: 11.11, readRatio: 2.1875, imageRatio: 3.6444, imageReductionPercent: 72.6 },
   metrics: [
     { id: "peak-write", label: "Peak raw writes", value: 300000, display: "300K", unit: "docs/sec", status: "observed", note: "LioranDB peak/observed rate in the supplied local result." },
